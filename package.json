@@ -1,0 +1,19 @@
+{
+  "name": "shoplab-bench",
+  "version": "1.0.0-dev",
+  "private": true,
+  "type": "module",
+  "description": "ShopLab benchmark: manifest, answer keys, scorer, results",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts",
+    "score": "tsx src/cli.ts score",
+    "coverage": "tsx src/cli.ts coverage",
+    "validate": "tsx src/cli.ts validate"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
