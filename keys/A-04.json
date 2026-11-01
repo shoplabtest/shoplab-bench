@@ -1,0 +1,46 @@
+{
+  "id": "A-04",
+  "repo": "shoplab-catalog-api",
+  "pr": 1,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "c6b9facd5a2091a8ba85981133359dfa6a0d7d5b",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/types.ts",
+      "line": 12,
+      "why": "Type of the GET /categories response uses children",
+      "snippet": "children: CategoryNode[]"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/CategoryNav.tsx",
+      "line": 13,
+      "why": "Renders the category tree from children",
+      "snippet": "node.children.length"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/RemoteBoundary.tsx",
+      "line": 3,
+      "why": "React children prop, unrelated to categories",
+      "snippet": "children: ReactNode"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/FormField.tsx",
+      "line": 7,
+      "why": "React children prop, unrelated to categories",
+      "snippet": "children: ReactNode"
+    }
+  ]
+}

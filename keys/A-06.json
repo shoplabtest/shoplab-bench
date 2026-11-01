@@ -1,0 +1,74 @@
+{
+  "id": "A-06",
+  "repo": "shoplab-catalog-api",
+  "pr": 3,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "25d85248f20a2a76fa5b120c572cb2c478a9bd01",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "medium",
+  "expect": "break",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 77,
+      "why": "Reads price.currency and price.amount from the catalog response (lines 77 to 82)",
+      "snippet": "product.price.currency"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 6,
+      "why": "CatalogProduct type models price as an object",
+      "snippet": "price: { amount: number"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/types.ts",
+      "line": 7,
+      "why": "Product type models price as an object",
+      "snippet": "price: { amount: number"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/ProductCard.tsx",
+      "line": 15,
+      "why": "Reads price.amount and price.currency",
+      "snippet": "product.price.amount"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 26,
+      "why": "Reads price.amount and price.currency",
+      "snippet": "state.data.price.amount"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 42,
+      "why": "Published OpenAPI spec still describes price as a Money object",
+      "snippet": "price: { $ref: '#/components/schemas/Money' }"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 52,
+      "why": "Reads only id and name from GET /products/:id",
+      "snippet": "as ProductName"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 49,
+      "why": "Request body for creating a product; the request shape is unchanged",
+      "snippet": "price: { amount: 4200"
+    }
+  ]
+}

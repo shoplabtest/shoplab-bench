@@ -1,0 +1,46 @@
+{
+  "id": "A-05",
+  "repo": "shoplab-catalog-api",
+  "pr": 2,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "2f6f665ce6348ae391fcb0517fdc396492c74a5f",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 19,
+      "why": "Sends the search term as q to GET /search",
+      "snippet": "{ q: query"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 24,
+      "why": "Published OpenAPI spec still documents the parameter as q",
+      "snippet": "name: q, in: query"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 64,
+      "why": "q is the browser URL parameter of the page, not the API parameter",
+      "snippet": "update({ q,"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "vite.config.ts",
+      "line": 33,
+      "why": "Proxy matches by path; the path did not change",
+      "snippet": "'/search':"
+    }
+  ]
+}

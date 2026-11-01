@@ -1,0 +1,74 @@
+{
+  "id": "A-09",
+  "repo": "shoplab-iam",
+  "pr": 2,
+  "baseSha": "37f4795f1c669b038559f07305f58e92cb790e26",
+  "headSha": "812d34fe8172f5132abe11a74709517be3018d9e",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "env-var"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 44,
+      "why": "Compose sets the old variable name for the iam service (first occurrence)",
+      "snippet": "JWT_SECRET"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/iam/values.yaml",
+      "line": 9,
+      "why": "Helm values set the old variable name for iam",
+      "snippet": "JWT_SECRET"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 57,
+      "why": "catalog-api still reads JWT_SECRET",
+      "snippet": "JWT_SECRET"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 70,
+      "why": "cart-api still reads JWT_SECRET",
+      "snippet": "JWT_SECRET"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/catalog-api/values.yaml",
+      "line": 9,
+      "why": "catalog-api still reads JWT_SECRET",
+      "snippet": "JWT_SECRET"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/cart-api/values.yaml",
+      "line": 9,
+      "why": "cart-api still reads JWT_SECRET",
+      "snippet": "JWT_SECRET"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/config.ts",
+      "line": 14,
+      "why": "catalog-api has its own setting and still reads JWT_SECRET",
+      "snippet": "env.JWT_SECRET"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/config.ts",
+      "line": 15,
+      "why": "cart-api has its own setting and still reads JWT_SECRET",
+      "snippet": "env.JWT_SECRET"
+    }
+  ]
+}

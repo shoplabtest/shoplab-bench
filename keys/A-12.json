@@ -1,0 +1,38 @@
+{
+  "id": "A-12",
+  "repo": "shoplab-catalog-api",
+  "pr": 4,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "5e7f733d9de94a49bf2030eb232c826ef3d662ee",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "event"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/consumer.ts",
+      "line": 9,
+      "why": "Consumer reads productId from product.updated",
+      "snippet": "typeof ev.productId"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 16,
+      "why": "ProductUpdated type declares productId",
+      "snippet": "  productId: string;"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 8,
+      "why": "Published event schema still names the field productId",
+      "snippet": "\"productId\":{\"type\":\"string\"}"
+    }
+  ],
+  "mustNotFlag": []
+}

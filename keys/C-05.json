@@ -1,0 +1,16 @@
+{
+  "id": "C-05",
+  "repo": "shoplab-catalog-api",
+  "pr": 8,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "f6115263bb3645e6c34c41a22ce24f90dad5fb7e",
+  "split": "dev",
+  "category": "C",
+  "difficulty": "easy",
+  "expect": "safe",
+  "kinds": [
+    "db-table"
+  ],
+  "sites": [],
+  "mustNotFlag": []
+}

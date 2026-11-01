@@ -1,0 +1,74 @@
+{
+  "id": "A-03",
+  "repo": "shoplab-ui-kit",
+  "pr": 3,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "b476ab71ce73fba535fa85d60345932ecd6d605f",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "medium",
+  "expect": "break",
+  "kinds": [
+    "class"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/errors.ts",
+      "line": 6,
+      "why": "Reads ApiError.status to choose the login error message",
+      "snippet": "e.status === 401"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 20,
+      "why": "Reads ApiError.status to show the \"no longer exists\" message",
+      "snippet": "state.error.status === 404"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 47,
+      "why": "Reads ApiError.status to detect an invalid coupon",
+      "snippet": "e.status === 422"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 49,
+      "why": "Reads ApiError.status to decide whether to refresh the token",
+      "snippet": "err.status !== 401"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/Cart.tsx",
+      "line": 11,
+      "why": "status on a local load-state object, not ApiError",
+      "snippet": "state.status === 'loading'"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 11,
+      "why": "status on a local load-state object, not ApiError",
+      "snippet": "state.status === 'loading'"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 15,
+      "why": "status of a fetch Response, not ApiError",
+      "snippet": "res.status === 204"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 19,
+      "why": "status of a fetch Response, not ApiError",
+      "snippet": "res.status === 404"
+    }
+  ]
+}

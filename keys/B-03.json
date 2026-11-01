@@ -1,0 +1,39 @@
+{
+  "id": "B-03",
+  "repo": "shoplab-catalog-api",
+  "pr": 6,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "aac07235c4f33cb840bce6a9fc11c7096f1e7f69",
+  "split": "dev",
+  "category": "B",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "event"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/consumer.ts",
+      "line": 9,
+      "why": "A string price fails this guard, so every price update is dropped silently",
+      "hard": true,
+      "snippet": "Number.isInteger(ev.price)"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 17,
+      "why": "ProductUpdated type declares price as a number",
+      "snippet": "  price: number;"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 8,
+      "why": "Published event schema still says price is an integer",
+      "snippet": "\"price\":{\"type\":\"integer\""
+    }
+  ],
+  "mustNotFlag": []
+}

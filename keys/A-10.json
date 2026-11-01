@@ -1,0 +1,123 @@
+{
+  "id": "A-10",
+  "repo": "shoplab-host",
+  "pr": 2,
+  "baseSha": "f92fd3f36e7916d530da595eaf98e699e2479c79",
+  "headSha": "7e9fd5169a144e136df90efa9fec2766dd3092e6",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "medium",
+  "expect": "break",
+  "kinds": [
+    "federation-module"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 2,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 2,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "why": "Type declaration for the ./ui module",
+      "snippet": "declare module 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/Cart.tsx",
+      "line": 1,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 2,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "why": "Type declaration for the ./ui module",
+      "snippet": "declare module 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/Account.tsx",
+      "line": 1,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/ProfileForm.tsx",
+      "line": 2,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 2,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/AuthForm.tsx",
+      "line": 3,
+      "why": "Imports the module exposed as ./ui",
+      "snippet": "from 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "why": "Type declaration for the ./ui module",
+      "snippet": "declare module 'host/ui'"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "vite.config.ts",
+      "line": 26,
+      "why": "Unit-test alias maps the old module name",
+      "snippet": "{ 'host/ui':"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "vite.config.ts",
+      "line": 26,
+      "why": "Unit-test alias maps the old module name",
+      "snippet": "{ 'host/ui':"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "vite.config.ts",
+      "line": 26,
+      "why": "Unit-test alias maps the old module name",
+      "snippet": "{ 'host/ui':"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "vite.config.ts",
+      "line": 17,
+      "why": "The remote alias host stays the same; only the exposed module name changes",
+      "snippet": "remotes: { host:"
+    }
+  ]
+}

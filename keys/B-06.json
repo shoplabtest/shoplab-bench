@@ -1,0 +1,33 @@
+{
+  "id": "B-06",
+  "repo": "shoplab-cart-api",
+  "pr": 3,
+  "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+  "headSha": "82a0d39b7e17f89b9561160c1ae6542c8130f39a",
+  "split": "dev",
+  "category": "B",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "env-var"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 72,
+      "why": "Compose still sets the old variable name for cart-api",
+      "hard": true,
+      "snippet": "CATALOG_API_URL"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/cart-api/values.yaml",
+      "line": 11,
+      "why": "Helm values still set the old variable name",
+      "hard": true,
+      "snippet": "CATALOG_API_URL"
+    }
+  ],
+  "mustNotFlag": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "D-02",
+  "repo": "shoplab-cart-api",
+  "pr": 5,
+  "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+  "headSha": "9df30bf0efe94d8965f94f1ed1f4870989ce0312",
+  "split": "dev",
+  "category": "D",
+  "difficulty": "medium",
+  "expect": "safe",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 17,
+      "why": "Sends a number, which is still accepted",
+      "snippet": "quantity: 1"
+    }
+  ]
+}

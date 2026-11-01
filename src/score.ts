@@ -9,6 +9,11 @@ export function sitesMatch(found: FoundSite, key: { consumer: string; file: stri
   return found.consumer === key.consumer && found.file === key.file && Math.abs(found.line - key.line) <= LINE_TOLERANCE;
 }
 
+/** Test files mirror the contracts they test, so a PR also breaks them. Keys list production consumers only, so findings in test files are ignored. */
+export function isTestFile(file: string): boolean {
+  return /(^|\/)(test|tests|__tests__)\//.test(file) || /\.(test|spec)\.[cm]?[jt]sx?$/.test(file);
+}
+
 export interface PrScore {
   id: string;
   split: Split;
@@ -17,6 +22,8 @@ export interface PrScore {
   matched: KeySite[];
   misses: KeySite[];
   falsePositives: FoundSite[];
+  /** Reported sites in test files: neither credited nor counted as false positives. */
+  ignoredTestSites: FoundSite[];
   unsupportedSkipped: KeySite[];
   evidenceChecked: number;
   evidenceValid: number;
@@ -38,7 +45,8 @@ export function fsEvidenceCheck(reposDir: string): EvidenceCheck {
 }
 
 export function scorePr(key: AnswerKey, res: PrResult | undefined, evidence?: EvidenceCheck): PrScore {
-  const sites = res?.sites ?? [];
+  const allSites = res?.sites ?? [];
+  const sites = allSites.filter((f) => !isTestFile(f.file));
   const scored = key.sites.filter((s) => !s.unsupported);
   const matched = scored.filter((k) => sites.some((f) => sitesMatch(f, k)));
   const misses = scored.filter((k) => !matched.includes(k));
@@ -48,7 +56,7 @@ export function scorePr(key: AnswerKey, res: PrResult | undefined, evidence?: Ev
   let evidenceChecked = 0;
   let evidenceValid = 0;
   if (evidence) {
-    for (const f of sites) {
+    for (const f of allSites) {
       const r = evidence(f);
       if (r === null) continue;
       evidenceChecked++;
@@ -66,6 +74,7 @@ export function scorePr(key: AnswerKey, res: PrResult | undefined, evidence?: Ev
     matched,
     misses,
     falsePositives,
+    ignoredTestSites: allSites.filter((f) => isTestFile(f.file)),
     unsupportedSkipped: key.sites.filter((s) => s.unsupported),
     evidenceChecked,
     evidenceValid,

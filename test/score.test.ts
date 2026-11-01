@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { scorePr, sitesMatch, summarize } from '../src/score.ts';
+import { isTestFile, scorePr, sitesMatch, summarize } from '../src/score.ts';
 import { coverageReport } from '../src/coverage.ts';
 import { validateKey } from '../src/validate.ts';
 import type { AnswerKey, PrResult } from '../src/types.ts';
@@ -88,4 +88,25 @@ test('key validation', () => {
   assert.ok(validateKey(key({ baseSha: 'abc' })).length > 0);
   assert.ok(validateKey(key({ expect: 'safe' })).length > 0);
   assert.ok(validateKey(key({ id: 'C-03' })).length > 0);
+});
+
+test('isTestFile recognises test directories and test file names', () => {
+  for (const f of ['test/app.test.ts', 'src/test/helpers.ts', 'a/__tests__/x.ts', 'src/Page.spec.tsx', 'x.test.mjs']) assert.ok(isTestFile(f), f);
+  for (const f of ['src/app.ts', 'src/contest.ts', 'scripts/e2e.mjs', 'docker-compose.yml']) assert.ok(!isTestFile(f), f);
+});
+
+test('findings in test files are neither false positives nor matches', () => {
+  const res: PrResult = {
+    id: 'B-03',
+    verdict: 'break',
+    sites: [
+      { consumer: 'shoplab-cart-api', file: 'src/clients/catalog.ts', line: 27 },
+      { consumer: 'shoplab-cart-api', file: 'test/clients.test.ts', line: 3 },
+    ],
+  };
+  const s = scorePr(key(), res);
+  assert.equal(s.matched.length, 1);
+  assert.equal(s.falsePositives.length, 0);
+  assert.equal(s.ignoredTestSites.length, 1);
+  assert.equal(summarize([key()], new Map([['B-03', res]])).sitePrecision, 1);
 });

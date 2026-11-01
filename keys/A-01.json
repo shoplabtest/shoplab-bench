@@ -1,0 +1,46 @@
+{
+  "id": "A-01",
+  "repo": "shoplab-ui-kit",
+  "pr": 1,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "11c8ac3b0e49c32b236238932554e1e8bfd65b01",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "component"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 11,
+      "why": "Subtotal, discount and total all pass amount= to Money (lines 11 to 13)",
+      "snippet": "<Money amount={subtotal}"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 20,
+      "why": "Unit price and latest price pass amount= to Money",
+      "snippet": "<Money amount={l.unitPrice}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 19,
+      "why": "Order total passed as amount=",
+      "snippet": "<Money amount={o.total}"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/Price.tsx",
+      "line": 4,
+      "why": "Uses PriceTag, whose props this PR does not change",
+      "snippet": "<PriceTag className"
+    }
+  ]
+}

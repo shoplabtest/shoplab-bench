@@ -1,0 +1,74 @@
+{
+  "id": "A-08",
+  "repo": "shoplab-iam",
+  "pr": 1,
+  "baseSha": "37f4795f1c669b038559f07305f58e92cb790e26",
+  "headSha": "8a659d9abba9f1d8886d5fc5cbf7c1b73f547765",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 59,
+      "why": "Reads accessToken from the login response",
+      "snippet": "accessToken: next.accessToken"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 30,
+      "why": "Reads accessToken from the refresh response",
+      "snippet": "accessToken: next.accessToken"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 48,
+      "why": "Smoke test reads accessToken from the login response",
+      "snippet": "admin.body.accessToken"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 59,
+      "why": "Smoke test reads accessToken from the login response",
+      "snippet": "user.body.accessToken"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 65,
+      "why": "Smoke test reads accessToken from the login response",
+      "snippet": "user.body.accessToken"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/iam.yaml",
+      "line": 78,
+      "why": "Published OpenAPI spec still names the field accessToken",
+      "snippet": "accessToken: { type: string"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/storage.ts",
+      "line": 5,
+      "why": "Shape the host stores itself; only the code that fills it is affected",
+      "snippet": "export interface Tokens"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 47,
+      "why": "Reads the stored Tokens shape, not the API response",
+      "snippet": "token: tokens?.accessToken"
+    }
+  ]
+}

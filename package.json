@@ -10,7 +10,8 @@
     "score": "tsx src/cli.ts score",
     "coverage": "tsx src/cli.ts coverage",
     "validate": "tsx src/cli.ts validate",
-    "pin": "tsx src/cli.ts pin"
+    "pin": "tsx src/cli.ts pin",
+    "verify-keys": "tsx src/cli.ts verify-keys"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

@@ -1,0 +1,41 @@
+{
+  "id": "B-05",
+  "repo": "shoplab-cart-api",
+  "pr": 2,
+  "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+  "headSha": "d5e1962514d24a4babd04aaf523b8647a7984cf6",
+  "split": "dev",
+  "category": "B",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 25,
+      "why": "Sends the guest cart header by its old name",
+      "hard": true,
+      "snippet": "'x-cart-id': guestId"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 25,
+      "why": "Sends the guest cart header by its old name",
+      "hard": true,
+      "snippet": "'x-cart-id': guestId"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 22,
+      "why": "Smoke test sends the old header name",
+      "hard": true,
+      "snippet": "'x-cart-id': cartId"
+    }
+  ],
+  "mustNotFlag": []
+}

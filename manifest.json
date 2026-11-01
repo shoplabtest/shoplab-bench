@@ -43,5 +43,230 @@
       "sha": "77726d7220d291b838220ee996f209d9c4163497"
     }
   },
-  "prs": []
+  "prs": [
+    {
+      "id": "A-01",
+      "repo": "shoplab-ui-kit",
+      "pr": 1,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "11c8ac3b0e49c32b236238932554e1e8bfd65b01",
+      "split": "dev"
+    },
+    {
+      "id": "A-02",
+      "repo": "shoplab-ui-kit",
+      "pr": 2,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "166529db04f086d474be2d740c85204dd8337f53",
+      "split": "dev"
+    },
+    {
+      "id": "A-03",
+      "repo": "shoplab-ui-kit",
+      "pr": 3,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "b476ab71ce73fba535fa85d60345932ecd6d605f",
+      "split": "dev"
+    },
+    {
+      "id": "A-04",
+      "repo": "shoplab-catalog-api",
+      "pr": 1,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "c6b9facd5a2091a8ba85981133359dfa6a0d7d5b",
+      "split": "dev"
+    },
+    {
+      "id": "A-05",
+      "repo": "shoplab-catalog-api",
+      "pr": 2,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "2f6f665ce6348ae391fcb0517fdc396492c74a5f",
+      "split": "dev"
+    },
+    {
+      "id": "A-06",
+      "repo": "shoplab-catalog-api",
+      "pr": 3,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "25d85248f20a2a76fa5b120c572cb2c478a9bd01",
+      "split": "dev"
+    },
+    {
+      "id": "A-07",
+      "repo": "shoplab-cart-api",
+      "pr": 1,
+      "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+      "headSha": "f2476cf83fe8bbb1afa9fb8b9a54e59bf0d0392c",
+      "split": "dev"
+    },
+    {
+      "id": "A-08",
+      "repo": "shoplab-iam",
+      "pr": 1,
+      "baseSha": "37f4795f1c669b038559f07305f58e92cb790e26",
+      "headSha": "8a659d9abba9f1d8886d5fc5cbf7c1b73f547765",
+      "split": "dev"
+    },
+    {
+      "id": "A-09",
+      "repo": "shoplab-iam",
+      "pr": 2,
+      "baseSha": "37f4795f1c669b038559f07305f58e92cb790e26",
+      "headSha": "812d34fe8172f5132abe11a74709517be3018d9e",
+      "split": "dev"
+    },
+    {
+      "id": "A-10",
+      "repo": "shoplab-host",
+      "pr": 2,
+      "baseSha": "f92fd3f36e7916d530da595eaf98e699e2479c79",
+      "headSha": "7e9fd5169a144e136df90efa9fec2766dd3092e6",
+      "split": "dev"
+    },
+    {
+      "id": "A-11",
+      "repo": "shoplab-catalog-mfe",
+      "pr": 2,
+      "baseSha": "ca3a46c35c6cdb30472dea32404f48688b6cb7e3",
+      "headSha": "60f77a45430bdfdc282156c3680e638721da6c27",
+      "split": "dev"
+    },
+    {
+      "id": "A-12",
+      "repo": "shoplab-catalog-api",
+      "pr": 4,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "5e7f733d9de94a49bf2030eb232c826ef3d662ee",
+      "split": "dev"
+    },
+    {
+      "id": "A-13",
+      "repo": "shoplab-host",
+      "pr": 3,
+      "baseSha": "f92fd3f36e7916d530da595eaf98e699e2479c79",
+      "headSha": "ae32f9bcc6027a1bcc9b652ba80773b65b7344f1",
+      "split": "dev"
+    },
+    {
+      "id": "B-01",
+      "repo": "shoplab-catalog-api",
+      "pr": 5,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "c226aa324fc2aa3cfdfea474ae16bc43868b455f",
+      "split": "dev"
+    },
+    {
+      "id": "B-02",
+      "repo": "shoplab-ui-kit",
+      "pr": 4,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "e6a2f9ecd8dddb213108f15a061377c5be04fbf2",
+      "split": "dev"
+    },
+    {
+      "id": "B-03",
+      "repo": "shoplab-catalog-api",
+      "pr": 6,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "aac07235c4f33cb840bce6a9fc11c7096f1e7f69",
+      "split": "dev"
+    },
+    {
+      "id": "B-04",
+      "repo": "shoplab-cart-mfe",
+      "pr": 2,
+      "baseSha": "09859d41aa602abbaa496ec1cbc81ffe1f095896",
+      "headSha": "40e56e956653cbdeb5caf9bcaed77a628db43638",
+      "split": "dev"
+    },
+    {
+      "id": "B-05",
+      "repo": "shoplab-cart-api",
+      "pr": 2,
+      "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+      "headSha": "d5e1962514d24a4babd04aaf523b8647a7984cf6",
+      "split": "dev"
+    },
+    {
+      "id": "B-06",
+      "repo": "shoplab-cart-api",
+      "pr": 3,
+      "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+      "headSha": "82a0d39b7e17f89b9561160c1ae6542c8130f39a",
+      "split": "dev"
+    },
+    {
+      "id": "C-01",
+      "repo": "shoplab-catalog-api",
+      "pr": 7,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "b7f41dca76820e362ca9d40fa5e9d1424dfdb235",
+      "split": "dev"
+    },
+    {
+      "id": "C-02",
+      "repo": "shoplab-iam",
+      "pr": 3,
+      "baseSha": "37f4795f1c669b038559f07305f58e92cb790e26",
+      "headSha": "ce665b452dad759a80e496510aaee7e28e88ba87",
+      "split": "dev"
+    },
+    {
+      "id": "C-03",
+      "repo": "shoplab-cart-api",
+      "pr": 4,
+      "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+      "headSha": "6204680467310fe6b335d5de9d267c9f3b160e64",
+      "split": "dev"
+    },
+    {
+      "id": "C-04",
+      "repo": "shoplab-ui-kit",
+      "pr": 5,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "fd32c5837689ef488c7838d9363d5eb02ac3e042",
+      "split": "dev"
+    },
+    {
+      "id": "C-05",
+      "repo": "shoplab-catalog-api",
+      "pr": 8,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "f6115263bb3645e6c34c41a22ce24f90dad5fb7e",
+      "split": "dev"
+    },
+    {
+      "id": "D-01",
+      "repo": "shoplab-ui-kit",
+      "pr": 6,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "74731904829551a576c8bdbf06b858b87069c217",
+      "split": "dev"
+    },
+    {
+      "id": "D-02",
+      "repo": "shoplab-cart-api",
+      "pr": 5,
+      "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+      "headSha": "9df30bf0efe94d8965f94f1ed1f4870989ce0312",
+      "split": "dev"
+    },
+    {
+      "id": "D-03",
+      "repo": "shoplab-catalog-api",
+      "pr": 9,
+      "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+      "headSha": "17738eb0a0d90509a9f22592d018216db226d55b",
+      "split": "dev"
+    },
+    {
+      "id": "D-04",
+      "repo": "shoplab-host",
+      "pr": 4,
+      "baseSha": "f92fd3f36e7916d530da595eaf98e699e2479c79",
+      "headSha": "a0364b268cccc3b2f3e1f7c1eac24e6c5ff9923f",
+      "split": "dev"
+    }
+  ]
 }

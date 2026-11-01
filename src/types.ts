@@ -28,6 +28,8 @@ export interface KeySite {
   line: number;
   why: string;
   hard?: boolean;
+  /** Text expected on `line` at the pinned baseline; checked by `npm run verify-keys`. */
+  snippet?: string;
   /** Consumer language the agent does not support; reported separately, never a miss. */
   unsupported?: boolean;
 }
@@ -37,6 +39,7 @@ export interface MustNotFlag {
   file: string;
   line: number;
   why: string;
+  snippet?: string;
 }
 
 export interface AnswerKey {

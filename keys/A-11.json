@@ -1,0 +1,46 @@
+{
+  "id": "A-11",
+  "repo": "shoplab-catalog-mfe",
+  "pr": 2,
+  "baseSha": "ca3a46c35c6cdb30472dea32404f48688b6cb7e3",
+  "headSha": "60f77a45430bdfdc282156c3680e638721da6c27",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "federation-module"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remotes.ts",
+      "line": 4,
+      "why": "Lazy-loads the module exposed as ./Page",
+      "snippet": "import('catalog/Page')"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "why": "Type declaration for the ./Page module",
+      "snippet": "declare module 'catalog/Page'"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remotes.ts",
+      "line": 5,
+      "why": "Different remote, not renamed",
+      "snippet": "import('cart/Cart')"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remotes.ts",
+      "line": 6,
+      "why": "Different remote, not renamed",
+      "snippet": "import('account/Account')"
+    }
+  ]
+}

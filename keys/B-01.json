@@ -1,0 +1,91 @@
+{
+  "id": "B-01",
+  "repo": "shoplab-catalog-api",
+  "pr": 5,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "c226aa324fc2aa3cfdfea474ae16bc43868b455f",
+  "split": "dev",
+  "category": "B",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 18,
+      "why": "URL built from a template string with the old path",
+      "hard": true,
+      "snippet": "/products/${encodeURIComponent(id)}"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 51,
+      "why": "URL built from a template string with the old path",
+      "hard": true,
+      "snippet": "fetch(`/products/${id}`)"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "vite.config.ts",
+      "line": 32,
+      "why": "Dev proxy routes by the old path prefix, so the new path would not be proxied",
+      "hard": true,
+      "snippet": "'/products': 'http://localhost:3002'"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 16,
+      "why": "Listing URL uses the old path",
+      "snippet": "`/products?${q}`"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 22,
+      "why": "Detail URL uses the old path",
+      "snippet": "`/products/${encodeURIComponent(id)}`"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 44,
+      "why": "Smoke test lists products with the old path",
+      "snippet": "'/products?category=audio'"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 4,
+      "why": "Published OpenAPI spec still documents the old list path",
+      "snippet": "  /products:"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 12,
+      "why": "Published OpenAPI spec still documents the old detail path",
+      "snippet": "  /products/{id}:"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 19,
+      "why": "/search keeps its path",
+      "snippet": "`/search?"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 24,
+      "why": "/categories keeps its path",
+      "snippet": "getJson<CategoryNode[]>('/categories')"
+    }
+  ]
+}
