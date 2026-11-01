@@ -16,3 +16,11 @@ npm run score -- --run results/<run-id> [--repos <dir with cloned repos>]
 - Scoring always reports `dev` and `holdout` separately. Hold-out keys stay in `shoplab-bench-holdout` until release.
 - A reported site matches a key site when consumer and file are equal and the line is within 5.
 - Key sites marked `unsupported` (e.g. the Go service) are reported separately and never counted as misses.
+
+## Pinning the baseline
+
+```
+npm run pin -- shoplab-host shoplab-iam ...   # resolves tag bench-v1.0-base on GitHub to full SHAs, writes manifest.json
+```
+
+The baseline tag is `bench-v1.0-base`. `shoplab-bench` itself is not listed in its own manifest.

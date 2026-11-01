@@ -1,6 +1,47 @@
 {
   "benchmarkVersion": "1.0.0-dev",
   "shuffleSeed": 20261101,
-  "repos": {},
+  "repos": {
+    "shoplab-host": {
+      "url": "https://github.com/shoplabtest/shoplab-host.git",
+      "sha": "f92fd3f36e7916d530da595eaf98e699e2479c79"
+    },
+    "shoplab-catalog-mfe": {
+      "url": "https://github.com/shoplabtest/shoplab-catalog-mfe.git",
+      "sha": "ca3a46c35c6cdb30472dea32404f48688b6cb7e3"
+    },
+    "shoplab-cart-mfe": {
+      "url": "https://github.com/shoplabtest/shoplab-cart-mfe.git",
+      "sha": "09859d41aa602abbaa496ec1cbc81ffe1f095896"
+    },
+    "shoplab-account-mfe": {
+      "url": "https://github.com/shoplabtest/shoplab-account-mfe.git",
+      "sha": "aaaecf08e73d248bd31eda2815becdc75632448d"
+    },
+    "shoplab-ui-kit": {
+      "url": "https://github.com/shoplabtest/shoplab-ui-kit.git",
+      "sha": "831e24ca9be8640f328042f341944ff6ddce9b34"
+    },
+    "shoplab-contracts": {
+      "url": "https://github.com/shoplabtest/shoplab-contracts.git",
+      "sha": "ed9db222348c2b0535b98cf1c94e08cf6d97414c"
+    },
+    "shoplab-iam": {
+      "url": "https://github.com/shoplabtest/shoplab-iam.git",
+      "sha": "37f4795f1c669b038559f07305f58e92cb790e26"
+    },
+    "shoplab-catalog-api": {
+      "url": "https://github.com/shoplabtest/shoplab-catalog-api.git",
+      "sha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac"
+    },
+    "shoplab-cart-api": {
+      "url": "https://github.com/shoplabtest/shoplab-cart-api.git",
+      "sha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0"
+    },
+    "shoplab-infra": {
+      "url": "https://github.com/shoplabtest/shoplab-infra.git",
+      "sha": "77726d7220d291b838220ee996f209d9c4163497"
+    }
+  },
   "prs": []
 }
