@@ -9,7 +9,8 @@
     "test": "tsx --test test/*.test.ts",
     "score": "tsx src/cli.ts score",
     "coverage": "tsx src/cli.ts coverage",
-    "validate": "tsx src/cli.ts validate"
+    "validate": "tsx src/cli.ts validate",
+    "pin": "tsx src/cli.ts pin"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

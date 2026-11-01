@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { coverageReport, formatCoverage } from './coverage.ts';
+import { pinRepos, resolveTags } from './pin.ts';
 import { fsEvidenceCheck, summarizeBySplit } from './score.ts';
 import { validateKey, validateManifest } from './validate.ts';
 import type { AnswerKey, Manifest, PrResult } from './types.ts';
@@ -31,6 +32,16 @@ if (cmd === 'validate') {
   if (existsSync(mp)) for (const p of validateManifest(readJson<Manifest>(mp))) (bad++, console.error(`manifest: ${p}`));
   console.log(`${keys.length} keys checked, ${bad} problem(s)`);
   process.exit(bad ? 1 : 0);
+} else if (cmd === 'pin') {
+  // pin --org shoplabtest --tag bench-v1.0-base <repo> [<repo> ...]
+  const org = arg('org') ?? 'shoplabtest';
+  const tag = arg('tag') ?? 'bench-v1.0-base';
+  const repos = process.argv.slice(3).filter((a, i, all) => !a.startsWith('--') && !all[i - 1]?.startsWith('--'));
+  if (!repos.length) throw new Error('usage: pin [--org <org>] [--tag <tag>] <repo> [<repo> ...]');
+  const mp = join(root, 'manifest.json');
+  const next = pinRepos(readJson<Manifest>(mp), resolveTags(org, repos, tag));
+  writeFileSync(mp, JSON.stringify(next, null, 2) + '\n');
+  for (const r of repos) console.log(`${r} ${next.repos[r].sha}`);
 } else if (cmd === 'coverage') {
   const r = coverageReport(loadKeys());
   console.log(formatCoverage(r));
@@ -51,6 +62,6 @@ if (cmd === 'validate') {
   writeFileSync(join(runDir, 'summary.json'), JSON.stringify(summary, null, 2) + '\n');
   console.log(JSON.stringify(summary, null, 2));
 } else {
-  console.error('commands: validate | coverage | score --run <dir> [--repos <dir>] [--keys <dir>]');
+  console.error('commands: validate | pin | coverage | score --run <dir> [--repos <dir>] [--keys <dir>]');
   process.exit(2);
 }
