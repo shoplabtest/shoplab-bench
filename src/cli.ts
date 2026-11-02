@@ -4,6 +4,7 @@ import { coverageReport, formatCoverage } from './coverage.ts';
 import { pinRepos, resolveTags } from './pin.ts';
 import { fsEvidenceCheck, summarizeBySplit } from './score.ts';
 import { validateKey, validateManifest } from './validate.ts';
+import { gitReadAtSha, verifyKeys } from './verify.ts';
 import type { AnswerKey, Manifest, PrResult } from './types.ts';
 
 const root = resolve(import.meta.dirname, '..');
@@ -32,6 +33,14 @@ if (cmd === 'validate') {
   if (existsSync(mp)) for (const p of validateManifest(readJson<Manifest>(mp))) (bad++, console.error(`manifest: ${p}`));
   console.log(`${keys.length} keys checked, ${bad} problem(s)`);
   process.exit(bad ? 1 : 0);
+} else if (cmd === 'verify-keys') {
+  // verify-keys --repos <dir with shoplab-* checkouts>: every site and decoy line must hold its snippet at the pinned SHA
+  const reposDir = arg('repos');
+  if (!reposDir) throw new Error('usage: verify-keys --repos <dir>');
+  const problems = verifyKeys(loadKeys(), readJson<Manifest>(join(root, 'manifest.json')), gitReadAtSha(resolve(reposDir)));
+  for (const p of problems) console.error(p);
+  console.log(`${problems.length} problem(s)`);
+  process.exit(problems.length ? 1 : 0);
 } else if (cmd === 'pin') {
   // pin --org shoplabtest --tag bench-v1.0-base <repo> [<repo> ...]
   const org = arg('org') ?? 'shoplabtest';
@@ -62,6 +71,6 @@ if (cmd === 'validate') {
   writeFileSync(join(runDir, 'summary.json'), JSON.stringify(summary, null, 2) + '\n');
   console.log(JSON.stringify(summary, null, 2));
 } else {
-  console.error('commands: validate | pin | coverage | score --run <dir> [--repos <dir>] [--keys <dir>]');
+  console.error('commands: validate | verify-keys | pin | coverage | score --run <dir> [--repos <dir>] [--keys <dir>]');
   process.exit(2);
 }

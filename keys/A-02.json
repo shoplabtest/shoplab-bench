@@ -1,0 +1,31 @@
+{
+  "id": "A-02",
+  "repo": "shoplab-ui-kit",
+  "pr": 2,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "166529db04f086d474be2d740c85204dd8337f53",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "value"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 1,
+      "why": "Imports the constant that was renamed",
+      "snippet": "import { DEFAULT_CURRENCY, Toast }"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 27,
+      "why": "Passes the constant to the catalog remote as the currency prop",
+      "snippet": "currency={DEFAULT_CURRENCY}"
+    }
+  ],
+  "mustNotFlag": []
+}

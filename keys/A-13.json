@@ -1,0 +1,53 @@
+{
+  "id": "A-13",
+  "repo": "shoplab-host",
+  "pr": 3,
+  "baseSha": "f92fd3f36e7916d530da595eaf98e699e2479c79",
+  "headSha": "ae32f9bcc6027a1bcc9b652ba80773b65b7344f1",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "medium",
+  "expect": "break",
+  "kinds": [
+    "browser-state"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 35,
+      "why": "Emits cart:updated with detail { count }",
+      "snippet": "emitCartUpdated({ count"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 35,
+      "why": "Emits cart:updated with detail { count }",
+      "snippet": "emitCartUpdated({ count"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 5,
+      "why": "Declares the detail shape with count",
+      "snippet": "emitCartUpdated(detail: { count: number })"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 5,
+      "why": "Declares the detail shape with count",
+      "snippet": "emitCartUpdated(detail: { count: number })"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 43,
+      "why": "The host emitter is changed in the same PR",
+      "snippet": "emitCartUpdated({ count"
+    }
+  ]
+}

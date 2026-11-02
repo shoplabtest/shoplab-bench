@@ -1,0 +1,31 @@
+{
+  "id": "C-01",
+  "repo": "shoplab-catalog-api",
+  "pr": 7,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "b7f41dca76820e362ca9d40fa5e9d1424dfdb235",
+  "split": "dev",
+  "category": "C",
+  "difficulty": "easy",
+  "expect": "safe",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/types.ts",
+      "line": 4,
+      "why": "Extra optional field does not break the type",
+      "snippet": "export interface Product"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 3,
+      "why": "Extra optional field does not break the type",
+      "snippet": "export interface CatalogProduct"
+    }
+  ]
+}

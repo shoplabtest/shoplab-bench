@@ -1,0 +1,46 @@
+{
+  "id": "A-07",
+  "repo": "shoplab-cart-api",
+  "pr": 1,
+  "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+  "headSha": "f2476cf83fe8bbb1afa9fb8b9a54e59bf0d0392c",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 44,
+      "why": "Sends the coupon as { code }",
+      "snippet": "'/cart/coupon', 'POST', { code }"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 62,
+      "why": "The smoke test posts { code: \"WELCOME10\" }",
+      "snippet": "'/cart/coupon'"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 26,
+      "why": "Published OpenAPI spec still requires { code } in the coupon request",
+      "snippet": "required: [code]"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/seed.ts",
+      "line": 8,
+      "why": "Seed data for the coupons table, not a request body",
+      "snippet": "code: 'WELCOME10'"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "B-02",
+  "repo": "shoplab-ui-kit",
+  "pr": 4,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "e6a2f9ecd8dddb213108f15a061377c5be04fbf2",
+  "split": "dev",
+  "category": "B",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "component"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/Price.tsx",
+      "line": 4,
+      "why": "Wrapper spreads PriceTag props, so the renamed prop passes through untyped by name",
+      "hard": true,
+      "snippet": "{...props}"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/ProductCard.tsx",
+      "line": 15,
+      "why": "Passes amount= through the wrapper",
+      "hard": true,
+      "snippet": "<Price amount="
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 26,
+      "why": "Passes amount= through the wrapper",
+      "hard": true,
+      "snippet": "<Price amount="
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 11,
+      "why": "Money, not PriceTag; its props are unchanged",
+      "snippet": "<Money amount={subtotal}"
+    }
+  ]
+}

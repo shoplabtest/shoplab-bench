@@ -6,6 +6,7 @@ Manifest, answer keys, scorer and results for the ShopLab benchmark. Design: `..
 npm install
 npm test                                  # scorer unit tests
 npm run validate                          # keys and manifest are well formed
+npm run verify-keys -- --repos <dir>       # every key site and decoy line holds its snippet at the pinned SHA
 npm run coverage                          # every contract kind needs >= 2 key sites
 npm run score -- --run results/<run-id> [--repos <dir with cloned repos>]
 ```
@@ -15,6 +16,7 @@ npm run score -- --run results/<run-id> [--repos <dir with cloned repos>]
 - `results/<run-id>/<pr-id>.json`: agent output (`verdict`, `sites`, `coverageGaps`, `cost`).
 - Scoring always reports `dev` and `holdout` separately. Hold-out keys stay in `shoplab-bench-holdout` until release.
 - A reported site matches a key site when consumer and file are equal and the line is within 5.
+- Findings in test files (`test/`, `*.test.*`, `*.spec.*`) are ignored: they are neither credited nor counted as false positives. Keys list production consumers only.
 - Key sites marked `unsupported` (e.g. the Go service) are reported separately and never counted as misses.
 
 ## Pinning the baseline

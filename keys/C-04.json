@@ -1,0 +1,24 @@
+{
+  "id": "C-04",
+  "repo": "shoplab-ui-kit",
+  "pr": 5,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "fd32c5837689ef488c7838d9363d5eb02ac3e042",
+  "split": "dev",
+  "category": "C",
+  "difficulty": "easy",
+  "expect": "safe",
+  "kinds": [
+    "component"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 1,
+      "why": "Existing ui-kit imports are unaffected by a new export",
+      "snippet": "import { DEFAULT_CURRENCY, Toast }"
+    }
+  ]
+}

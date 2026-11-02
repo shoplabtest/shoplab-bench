@@ -1,0 +1,24 @@
+{
+  "id": "C-03",
+  "repo": "shoplab-cart-api",
+  "pr": 4,
+  "baseSha": "6afff54b471d84b35f9a5f5fee951eae3ebcb7d0",
+  "headSha": "6204680467310fe6b335d5de9d267c9f3b160e64",
+  "split": "dev",
+  "category": "C",
+  "difficulty": "easy",
+  "expect": "safe",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 39,
+      "why": "Calls GET /cart, which is unchanged",
+      "snippet": "export const getCart"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "D-01",
+  "repo": "shoplab-ui-kit",
+  "pr": 6,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "74731904829551a576c8bdbf06b858b87069c217",
+  "split": "dev",
+  "category": "D",
+  "difficulty": "medium",
+  "expect": "safe",
+  "kinds": [
+    "component"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/Price.tsx",
+      "line": 1,
+      "why": "Neither prop is used here and compareAt still works",
+      "snippet": "PriceTagProps"
+    }
+  ]
+}

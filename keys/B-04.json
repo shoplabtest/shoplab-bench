@@ -1,0 +1,57 @@
+{
+  "id": "B-04",
+  "repo": "shoplab-cart-mfe",
+  "pr": 2,
+  "baseSha": "09859d41aa602abbaa496ec1cbc81ffe1f095896",
+  "headSha": "40e56e956653cbdeb5caf9bcaed77a628db43638",
+  "split": "dev",
+  "category": "B",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "browser-state"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/storage.ts",
+      "line": 3,
+      "why": "Host reads the guest cart id under the old key when merging after login",
+      "hard": true,
+      "snippet": "CART_ID_KEY = 'cartId'"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 6,
+      "why": "Catalog writes the guest cart id under the old key",
+      "hard": true,
+      "snippet": "GUEST_CART_KEY = 'cartId'"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 30,
+      "why": "e2e test reads the old key",
+      "hard": true,
+      "snippet": "getItem('cartId')"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 49,
+      "why": "e2e test waits for the old key to be cleared",
+      "hard": true,
+      "snippet": "getItem('cartId')"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 34,
+      "why": "Goes through the storage helper; only the key constant in storage.ts matters",
+      "snippet": "readGuestCartId()"
+    }
+  ]
+}

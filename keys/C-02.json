@@ -1,0 +1,31 @@
+{
+  "id": "C-02",
+  "repo": "shoplab-iam",
+  "pr": 3,
+  "baseSha": "37f4795f1c669b038559f07305f58e92cb790e26",
+  "headSha": "ce665b452dad759a80e496510aaee7e28e88ba87",
+  "split": "dev",
+  "category": "C",
+  "difficulty": "easy",
+  "expect": "safe",
+  "kinds": [
+    "http-endpoint"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/types.ts",
+      "line": 2,
+      "why": "Extra field does not break the type",
+      "snippet": "export interface Profile"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 15,
+      "why": "Reads token claims, not the user response",
+      "snippet": "export function decodeUser"
+    }
+  ]
+}
