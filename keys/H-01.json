@@ -1,0 +1,79 @@
+{
+  "id": "H-01",
+  "repo": "shoplab-catalog-api",
+  "pr": 10,
+  "baseSha": "0a90ba87f51ab9bad77f2cd3f4f8a10ad45e11ac",
+  "headSha": "2f0f56bc811860a92ad47808576023750dcf22ce",
+  "split": "dev",
+  "category": "H",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "event",
+    "http-endpoint"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/consumer.ts",
+      "line": 9,
+      "why": "product.updated no longer has a top-level price (it moved to pricing.amount), so Number.isInteger(ev.price) is false for every event and every price update is dropped silently",
+      "hard": true,
+      "snippet": "Number.isInteger(ev.price)"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 17,
+      "why": "ProductUpdated type still declares the removed price field",
+      "snippet": "  price: number;"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 8,
+      "why": "Published event schema still requires an integer price and has no pricing or status",
+      "snippet": "\"price\":{\"type\":\"integer\""
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 19,
+      "why": "Only 404 means not found; the new 410 for an archived product is thrown as a catalog failure, so add-to-cart answers 502 catalog_unavailable instead of 404 product_not_found",
+      "hard": true,
+      "snippet": "if (res.status === 404) return null;"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 20,
+      "why": "Only status 404 shows 'This product no longer exists'; a 410 falls through to 'Could not load the product'",
+      "hard": true,
+      "snippet": "state.error.status === 404"
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 82,
+      "why": "Reads product.price.amount from the REST response, whose price shape is unchanged",
+      "snippet": "product.price.amount"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/ProductCard.tsx",
+      "line": 15,
+      "why": "Reads product.price from the REST response, unchanged; tiers are additive and ignored",
+      "snippet": "product.price.amount"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/SearchBar.tsx",
+      "line": 26,
+      "why": "price_asc is a sort option sent to /search, not the event field",
+      "snippet": "price_asc"
+    }
+  ],
+  "notes": "Mixed PR. Safe parts: tiers on responses, /price and /tiers endpoints, product.archived event, migration 005 (appends status to the products view). Breaking parts: product.updated payload shape and 410 for archived products."
+}
