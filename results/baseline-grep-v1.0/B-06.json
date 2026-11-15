@@ -1,0 +1,23 @@
+{
+  "id": "B-06",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/cart-api/values.yaml",
+      "line": 11,
+      "snippet": "CATALOG_API_URL: \"\""
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 72,
+      "snippet": "CATALOG_API_URL: http://catalog-api:3002"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.004
+  }
+}

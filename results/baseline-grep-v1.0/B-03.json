@@ -1,0 +1,155 @@
+{
+  "id": "B-03",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "migrations/002_create_cart_lines.sql",
+      "line": 4,
+      "snippet": "quantity     integer NOT NULL CHECK (quantity > 0),"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "migrations/002_create_cart_lines.sql",
+      "line": 5,
+      "snippet": "unit_price   integer NOT NULL CHECK (unit_price >= 0),  -- snapshot in minor units at add time"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "migrations/002_create_cart_lines.sql",
+      "line": 6,
+      "snippet": "latest_price integer,                                     -- last price seen on product.updated"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "migrations/003_create_coupons.sql",
+      "line": 3,
+      "snippet": "percent_off integer NOT NULL CHECK (percent_off BETWEEN 1 AND 100),"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 60,
+      "snippet": "quantity integer NOT NULL,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 61,
+      "snippet": "unit_price integer NOT NULL,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 62,
+      "snippet": "latest_price integer,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 90,
+      "snippet": "percent_off integer NOT NULL,"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/types.ts",
+      "line": 5,
+      "snippet": "/** Price snapshot in minor units, taken when the item was added. */"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/cart.checked_out.schema.json",
+      "line": 8,
+      "snippet": "\"properties\": {\"cartId\":{\"type\":\"string\"},\"userId\":{\"type\":\"string\",\"format\":\"uuid\"},\"total\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"lines\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\""
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 8,
+      "snippet": "\"properties\": {\"productId\":{\"type\":\"string\"},\"price\":{\"type\":\"integer\",\"description\":\"minor units\"},\"currency\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\",\"format\":\"date-time\"}}"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 16,
+      "snippet": "schema: { type: object, required: [productId, quantity], properties: { productId: { type: string }, quantity: { type: integer, minimum: 1 } } }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 39,
+      "snippet": "schema: { type: object, required: [quantity], properties: { quantity: { type: integer, minimum: 0, description: '0 removes the line' } } }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 75,
+      "snippet": "quantity: { type: integer }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 76,
+      "snippet": "unitPrice: { type: integer, description: 'minor units, snapshot at add time' }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 77,
+      "snippet": "latestUnitPrice: { type: integer, description: 'present when the catalog price has changed since the snapshot' }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 85,
+      "snippet": "total: { type: integer, description: minor units }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 9,
+      "snippet": "- { name: page, in: query, schema: { type: integer, default: 1 } }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 34,
+      "snippet": "amount: { type: integer, description: minor units }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/iam.yaml",
+      "line": 80,
+      "snippet": "expiresIn: { type: integer, description: seconds }"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "README.md",
+      "line": 6,
+      "snippet": "Amounts are integers in minor units (cents)."
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/PriceTag.tsx",
+      "line": 7,
+      "snippet": "/** Original price in minor units; when set and higher, shown struck through. */"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/format-money.ts",
+      "line": 3,
+      "snippet": "/** Format an amount in minor units (cents) as a localized price string. */"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "test/ui-kit.test.tsx",
+      "line": 6,
+      "snippet": "test('formatMoney converts minor units', () => {"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.004
+  }
+}

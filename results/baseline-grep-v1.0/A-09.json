@@ -1,0 +1,83 @@
+{
+  "id": "A-09",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "README.md",
+      "line": 16,
+      "snippet": "Env: `DATABASE_URL`, `JWT_SECRET` (shared with iam), `CATALOG_API_URL`, `RABBITMQ_URL`, `PORT`, `CART_TTL_DAYS`."
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/config.ts",
+      "line": 15,
+      "snippet": "jwtSecret: env.JWT_SECRET ?? 'dev-only-secret',"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/helpers.ts",
+      "line": 10,
+      "snippet": "export const cfg = loadConfig({ JWT_SECRET: 'test-secret', CART_TTL_DAYS: '30' } as NodeJS.ProcessEnv);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "README.md",
+      "line": 15,
+      "snippet": "Env: `DATABASE_URL`, `JWT_SECRET` (shared with iam), `RABBITMQ_URL` (optional), `PORT`, `PAGE_SIZE`."
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/config.ts",
+      "line": 14,
+      "snippet": "jwtSecret: env.JWT_SECRET ?? 'dev-only-secret',"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 11,
+      "snippet": "const cfg = loadConfig({ JWT_SECRET: 'test-secret', PAGE_SIZE: '2' } as NodeJS.ProcessEnv);"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/cart-api/values.yaml",
+      "line": 9,
+      "snippet": "JWT_SECRET: \"\"            # set at deploy time (--set or an external values file)"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/catalog-api/values.yaml",
+      "line": 9,
+      "snippet": "JWT_SECRET: \"\"            # set at deploy time (--set or an external values file)"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/iam/values.yaml",
+      "line": 9,
+      "snippet": "JWT_SECRET: \"\"            # set at deploy time (--set or an external values file)"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 44,
+      "snippet": "JWT_SECRET: ${JWT_SECRET:-dev-only-secret}"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 57,
+      "snippet": "JWT_SECRET: ${JWT_SECRET:-dev-only-secret}"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 70,
+      "snippet": "JWT_SECRET: ${JWT_SECRET:-dev-only-secret}"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.005
+  }
+}

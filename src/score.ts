@@ -136,6 +136,30 @@ export function summarize(keys: AnswerKey[], results: Map<string, PrResult>, evi
   };
 }
 
+/** The same metrics for each category (A to I), so a weak spot shows up. Categories with no PR are left out. */
+export function summarizeByCategory(keys: AnswerKey[], results: Map<string, PrResult>, evidence?: EvidenceCheck): Record<string, Summary> {
+  const out: Record<string, Summary> = {};
+  for (const c of [...new Set(keys.map((k) => k.category))].sort()) out[c] = summarize(keys.filter((k) => k.category === c), results, evidence);
+  return out;
+}
+
+const csvCell = (v: string | number) => (/[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
+
+/** One row per PR: what was expected, what was said, and which sites matched, were missed or were extra. */
+export function perPrCsv(keys: AnswerKey[], results: Map<string, PrResult>, evidence?: EvidenceCheck): string {
+  const header = ['id', 'split', 'category', 'difficulty', 'expect', 'verdict', 'verdictOk', 'keySites', 'matched', 'missed', 'falsePositives', 'missedSites'];
+  const rows = keys.map((k) => {
+    const s = scorePr(k, results.get(k.id), evidence);
+    const keySites = s.matched.length + s.misses.length;
+    return [
+      k.id, k.split, k.category, k.difficulty, k.expect, s.verdict, s.verdict === k.expect ? 'yes' : 'no',
+      keySites, s.matched.length, s.misses.length, s.falsePositives.length,
+      s.misses.map((m) => `${m.consumer}/${m.file}:${m.line}`).join(' '),
+    ].map(csvCell).join(',');
+  });
+  return [header.join(','), ...rows].join('\n') + '\n';
+}
+
 /** Always reported separately so tuning on dev cannot inflate the hold-out number. */
 export function summarizeBySplit(keys: AnswerKey[], results: Map<string, PrResult>, evidence?: EvidenceCheck) {
   return {

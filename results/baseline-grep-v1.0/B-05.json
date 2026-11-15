@@ -1,0 +1,77 @@
+{
+  "id": "B-05",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "README.md",
+      "line": 7,
+      "snippet": "**HTTP:** `GET /cart`, `PATCH` and `DELETE /cart/items/:productId`, `POST /cart/coupon`, and `GET /products/:id` for line names. Guests send the `x-cart-id` header."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 15,
+      "snippet": "/** One call path for every cart operation: logged-in users use the host's authFetch, guests send `x-cart-id`. */"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 25,
+      "snippet": "headers: { 'content-type': 'application/json', ...(guestId ? { 'x-cart-id': guestId } : {}) },"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 20,
+      "snippet": "it('loads with the saved x-cart-id, names the lines and shows totals', async () => {"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 26,
+      "snippet": "expect(header(calls.find((c) => c.url === '/cart')!.init, 'x-cart-id')).toBe('c-1');"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 15,
+      "snippet": "/** Adds one unit. Logged-in users go through the host's authFetch; guests send `x-cart-id` and remember the id the server returns. */"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 25,
+      "snippet": "headers: { 'content-type': 'application/json', ...(guestId ? { 'x-cart-id': guestId } : {}) },"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 114,
+      "snippet": "expect((post.init.headers as Record<string, string>)['x-cart-id']).toBeUndefined();"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 119,
+      "snippet": "it('guest: a second add sends the saved x-cart-id', async () => {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 130,
+      "snippet": "expect((calls.find((c) => c.url === '/cart/items')!.init.headers as Record<string, string>)['x-cart-id']).toBe('guest-1');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 22,
+      "snippet": "headers: { 'content-type': 'application/json', ...(token && { authorization: `Bearer ${token}` }), ...(cartId && { 'x-cart-id': cartId }) },"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.005
+  }
+}

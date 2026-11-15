@@ -1,0 +1,155 @@
+{
+  "id": "A-07",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 44,
+      "snippet": "export const applyCoupon = (loggedIn: boolean, code: string) => call(loggedIn, '/cart/coupon', 'POST', { code });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CouponBox.tsx",
+      "line": 6,
+      "snippet": "onApply: (code: string) => void;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CouponBox.tsx",
+      "line": 10,
+      "snippet": "const [code, setCode] = useState('');"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CouponBox.tsx",
+      "line": 13,
+      "snippet": "if (code.trim()) onApply(code.trim());"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CouponBox.tsx",
+      "line": 17,
+      "snippet": "<FormField label=\"Coupon code\" name=\"coupon\">"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CouponBox.tsx",
+      "line": 18,
+      "snippet": "<input id=\"coupon\" value={code} onChange={(e) => setCode(e.target.value)} />"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 46,
+      "snippet": "applyCoupon: (code: string) =>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 47,
+      "snippet": "run(() => applyCoupon(loggedIn, code), (e) => (e instanceof ApiError && e.status === 422 ? 'That coupon is not valid.' : 'Could not apply the coupon.')),"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 114,
+      "snippet": "fireEvent.change(screen.getByLabelText('Coupon code'), { target: { value: 'welcome10' } });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 117,
+      "snippet": "expect(JSON.parse(calls.find((c) => c.url === '/cart/coupon')!.init.body as string)).toEqual({ code: 'welcome10' });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 130,
+      "snippet": "fireEvent.change(screen.getByLabelText('Coupon code'), { target: { value: 'NOPE' } });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 164,
+      "snippet": "fireEvent.change(screen.getByLabelText('Coupon code'), { target: { value: 'X' } });"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 26,
+      "snippet": "schema: { type: object, required: [code], properties: { code: { type: string } } }"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 36,
+      "snippet": "await expect(act(() => result.current.login('a@shoplab.test', 'bad'))).rejects.toMatchObject({ status: 401, code: 'invalid_credentials' });"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "README.md",
+      "line": 14,
+      "snippet": "npm run check:env # Helm env names vs service code"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/cart-api/values.yaml",
+      "line": 6,
+      "snippet": "# Env var names must match what the service code reads (checked by scripts/check-env-names.mjs)."
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/catalog-api/values.yaml",
+      "line": 6,
+      "snippet": "# Env var names must match what the service code reads (checked by scripts/check-env-names.mjs)."
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "charts/iam/values.yaml",
+      "line": 6,
+      "snippet": "# Env var names must match what the service code reads (checked by scripts/check-env-names.mjs)."
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 59,
+      "snippet": "await page.getByLabel('Coupon code').fill('WELCOME10');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 62,
+      "snippet": "const coupon = await call(CART, '/cart/coupon', { method: 'POST', token: user.body.accessToken, body: { code: 'WELCOME10' } });"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/errors.ts",
+      "line": 4,
+      "snippet": "readonly code: string;"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/errors.ts",
+      "line": 6,
+      "snippet": "constructor(status: number, code: string, message?: string) {"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/errors.ts",
+      "line": 7,
+      "snippet": "super(message ?? code);"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/errors.ts",
+      "line": 10,
+      "snippet": "this.code = code;"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.005
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "id": "A-13",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "README.md",
+      "line": 9,
+      "snippet": "**Events:** emits `cart:updated` `{ count }` after every cart response."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 35,
+      "snippet": "emitCartUpdated({ count: cart.lines.reduce((n, l) => n + l.quantity, 0) });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 5,
+      "snippet": "export function emitCartUpdated(detail: { count: number }): void;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 28,
+      "snippet": "expect(emitCartUpdated).toHaveBeenCalledWith({ count: 3 });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 73,
+      "snippet": "expect(emitCartUpdated).toHaveBeenLastCalledWith({ count: 3 });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 81,
+      "snippet": "expect(emitCartUpdated).toHaveBeenLastCalledWith({ count: 0 });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/seed.ts",
+      "line": 40,
+      "snippet": "export function seedProducts(count = 200, seed = 7) {"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/seed.ts",
+      "line": 43,
+      "snippet": "return Array.from({ length: count }, (_, i) => {"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/db.test.ts",
+      "line": 23,
+      "snippet": "const view = await pool.query('SELECT count(*)::int AS n FROM products');"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 35,
+      "snippet": "emitCartUpdated({ count: cart.lines.reduce((n, l) => n + l.quantity, 0) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 5,
+      "snippet": "export function emitCartUpdated(detail: { count: number }): void;"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 102,
+      "snippet": "it('guest: creates a cart, remembers localStorage.cartId, announces the count and notifies the host', async () => {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 116,
+      "snippet": "expect(emitCartUpdated).toHaveBeenCalledWith({ count: 1 });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 129,
+      "snippet": "await waitFor(() => expect(emitCartUpdated).toHaveBeenCalledWith({ count: 2 }));"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 143,
+      "snippet": "expect(emitCartUpdated).toHaveBeenCalledWith({ count: 3 });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/seed.ts",
+      "line": 24,
+      "snippet": "export function seedUsers(count = 50, seed = 42) {"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/seed.ts",
+      "line": 26,
+      "snippet": "return Array.from({ length: count }, (_, i) => {"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 29,
+      "snippet": "await expectVisible(page.getByRole('link', { name: 'Cart (1)' }), 'header cart count follows cart:updated');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 37,
+      "snippet": "await expectVisible(page.getByRole('link', { name: 'Cart (2)' }), 'quantity edit updates the cart count');"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.004
+  }
+}

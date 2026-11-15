@@ -1,0 +1,221 @@
+{
+  "id": "B-01",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "README.md",
+      "line": 8,
+      "snippet": "| `POST /cart/items` | looks the product up with `GET {CATALOG_API_URL}/products/:id` and snapshots the price |"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 18,
+      "snippet": "const res = await fetch(`${this.cfg.catalogApiUrl}/products/${encodeURIComponent(id)}`);"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "README.md",
+      "line": 7,
+      "snippet": "**HTTP:** `GET /cart`, `PATCH` and `DELETE /cart/items/:productId`, `POST /cart/coupon`, and `GET /products/:id` for line names. Guests send the `x-cart-id` header."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 46,
+      "snippet": "/** Cart lines only carry product ids; names come from GET /products/:id. A failed lookup falls back to the id. */"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 51,
+      "snippet": "const res = await fetch(`/products/${id}`);"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 10,
+      "snippet": "const names = { 'GET /products/p-1': () => ({ body: { id: 'p-1', name: 'Studio Speaker' } }), 'GET /products/p-2': () => ({ body: { id: 'p-2', name: 'Everyday Cable' } }) };"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 39,
+      "snippet": "stubFetch({ 'GET /cart': () => ({ body: cart([line('p-9', 1, 100)], 100) }), 'GET /products/p-9': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "README.md",
+      "line": 7,
+      "snippet": "**HTTP:** `GET /products?category&page`, `GET /products/:id`, `GET /search?q&sort`, `GET /categories`, `POST /cart/items`."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 16,
+      "snippet": "return getJson<Product[]>(`/products?${q}`);"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 21,
+      "snippet": "/** The product id goes straight into the path: GET /products/:id */"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 22,
+      "snippet": "export const getProduct = (id: string) => getJson<Product>(`/products/${encodeURIComponent(id)}`);"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 24,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: TREE }), 'GET /products?*': () => ({ body: [speaker, cable] }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 34,
+      "snippet": "const calls = stubFetch({ 'GET /categories': () => ({ body: TREE }), 'GET /products?*': () => ({ body: [speaker] }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 37,
+      "snippet": "await waitFor(() => expect(calls.some((c) => c.url === '/products?page=1&category=audio')).toBe(true));"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 41,
+      "snippet": "const calls = stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products?*': () => ({ body: [speaker] }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 45,
+      "snippet": "await waitFor(() => expect(calls.some((c) => c.url === '/products?page=2')).toBe(true));"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 50,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products?*': () => ({ body: [] }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 56,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products?*': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 66,
+      "snippet": "'GET /products?*': () => ({ body: [speaker] }),"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 79,
+      "snippet": "it('loads /products/:id from the product query param', async () => {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 80,
+      "snippet": "const calls = stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products/p-1': () => ({ body: speaker }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 83,
+      "snippet": "expect(calls.some((c) => c.url === '/products/p-1')).toBe(true);"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 87,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products/gone': () => ({ status: 404, body: { error: 'not_found' } }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 93,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products/p-1': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 105,
+      "snippet": "'GET /products?*': () => ({ body: [speaker] }),"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 123,
+      "snippet": "'GET /products?*': () => ({ body: [speaker] }),"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 136,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products?*': () => ({ body: [speaker] }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 149,
+      "snippet": "'GET /products?*': () => ({ body: [speaker] }),"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 4,
+      "snippet": "/products:"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 12,
+      "snippet": "/products/{id}:"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "README.md",
+      "line": 16,
+      "snippet": "npm run dev      # port 5000; Vite proxies /auth, /products, /search, /categories, /cart to local services"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "vite.config.ts",
+      "line": 32,
+      "snippet": "'/products': 'http://localhost:3002',"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/frontends.mjs",
+      "line": 3,
+      "snippet": "// The host's preview server proxies /auth, /products, /cart ... to the services, standing in for the gateway."
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 44,
+      "snippet": "const list = await call(CATALOG, '/products?category=audio');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 47,
+      "snippet": "const created = await call(CATALOG, '/products', {"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.005
+  }
+}

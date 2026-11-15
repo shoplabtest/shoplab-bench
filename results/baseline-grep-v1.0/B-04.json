@@ -1,0 +1,503 @@
+{
+  "id": "B-04",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 143,
+      "snippet": "cartId: cart.id,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 149,
+      "snippet": "res.status(202).json({ cartId: cart.id });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 7,
+      "snippet": "cartId: string;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 30,
+      "snippet": "touch(cartId: string, expiresAt: Date): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 31,
+      "snippet": "setCurrency(cartId: string, currency: string): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 32,
+      "snippet": "setCoupon(cartId: string, code: string | null): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 33,
+      "snippet": "setStatus(cartId: string, status: CartRow['status']): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 34,
+      "snippet": "getLines(cartId: string): Promise<LineRow[]>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 36,
+      "snippet": "addToLine(cartId: string, productId: string, quantity: number, unitPrice: number): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 37,
+      "snippet": "setLineQuantity(cartId: string, productId: string, quantity: number): Promise<boolean>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 38,
+      "snippet": "removeLine(cartId: string, productId: string): Promise<boolean>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 39,
+      "snippet": "deleteCart(cartId: string): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 57,
+      "snippet": "async touch(cartId: string, expiresAt: Date) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 58,
+      "snippet": "await this.pool.query('UPDATE carts SET expires_at = $2, updated_at = now() WHERE id = $1', [cartId, expiresAt]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 60,
+      "snippet": "async setCurrency(cartId: string, currency: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 61,
+      "snippet": "await this.pool.query('UPDATE carts SET currency = $2 WHERE id = $1', [cartId, currency]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 63,
+      "snippet": "async setCoupon(cartId: string, code: string | null) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 64,
+      "snippet": "await this.pool.query('UPDATE carts SET coupon_code = $2 WHERE id = $1', [cartId, code]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 66,
+      "snippet": "async setStatus(cartId: string, status: CartRow['status']) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 67,
+      "snippet": "await this.pool.query('UPDATE carts SET status = $2 WHERE id = $1', [cartId, status]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 69,
+      "snippet": "async getLines(cartId: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 70,
+      "snippet": "return (await this.pool.query<LineRow>('SELECT product_id, quantity, unit_price, latest_price FROM cart_lines WHERE cart_id = $1 ORDER BY product_id', [cartId])).rows;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 72,
+      "snippet": "async addToLine(cartId: string, productId: string, quantity: number, unitPrice: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 76,
+      "snippet": "[cartId, productId, quantity, unitPrice],"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 79,
+      "snippet": "async setLineQuantity(cartId: string, productId: string, quantity: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 80,
+      "snippet": "return ((await this.pool.query('UPDATE cart_lines SET quantity = $3 WHERE cart_id = $1 AND product_id = $2', [cartId, productId, quantity])).rowCount ?? 0) > 0;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 82,
+      "snippet": "async removeLine(cartId: string, productId: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 83,
+      "snippet": "return ((await this.pool.query('DELETE FROM cart_lines WHERE cart_id = $1 AND product_id = $2', [cartId, productId])).rowCount ?? 0) > 0;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 85,
+      "snippet": "async deleteCart(cartId: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 86,
+      "snippet": "await this.pool.query('DELETE FROM carts WHERE id = $1', [cartId]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 119,
+      "snippet": "async touch(cartId: string, expiresAt: Date) { const c = this.carts.get(cartId); if (c) c.expires_at = expiresAt; }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 120,
+      "snippet": "async setCurrency(cartId: string, currency: string) { const c = this.carts.get(cartId); if (c) c.currency = currency; }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 121,
+      "snippet": "async setCoupon(cartId: string, code: string | null) { const c = this.carts.get(cartId); if (c) c.coupon_code = code; }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 122,
+      "snippet": "async setStatus(cartId: string, status: CartRow['status']) { const c = this.carts.get(cartId); if (c) c.status = status; }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 123,
+      "snippet": "async getLines(cartId: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 124,
+      "snippet": "return [...(this.lines.get(cartId) ?? [])].sort((a, b) => a.product_id.localeCompare(b.product_id)).map((l) => ({ ...l }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 126,
+      "snippet": "async addToLine(cartId: string, productId: string, quantity: number, unitPrice: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 127,
+      "snippet": "const ls = this.lines.get(cartId)!;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 132,
+      "snippet": "async setLineQuantity(cartId: string, productId: string, quantity: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 133,
+      "snippet": "const l = this.lines.get(cartId)?.find((x) => x.product_id === productId);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 138,
+      "snippet": "async removeLine(cartId: string, productId: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 139,
+      "snippet": "const ls = this.lines.get(cartId) ?? [];"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 145,
+      "snippet": "async deleteCart(cartId: string) { this.carts.delete(cartId); this.lines.delete(cartId); }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 33,
+      "snippet": "const again = await json(await call('/cart', { cartId: added.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 40,
+      "snippet": "const second = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 2 }, cartId: first.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 48,
+      "snippet": "const b = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-2', quantity: 1 }, cartId: a.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 64,
+      "snippet": "const r = await call('/cart/items', { method: 'POST', body: { productId: 'p-eur', quantity: 1 }, cartId: a.id });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 70,
+      "snippet": "const patched = await json(await call('/cart/items/p-1', { method: 'PATCH', body: { quantity: 4 }, cartId: a.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 72,
+      "snippet": "const zeroed = await json(await call('/cart/items/p-1', { method: 'PATCH', body: { quantity: 0 }, cartId: a.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 74,
+      "snippet": "assert.equal((await call('/cart/items/p-1', { method: 'DELETE', cartId: a.id })).status, 404);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 79,
+      "snippet": "const c = await json(await call('/cart/coupon', { method: 'POST', body: { code: 'ten' }, cartId: a.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 82,
+      "snippet": "assert.equal((await call('/cart/coupon', { method: 'POST', body: { code: 'NOPE' }, cartId: a.id })).status, 422);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 83,
+      "snippet": "assert.equal((await call('/cart/coupon', { method: 'POST', body: { code: 'OLD' }, cartId: a.id })).status, 422);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 90,
+      "snippet": "await call('/cart/items', { method: 'POST', body: { productId: 'p-2', quantity: 1 }, cartId: guest.id });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 91,
+      "snippet": "await call('/cart/coupon', { method: 'POST', body: { code: 'TEN' }, cartId: guest.id });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 110,
+      "snippet": "const next = await json(await call('/cart', { cartId: a.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 123,
+      "snippet": "assert.deepEqual(ev.body, { cartId: ((await r.json()) as { cartId: string }).cartId, userId: USER, total: 1800, currency: 'USD', lines: [{ productId: 'p-1', quantity: 2 }] });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/helpers.ts",
+      "line": 28,
+      "snippet": "const call = (path: string, o: { method?: string; body?: unknown; token?: string; cartId?: string } = {}) =>"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/helpers.ts",
+      "line": 34,
+      "snippet": "...(o.cartId ? { 'x-cart-id': o.cartId } : {}),"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "README.md",
+      "line": 8,
+      "snippet": "**Browser state:** URL query params `category`, `q`, `sort`, `page`, `product`; `localStorage.cartId` (guest cart id, written here and by the cart remote, merged by the host after login)."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 5,
+      "snippet": "// The guest cart id lives in localStorage under `cartId`; the cart remote reads and the host merges it on login."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 6,
+      "snippet": "const GUEST_CART_KEY = 'cartId';"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 102,
+      "snippet": "it('guest: creates a cart, remembers localStorage.cartId, announces the count and notifies the host', async () => {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 115,
+      "snippet": "expect(localStorage.getItem('cartId')).toBe('guest-1');"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 120,
+      "snippet": "localStorage.setItem('cartId', 'guest-1');"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 133,
+      "snippet": "it('logged in: goes through the host authFetch and leaves localStorage.cartId alone', async () => {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 142,
+      "snippet": "expect(localStorage.getItem('cartId')).toBeNull();"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/cart.checked_out.schema.json",
+      "line": 6,
+      "snippet": "\"required\": [\"cartId\",\"userId\",\"total\",\"currency\",\"lines\"],"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/cart.checked_out.schema.json",
+      "line": 8,
+      "snippet": "\"properties\": {\"cartId\":{\"type\":\"string\"},\"userId\":{\"type\":\"string\",\"format\":\"uuid\"},\"total\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"lines\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\""
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 66,
+      "snippet": "'202': { description: Accepted, emits cart.checked_out, content: { application/json: { schema: { type: object, properties: { cartId: { type: string } } } } } }"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "README.md",
+      "line": 9,
+      "snippet": "**Browser state:** `localStorage.shoplab.auth` (tokens, owned here), `localStorage.cartId` (guest cart, written by the cart remote, read here to call `POST /cart/merge` after login)."
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 32,
+      "snippet": "/** After login, folds the guest cart (id kept by the cart remote in localStorage.cartId) into the user's cart. */"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/storage.ts",
+      "line": 1,
+      "snippet": "/** Browser-state keys. `cartId` is written by the cart remote; the host reads it to merge a guest cart on login. */"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/storage.ts",
+      "line": 3,
+      "snippet": "export const CART_ID_KEY = 'cartId';"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 41,
+      "snippet": "it('login merges the guest cart named by localStorage.cartId, then clears it', async () => {"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 30,
+      "snippet": "const guestCart = await page.evaluate(() => localStorage.getItem('cartId'));"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 31,
+      "snippet": "if (!guestCart) throw new Error('e2e failed: guest cart id was not saved in localStorage.cartId');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 32,
+      "snippet": "step('guest cart id saved in localStorage.cartId');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 49,
+      "snippet": "await page.waitForFunction(() => localStorage.getItem('cartId') === null, null, { timeout: 15000 });"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 50,
+      "snippet": "step('login merged the guest cart and cleared localStorage.cartId');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 19,
+      "snippet": "async function call(base, path, { method = 'GET', body, token, cartId } = {}) {"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 22,
+      "snippet": "headers: { 'content-type': 'application/json', ...(token && { authorization: `Bearer ${token}` }), ...(cartId && { 'x-cart-id': cartId }) },"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.005
+  }
+}

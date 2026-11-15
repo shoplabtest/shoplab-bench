@@ -1,0 +1,551 @@
+{
+  "id": "A-06",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 19,
+      "snippet": "{o.id} · {o.status} · <Money amount={o.total} currency={o.currency as 'USD'} /> · {new Date(o.placedAt).toLocaleDateString('en-US')}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/types.ts",
+      "line": 5,
+      "snippet": "export interface OrderSummary { id: string; status: string; total: number; currency: string; placedAt: string }"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/account.test.tsx",
+      "line": 109,
+      "snippet": "routes([{ id: 'o-7', status: 'shipped', total: 12500, currency: 'USD', placedAt: '2026-10-15T10:00:00Z' }]);"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/helpers.ts",
+      "line": 3,
+      "snippet": "export const product = (id: string, name: string, amount: number) => ({ id, name, price: { amount, currency: 'USD' }, categoryId: 'audio' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "migrations/001_create_carts.sql",
+      "line": 8,
+      "snippet": "currency    text,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 77,
+      "snippet": "currency text,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 26,
+      "snippet": "currency: cart.currency ?? 'USD',"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 77,
+      "snippet": "if (cart.currency && cart.currency !== product.price.currency) return void res.status(409).json({ error: 'currency_mismatch' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 78,
+      "snippet": "if (!cart.currency) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 79,
+      "snippet": "await store.setCurrency(cart.id, product.price.currency);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 80,
+      "snippet": "cart.currency = product.price.currency;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 82,
+      "snippet": "await store.addToLine(cart.id, productId, quantity, product.price.amount);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 119,
+      "snippet": "if (!cart.currency && guest.currency) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 120,
+      "snippet": "await store.setCurrency(cart.id, guest.currency);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 121,
+      "snippet": "cart.currency = guest.currency;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 127,
+      "snippet": "if (!guest.currency || guest.currency === cart.currency) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 146,
+      "snippet": "currency: body.currency,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 6,
+      "snippet": "price: { amount: number; currency: string };"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 10,
+      "snippet": "currency: string;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 18,
+      "snippet": "currency: string;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 9,
+      "snippet": "currency: string | null;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 31,
+      "snippet": "setCurrency(cartId: string, currency: string): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 60,
+      "snippet": "async setCurrency(cartId: string, currency: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 61,
+      "snippet": "await this.pool.query('UPDATE carts SET currency = $2 WHERE id = $1', [cartId, currency]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 114,
+      "snippet": "const c: CartRow = { id: randomUUID(), user_id: userId, status: 'active', coupon_code: null, currency: null, expires_at: expiresAt };"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 120,
+      "snippet": "async setCurrency(cartId: string, currency: string) { const c = this.carts.get(cartId); if (c) c.currency = currency; }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 12,
+      "snippet": "type Cart = { id: string; lines: { productId: string; quantity: number; unitPrice: number; latestUnitPrice?: number }[]; coupon: string | null; total: number; currency: string };"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 32,
+      "snippet": "assert.equal(added.currency, 'USD');"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 62,
+      "snippet": "test('a cart holds one currency', async () => {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 123,
+      "snippet": "assert.deepEqual(ev.body, { cartId: ((await r.json()) as { cartId: string }).cartId, userId: USER, total: 1800, currency: 'USD', lines: [{ productId: 'p-1', quantity: 2 }] });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/consumer.test.ts",
+      "line": 11,
+      "snippet": "assert.equal(await handleProductUpdated(store, { productId: 'p-1', price: 1200, currency: 'USD' }), 1);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/consumer.test.ts",
+      "line": 22,
+      "snippet": "assert.equal(await handleProductUpdated(store, { productId: 'p-1', price: '12.00' as unknown as number, currency: 'USD' }), 0);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/db.test.ts",
+      "line": 34,
+      "snippet": "assert.equal(await handleProductUpdated(store, { productId: 'p-1', price: 1100, currency: 'USD' }), 1);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/helpers.ts",
+      "line": 15,
+      "snippet": "add(id: string, amount: number, currency = 'USD') { this.products.set(id, { id, name: id, price: { amount, currency } }); }"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/Cart.tsx",
+      "line": 23,
+      "snippet": "<CartLines lines={cart.lines} currency={cart.currency} names={names} onQuantity={setQuantity} onRemove={remove} />"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 6,
+      "snippet": "currency: string;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 12,
+      "snippet": "export function CartLines({ lines, currency, names, onQuantity, onRemove }: CartLinesProps) {"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 20,
+      "snippet": "<Money amount={l.unitPrice} currency={currency as 'USD'} />"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 22,
+      "snippet": "<small> (now <Money amount={l.latestUnitPrice} currency={currency as 'USD'} />)</small>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 6,
+      "snippet": "const currency = cart.currency as 'USD';"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 11,
+      "snippet": "<dt>Subtotal</dt><dd><Money amount={subtotal} currency={currency} /></dd>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 12,
+      "snippet": "{discount > 0 && (<><dt>Discount</dt><dd>−<Money amount={discount} currency={currency} /></dd></>)}"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 13,
+      "snippet": "<dt>Total</dt><dd><Money amount={cart.total} currency={currency} /></dd>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/types.ts",
+      "line": 16,
+      "snippet": "currency: string;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 9,
+      "snippet": "const cart = (lines: ReturnType<typeof line>[], total: number, coupon: string | null = null) => ({ id: 'c-1', lines, coupon, total, currency: 'USD' });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/helpers.ts",
+      "line": 3,
+      "snippet": "export const product = (id: string, name: string, amount: number) => ({ id, name, price: { amount, currency: 'USD' }, categoryId: 'audio' });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "README.md",
+      "line": 5,
+      "snippet": "**Exposes** `./Page` with props `onAddToCart(productId)` and `currency`."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 15,
+      "snippet": "/** Shop currency, shown as a hint above the listing. */"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 16,
+      "snippet": "currency: Currency;"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 21,
+      "snippet": "export default function Page({ onAddToCart, currency }: CatalogPageProps) {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 63,
+      "snippet": "<p>Prices in {currency}</p>"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 26,
+      "snippet": "<Price amount={state.data.price.amount} currency={state.data.price.currency} />"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/ProductCard.tsx",
+      "line": 15,
+      "snippet": "<Price amount={product.price.amount} currency={product.price.currency} />"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/types.ts",
+      "line": 7,
+      "snippet": "price: { amount: number; currency: Currency };"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/helpers.ts",
+      "line": 3,
+      "snippet": "export const product = (id: string, name: string, amount: number) => ({ id, name, price: { amount, currency: 'USD' }, categoryId: 'audio' });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 12,
+      "snippet": "render(<MemoryRouter initialEntries={[path]}><Page onAddToCart={onAddToCart} currency=\"USD\" /></MemoryRouter>);"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 23,
+      "snippet": "it('shows products with formatted prices, the category tree and the currency hint', async () => {"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/cart.checked_out.schema.json",
+      "line": 6,
+      "snippet": "\"required\": [\"cartId\",\"userId\",\"total\",\"currency\",\"lines\"],"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/cart.checked_out.schema.json",
+      "line": 8,
+      "snippet": "\"properties\": {\"cartId\":{\"type\":\"string\"},\"userId\":{\"type\":\"string\",\"format\":\"uuid\"},\"total\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"lines\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\""
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 6,
+      "snippet": "\"required\": [\"productId\",\"price\",\"currency\",\"updatedAt\"],"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 8,
+      "snippet": "\"properties\": {\"productId\":{\"type\":\"string\"},\"price\":{\"type\":\"integer\",\"description\":\"minor units\"},\"currency\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\",\"format\":\"date-time\"}}"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 80,
+      "snippet": "required: [id, lines, total, currency]"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 86,
+      "snippet": "currency: { type: string }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 32,
+      "snippet": "required: [amount, currency]"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 34,
+      "snippet": "amount: { type: integer, description: minor units }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 35,
+      "snippet": "currency: { type: string, enum: [USD, EUR, GBP] }"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "README.md",
+      "line": 10,
+      "snippet": "**Props passed to catalog:** `onAddToCart(productId)`, `currency`."
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 27,
+      "snippet": "<Route path=\"/\" element={<RemoteBoundary name=\"Catalog\"><CatalogPage onAddToCart={onAddToCart} currency={DEFAULT_CURRENCY} /></RemoteBoundary>} />"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remote-modules.d.ts",
+      "line": 4,
+      "snippet": "const Page: ComponentType<{ onAddToCart: (productId: string) => void; currency: Currency }>;"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/app.test.tsx",
+      "line": 10,
+      "snippet": "CatalogPage: ({ onAddToCart, currency }: { onAddToCart: (id: string) => void; currency: string }) => ("
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/app.test.tsx",
+      "line": 11,
+      "snippet": "<button onClick={() => onAddToCart('p-1')}>catalog ({currency})</button>"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/app.test.tsx",
+      "line": 29,
+      "snippet": "it('mounts the catalog remote with the currency prop and shows a toast on add', async () => {"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 49,
+      "snippet": "body: { name: `Smoke Speaker ${Date.now()}`, price: { amount: 4200, currency: 'USD' }, categoryId: 'audio' },"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "README.md",
+      "line": 5,
+      "snippet": "Exports: `Money`, `PriceTag`, `FormField`, `Toast`, `formatMoney(amount, currency, locale?)`, `CURRENCIES`, `ApiError`, `theme`."
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/Money.tsx",
+      "line": 5,
+      "snippet": "amount: number;"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/Money.tsx",
+      "line": 6,
+      "snippet": "currency: Currency;"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/Money.tsx",
+      "line": 10,
+      "snippet": "export function Money({ amount, currency, locale }: MoneyProps) {"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/Money.tsx",
+      "line": 11,
+      "snippet": "return <span className=\"sl-money\">{formatMoney(amount, currency, locale)}</span>;"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/PriceTag.tsx",
+      "line": 5,
+      "snippet": "amount: number;"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/PriceTag.tsx",
+      "line": 6,
+      "snippet": "currency: Currency;"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/PriceTag.tsx",
+      "line": 12,
+      "snippet": "export function PriceTag({ amount, currency, compareAt, className }: PriceTagProps) {"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/PriceTag.tsx",
+      "line": 15,
+      "snippet": "{compareAt !== undefined && compareAt > amount && ("
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/PriceTag.tsx",
+      "line": 16,
+      "snippet": "<s className=\"sl-price-tag__was\"><Money amount={compareAt} currency={currency} /></s>"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/PriceTag.tsx",
+      "line": 18,
+      "snippet": "<Money amount={amount} currency={currency} />"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/format-money.ts",
+      "line": 3,
+      "snippet": "/** Format an amount in minor units (cents) as a localized price string. */"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/format-money.ts",
+      "line": 4,
+      "snippet": "export function formatMoney(amount: number, currency: Currency, locale = 'en-US'): string {"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/format-money.ts",
+      "line": 5,
+      "snippet": "if (!CURRENCIES.includes(currency)) throw new RangeError(`Unsupported currency ${currency}`);"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/format-money.ts",
+      "line": 6,
+      "snippet": "return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount / 100);"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "test/ui-kit.test.tsx",
+      "line": 20,
+      "snippet": "assert.match(renderToStaticMarkup(<PriceTag amount={800} currency=\"USD\" compareAt={1000} />), /<s class=\"sl-price-tag__was\">/);"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "test/ui-kit.test.tsx",
+      "line": 21,
+      "snippet": "assert.doesNotMatch(renderToStaticMarkup(<PriceTag amount={800} currency=\"USD\" compareAt={700} />), /<s /);"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.006
+  }
+}

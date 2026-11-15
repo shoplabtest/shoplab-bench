@@ -1,0 +1,119 @@
+{
+  "id": "A-04",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/helpers.ts",
+      "line": 5,
+      "snippet": "export const TREE = [{ id: 'electronics', name: 'Electronics', children: [{ id: 'audio', name: 'Audio', children: [] }] }];"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/helpers.ts",
+      "line": 5,
+      "snippet": "export const TREE = [{ id: 'electronics', name: 'Electronics', children: [{ id: 'audio', name: 'Audio', children: [] }] }];"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/CategoryNav.tsx",
+      "line": 13,
+      "snippet": "{node.children.length > 0 && ("
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/CategoryNav.tsx",
+      "line": 14,
+      "snippet": "<ul>{node.children.map((c) => <Node key={c.id} node={c} selected={selected} onSelect={onSelect} />)}</ul>"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/types.ts",
+      "line": 12,
+      "snippet": "export interface CategoryNode { id: string; name: string; children: CategoryNode[] }"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/helpers.ts",
+      "line": 5,
+      "snippet": "export const TREE = [{ id: 'electronics', name: 'Electronics', children: [{ id: 'audio', name: 'Audio', children: [] }] }];"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/RemoteBoundary.tsx",
+      "line": 3,
+      "snippet": "class Boundary extends Component<{ name: string; children: ReactNode }, { failed: boolean }> {"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/RemoteBoundary.tsx",
+      "line": 7,
+      "snippet": "return this.state.failed ? <p role=\"alert\">{this.props.name} is unavailable right now.</p> : this.props.children;"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/RemoteBoundary.tsx",
+      "line": 12,
+      "snippet": "export function RemoteBoundary({ name, children }: { name: string; children: ReactNode }) {"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/RemoteBoundary.tsx",
+      "line": 15,
+      "snippet": "<Suspense fallback={<p>Loading {name}…</p>}>{children}</Suspense>"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 49,
+      "snippet": "export function AuthProvider({ children }: { children: ReactNode }) {"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 73,
+      "snippet": "return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 9,
+      "snippet": "const wrapper = ({ children }: { children: ReactNode }) => <AuthProvider>{children}</AuthProvider>;"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/frontends.mjs",
+      "line": 20,
+      "snippet": "const children = apps.map((a) => spawn('npx', ['vite', 'preview', '--port', String(a.port), '--strictPort'], { cwd: resolve(root, a.dir), stdio: 'ignore' }));"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/frontends.mjs",
+      "line": 21,
+      "snippet": "const stop = () => { for (const c of children) c.kill(); process.exit(0); };"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/FormField.tsx",
+      "line": 7,
+      "snippet": "children: ReactNode;"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/FormField.tsx",
+      "line": 10,
+      "snippet": "export function FormField({ label, name, error, children }: FormFieldProps) {"
+    },
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "src/FormField.tsx",
+      "line": 14,
+      "snippet": "{children}"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.007
+  }
+}

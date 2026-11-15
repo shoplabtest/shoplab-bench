@@ -1,0 +1,191 @@
+{
+  "id": "A-10",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "README.md",
+      "line": 6,
+      "snippet": "**Consumes** `host/ui` (`useAuth` with `login` and `logout`, `authFetch`), `@shoplab/ui-kit` (`FormField`, `Money`, `ApiError`, shared singleton)."
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/Account.tsx",
+      "line": 1,
+      "snippet": "import { authFetch, useAuth } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/AuthForm.tsx",
+      "line": 3,
+      "snippet": "import { useAuth } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 2,
+      "snippet": "import { authFetch } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/ProfileForm.tsx",
+      "line": 2,
+      "snippet": "import { authFetch } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "snippet": "declare module 'host/ui' {"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/stubs/host-ui.ts",
+      "line": 1,
+      "snippet": "// Stands in for the host's `./ui` module in unit tests. Tests set `hostState` to control it."
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "vite.config.ts",
+      "line": 11,
+      "snippet": "// Federation rewrites `host/ui` into a runtime URL fetch, so unit tests leave it out and alias a stub instead."
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "vite.config.ts",
+      "line": 16,
+      "snippet": "// The host provides auth, the API client and the cart event bus through `host/ui`."
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "vite.config.ts",
+      "line": 25,
+      "snippet": "// `host/ui` only exists at runtime; tests use a stub."
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "vite.config.ts",
+      "line": 26,
+      "snippet": "alias: (mode === 'test' ? { 'host/ui': fileURLToPath(new URL('./test/stubs/host-ui.ts', import.meta.url)) } : {}) as Record<string, string>,"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "README.md",
+      "line": 6,
+      "snippet": "**Consumes** `host/ui` (`useAuth`, `authFetch`, `emitCartUpdated`), `@shoplab/ui-kit` (`Money`, `FormField`, `ApiError`, shared singleton)."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/Cart.tsx",
+      "line": 1,
+      "snippet": "import { useAuth } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 2,
+      "snippet": "import { authFetch, emitCartUpdated } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "snippet": "declare module 'host/ui' {"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/stubs/host-ui.ts",
+      "line": 1,
+      "snippet": "// Stands in for the host's `./ui` module in unit tests. Tests set `hostState` to control it."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "vite.config.ts",
+      "line": 11,
+      "snippet": "// Federation rewrites `host/ui` into a runtime URL fetch, so unit tests leave it out and alias a stub instead."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "vite.config.ts",
+      "line": 16,
+      "snippet": "// The host provides auth, the API client and the cart event bus through `host/ui`."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "vite.config.ts",
+      "line": 25,
+      "snippet": "// `host/ui` only exists at runtime; tests use a stub."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "vite.config.ts",
+      "line": 26,
+      "snippet": "alias: (mode === 'test' ? { 'host/ui': fileURLToPath(new URL('./test/stubs/host-ui.ts', import.meta.url)) } : {}) as Record<string, string>,"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "README.md",
+      "line": 6,
+      "snippet": "**Consumes** `host/ui` (`useAuth`, `authFetch`, `emitCartUpdated`), `@shoplab/ui-kit` (`PriceTag`, `FormField`, `ApiError`, shared singleton)."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "README.md",
+      "line": 9,
+      "snippet": "**Events:** emits `cart:updated` through `host/ui` after every add."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 2,
+      "snippet": "import { useAuth } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 2,
+      "snippet": "import { authFetch, emitCartUpdated } from 'host/ui';"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "snippet": "declare module 'host/ui' {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/stubs/host-ui.ts",
+      "line": 1,
+      "snippet": "// Stands in for the host's `./ui` module in unit tests. Tests set `hostState` to control it."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "vite.config.ts",
+      "line": 11,
+      "snippet": "// Federation rewrites `host/ui` into a runtime URL fetch, so unit tests leave it out and alias a stub instead."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "vite.config.ts",
+      "line": 16,
+      "snippet": "// The host provides auth, the API client and the cart event bus through `host/ui`."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "vite.config.ts",
+      "line": 25,
+      "snippet": "// `host/ui` only exists at runtime; tests use a stub."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "vite.config.ts",
+      "line": 26,
+      "snippet": "alias: (mode === 'test' ? { 'host/ui': fileURLToPath(new URL('./test/stubs/host-ui.ts', import.meta.url)) } : {}) as Record<string, string>,"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.004
+  }
+}

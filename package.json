@@ -11,7 +11,10 @@
     "coverage": "tsx src/cli.ts coverage",
     "validate": "tsx src/cli.ts validate",
     "pin": "tsx src/cli.ts pin",
-    "verify-keys": "tsx src/cli.ts verify-keys"
+    "verify-keys": "tsx src/cli.ts verify-keys",
+    "validate-run": "tsx src/cli.ts validate-run",
+    "materialize": "tsx src/cli.ts materialize",
+    "baseline-grep": "tsx src/cli.ts baseline-grep"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
