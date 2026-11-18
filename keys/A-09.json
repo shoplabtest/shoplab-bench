@@ -17,14 +17,16 @@
       "file": "docker-compose.yml",
       "line": 44,
       "why": "Compose sets the old variable name for the iam service (first occurrence)",
-      "snippet": "JWT_SECRET"
+      "snippet": "JWT_SECRET",
+      "hard": false
     },
     {
       "consumer": "shoplab-infra",
       "file": "charts/iam/values.yaml",
       "line": 9,
       "why": "Helm values set the old variable name for iam",
-      "snippet": "JWT_SECRET"
+      "snippet": "JWT_SECRET",
+      "hard": false
     }
   ],
   "mustNotFlag": [

@@ -17,7 +17,7 @@
       "file": "src/clients/catalog.ts",
       "line": 18,
       "why": "URL built from a template string with the old path",
-      "hard": true,
+      "hard": false,
       "snippet": "/products/${encodeURIComponent(id)}"
     },
     {
@@ -25,7 +25,7 @@
       "file": "src/cartApi.ts",
       "line": 51,
       "why": "URL built from a template string with the old path",
-      "hard": true,
+      "hard": false,
       "snippet": "fetch(`/products/${id}`)"
     },
     {
@@ -33,7 +33,7 @@
       "file": "vite.config.ts",
       "line": 32,
       "why": "Dev proxy routes by the old path prefix, so the new path would not be proxied",
-      "hard": true,
+      "hard": false,
       "snippet": "'/products': 'http://localhost:3002'"
     },
     {
@@ -41,35 +41,40 @@
       "file": "src/api.ts",
       "line": 16,
       "why": "Listing URL uses the old path",
-      "snippet": "`/products?${q}`"
+      "snippet": "`/products?${q}`",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/api.ts",
       "line": 22,
       "why": "Detail URL uses the old path",
-      "snippet": "`/products/${encodeURIComponent(id)}`"
+      "snippet": "`/products/${encodeURIComponent(id)}`",
+      "hard": false
     },
     {
       "consumer": "shoplab-infra",
       "file": "scripts/smoke.mjs",
       "line": 44,
       "why": "Smoke test lists products with the old path",
-      "snippet": "'/products?category=audio'"
+      "snippet": "'/products?category=audio'",
+      "hard": false
     },
     {
       "consumer": "shoplab-contracts",
       "file": "openapi/catalog-api.yaml",
       "line": 4,
       "why": "Published OpenAPI spec still documents the old list path",
-      "snippet": "  /products:"
+      "snippet": "  /products:",
+      "hard": false
     },
     {
       "consumer": "shoplab-contracts",
       "file": "openapi/catalog-api.yaml",
       "line": 12,
       "why": "Published OpenAPI spec still documents the old detail path",
-      "snippet": "  /products/{id}:"
+      "snippet": "  /products/{id}:",
+      "hard": false
     }
   ],
   "mustNotFlag": [

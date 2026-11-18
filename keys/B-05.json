@@ -17,7 +17,7 @@
       "file": "src/cartApi.ts",
       "line": 25,
       "why": "Sends the guest cart header by its old name",
-      "hard": true,
+      "hard": false,
       "snippet": "'x-cart-id': guestId"
     },
     {
@@ -25,7 +25,7 @@
       "file": "src/cart.ts",
       "line": 25,
       "why": "Sends the guest cart header by its old name",
-      "hard": true,
+      "hard": false,
       "snippet": "'x-cart-id': guestId"
     },
     {
@@ -33,7 +33,7 @@
       "file": "scripts/smoke.mjs",
       "line": 22,
       "why": "Smoke test sends the old header name",
-      "hard": true,
+      "hard": false,
       "snippet": "'x-cart-id': cartId"
     }
   ],

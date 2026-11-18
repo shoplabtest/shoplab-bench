@@ -17,42 +17,48 @@
       "file": "src/app.ts",
       "line": 77,
       "why": "Reads price.currency and price.amount from the catalog response (lines 77 to 82)",
-      "snippet": "product.price.currency"
+      "snippet": "product.price.currency",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-api",
       "file": "src/clients/catalog.ts",
       "line": 6,
       "why": "CatalogProduct type models price as an object",
-      "snippet": "price: { amount: number"
+      "snippet": "price: { amount: number",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/types.ts",
       "line": 7,
       "why": "Product type models price as an object",
-      "snippet": "price: { amount: number"
+      "snippet": "price: { amount: number",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/components/ProductCard.tsx",
       "line": 15,
       "why": "Reads price.amount and price.currency",
-      "snippet": "product.price.amount"
+      "snippet": "product.price.amount",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/ProductDetail.tsx",
       "line": 26,
       "why": "Reads price.amount and price.currency",
-      "snippet": "state.data.price.amount"
+      "snippet": "state.data.price.amount",
+      "hard": false
     },
     {
       "consumer": "shoplab-contracts",
       "file": "openapi/catalog-api.yaml",
       "line": 42,
       "why": "Published OpenAPI spec still describes price as a Money object",
-      "snippet": "price: { $ref: '#/components/schemas/Money' }"
+      "snippet": "price: { $ref: '#/components/schemas/Money' }",
+      "hard": true
     }
   ],
   "mustNotFlag": [

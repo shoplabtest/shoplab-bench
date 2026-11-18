@@ -17,42 +17,48 @@
       "file": "src/auth.tsx",
       "line": 59,
       "why": "Reads accessToken from the login response",
-      "snippet": "accessToken: next.accessToken"
+      "snippet": "accessToken: next.accessToken",
+      "hard": false
     },
     {
       "consumer": "shoplab-host",
       "file": "src/api.ts",
       "line": 30,
       "why": "Reads accessToken from the refresh response",
-      "snippet": "accessToken: next.accessToken"
+      "snippet": "accessToken: next.accessToken",
+      "hard": false
     },
     {
       "consumer": "shoplab-infra",
       "file": "scripts/smoke.mjs",
       "line": 48,
       "why": "Smoke test reads accessToken from the login response",
-      "snippet": "admin.body.accessToken"
+      "snippet": "admin.body.accessToken",
+      "hard": false
     },
     {
       "consumer": "shoplab-infra",
       "file": "scripts/smoke.mjs",
       "line": 59,
       "why": "Smoke test reads accessToken from the login response",
-      "snippet": "user.body.accessToken"
+      "snippet": "user.body.accessToken",
+      "hard": false
     },
     {
       "consumer": "shoplab-infra",
       "file": "scripts/smoke.mjs",
       "line": 65,
       "why": "Smoke test reads accessToken from the login response",
-      "snippet": "user.body.accessToken"
+      "snippet": "user.body.accessToken",
+      "hard": false
     },
     {
       "consumer": "shoplab-contracts",
       "file": "openapi/iam.yaml",
       "line": 78,
       "why": "Published OpenAPI spec still names the field accessToken",
-      "snippet": "accessToken: { type: string"
+      "snippet": "accessToken: { type: string",
+      "hard": false
     }
   ],
   "mustNotFlag": [

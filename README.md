@@ -22,6 +22,7 @@ See [RUNNING.md](RUNNING.md) for the contract between a review agent and the ben
 - Scoring always reports `dev` and `holdout` separately. Hold-out keys stay in `shoplab-bench-holdout` until release.
 - A reported site matches a key site when consumer and file are equal and the line is within 5.
 - Findings in test files (`test/`, `*.test.*`, `*.spec.*`) are ignored: they are neither credited nor counted as false positives. Keys list production consumers only.
+- **`hard: true` means the grep baseline does not find the site.** It is set by `npm run reflag-hard -- --run results/baseline-grep-v1.0 --write` from the committed baseline run, not by judgement, so the grep baseline's hard-site recall is 0 by construction and the agent's hard-site recall measures what it adds over a text search. A new PR's keys are flagged the same way before they are committed.
 - Key sites marked `unsupported` (e.g. the Go service) are reported separately and never counted as misses.
 
 ## Pinning the baseline

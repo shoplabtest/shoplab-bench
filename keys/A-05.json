@@ -17,14 +17,16 @@
       "file": "src/api.ts",
       "line": 19,
       "why": "Sends the search term as q to GET /search",
-      "snippet": "{ q: query"
+      "snippet": "{ q: query",
+      "hard": true
     },
     {
       "consumer": "shoplab-contracts",
       "file": "openapi/catalog-api.yaml",
       "line": 24,
       "why": "Published OpenAPI spec still documents the parameter as q",
-      "snippet": "name: q, in: query"
+      "snippet": "name: q, in: query",
+      "hard": true
     }
   ],
   "mustNotFlag": [
