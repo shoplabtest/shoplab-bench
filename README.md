@@ -8,8 +8,13 @@ npm test                                  # scorer unit tests
 npm run validate                          # keys and manifest are well formed
 npm run verify-keys -- --repos <dir>       # every key site and decoy line holds its snippet at the pinned SHA
 npm run coverage                          # every contract kind needs >= 2 key sites
-npm run score -- --run results/<run-id> [--repos <dir with cloned repos>]
+npm run materialize -- --out <dir>        # pinned repos and one diff + review request per PR (the inputs of a run)
+npm run validate-run -- --run results/<run-id>   # agent results are well formed
+npm run score -- --run results/<run-id> [--repos <dir>/repos]
+npm run baseline-grep -- --work <dir> --out results/<run-id>   # reference baseline, no model
 ```
+
+See [RUNNING.md](RUNNING.md) for the contract between a review agent and the benchmark.
 
 - `manifest.json`: every repo and PR at a full 40-char SHA. Branch names are never used.
 - `keys/<id>.json`: one answer key per PR, committed before any agent run.

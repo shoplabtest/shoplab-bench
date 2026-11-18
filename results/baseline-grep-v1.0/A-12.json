@@ -1,0 +1,617 @@
+{
+  "id": "A-12",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "README.md",
+      "line": 9,
+      "snippet": "| `PATCH/DELETE /cart/items/:productId` | quantity `0` removes the line |"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 19,
+      "snippet": "productId: l.product_id,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 71,
+      "snippet": "const { productId, quantity } = req.body ?? {};"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 72,
+      "snippet": "if (typeof productId !== 'string' || !Number.isInteger(quantity) || quantity < 1) return void res.status(400).json({ error: 'invalid_request' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 73,
+      "snippet": "const product = await catalog.getProduct(productId).catch(() => 'down' as const);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 82,
+      "snippet": "await store.addToLine(cart.id, productId, quantity, product.price.amount);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 86,
+      "snippet": "app.patch('/cart/items/:productId', async (req, res) => {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 90,
+      "snippet": "const ok = quantity === 0 ? await store.removeLine(cart.id, req.params.productId) : await store.setLineQuantity(cart.id, req.params.productId, quantity);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 95,
+      "snippet": "app.delete('/cart/items/:productId', async (req, res) => {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 97,
+      "snippet": "if (!(await store.removeLine(cart.id, req.params.productId))) return void res.status(404).json({ error: 'line_not_found' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 147,
+      "snippet": "lines: body.lines.map((l) => ({ productId: l.productId, quantity: l.quantity })),"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/consumer.ts",
+      "line": 9,
+      "snippet": "if (typeof ev.productId !== 'string' || !Number.isInteger(ev.price)) return 0;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/consumer.ts",
+      "line": 10,
+      "snippet": "return store.recordLatestPrice(ev.productId, ev.price);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 11,
+      "snippet": "lines: { productId: string; quantity: number }[];"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/events.ts",
+      "line": 16,
+      "snippet": "productId: string;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 36,
+      "snippet": "addToLine(cartId: string, productId: string, quantity: number, unitPrice: number): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 37,
+      "snippet": "setLineQuantity(cartId: string, productId: string, quantity: number): Promise<boolean>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 38,
+      "snippet": "removeLine(cartId: string, productId: string): Promise<boolean>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 42,
+      "snippet": "recordLatestPrice(productId: string, price: number): Promise<number>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 72,
+      "snippet": "async addToLine(cartId: string, productId: string, quantity: number, unitPrice: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 76,
+      "snippet": "[cartId, productId, quantity, unitPrice],"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 79,
+      "snippet": "async setLineQuantity(cartId: string, productId: string, quantity: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 80,
+      "snippet": "return ((await this.pool.query('UPDATE cart_lines SET quantity = $3 WHERE cart_id = $1 AND product_id = $2', [cartId, productId, quantity])).rowCount ?? 0) > 0;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 82,
+      "snippet": "async removeLine(cartId: string, productId: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 83,
+      "snippet": "return ((await this.pool.query('DELETE FROM cart_lines WHERE cart_id = $1 AND product_id = $2', [cartId, productId])).rowCount ?? 0) > 0;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 97,
+      "snippet": "async recordLatestPrice(productId: string, price: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 98,
+      "snippet": "return (await this.pool.query('UPDATE cart_lines SET latest_price = $2 WHERE product_id = $1', [productId, price])).rowCount ?? 0;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 126,
+      "snippet": "async addToLine(cartId: string, productId: string, quantity: number, unitPrice: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 128,
+      "snippet": "const l = ls.find((x) => x.product_id === productId);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 130,
+      "snippet": "else ls.push({ product_id: productId, quantity, unit_price: unitPrice, latest_price: null });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 132,
+      "snippet": "async setLineQuantity(cartId: string, productId: string, quantity: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 133,
+      "snippet": "const l = this.lines.get(cartId)?.find((x) => x.product_id === productId);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 138,
+      "snippet": "async removeLine(cartId: string, productId: string) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 140,
+      "snippet": "const i = ls.findIndex((x) => x.product_id === productId);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 148,
+      "snippet": "async recordLatestPrice(productId: string, price: number) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 150,
+      "snippet": "for (const ls of this.lines.values()) for (const l of ls) if (l.product_id === productId) { l.latest_price = price; n++; }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 12,
+      "snippet": "type Cart = { id: string; lines: { productId: string; quantity: number; unitPrice: number; latestUnitPrice?: number }[]; coupon: string | null; total: number; currency: string };"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 30,
+      "snippet": "const added = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 2 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 39,
+      "snippet": "const first = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 1 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 40,
+      "snippet": "const second = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 2 }, cartId: first.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 46,
+      "snippet": "const a = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 1 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 48,
+      "snippet": "const b = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-2', quantity: 1 }, cartId: a.id }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 49,
+      "snippet": "assert.equal(b.lines.find((l) => l.productId === 'p-1')!.unitPrice, 1000);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 55,
+      "snippet": "assert.equal((await add({ productId: 'p-1', quantity: 0 })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 56,
+      "snippet": "assert.equal((await add({ productId: 'p-1', quantity: 1.5 })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 57,
+      "snippet": "assert.equal((await add({ productId: 'nope', quantity: 1 })).status, 404);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 59,
+      "snippet": "assert.equal((await add({ productId: 'p-1', quantity: 1 })).status, 502);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 63,
+      "snippet": "const a = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 1 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 64,
+      "snippet": "const r = await call('/cart/items', { method: 'POST', body: { productId: 'p-eur', quantity: 1 }, cartId: a.id });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 69,
+      "snippet": "const a = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 1 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 78,
+      "snippet": "const a = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 3 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 88,
+      "snippet": "await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 1 }, token });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 89,
+      "snippet": "const guest = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 2 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 90,
+      "snippet": "await call('/cart/items', { method: 'POST', body: { productId: 'p-2', quantity: 1 }, cartId: guest.id });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 94,
+      "snippet": "assert.deepEqual(merged.lines.map((l) => [l.productId, l.quantity]), [['p-1', 3], ['p-2', 1]]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 101,
+      "snippet": "const other = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 1 }, token: userToken('22222222-2222-2222-2222-222222222222') }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 108,
+      "snippet": "const a = await json(await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 1 } }));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 117,
+      "snippet": "await call('/cart/items', { method: 'POST', body: { productId: 'p-1', quantity: 2 }, token });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 123,
+      "snippet": "assert.deepEqual(ev.body, { cartId: ((await r.json()) as { cartId: string }).cartId, userId: USER, total: 1800, currency: 'USD', lines: [{ productId: 'p-1', quantity: 2 }] });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/consumer.test.ts",
+      "line": 11,
+      "snippet": "assert.equal(await handleProductUpdated(store, { productId: 'p-1', price: 1200, currency: 'USD' }), 1);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/consumer.test.ts",
+      "line": 22,
+      "snippet": "assert.equal(await handleProductUpdated(store, { productId: 'p-1', price: '12.00' as unknown as number, currency: 'USD' }), 0);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/db.test.ts",
+      "line": 34,
+      "snippet": "assert.equal(await handleProductUpdated(store, { productId: 'p-1', price: 1100, currency: 'USD' }), 1);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/db.test.ts",
+      "line": 36,
+      "snippet": "assert.deepEqual(body.lines, [{ productId: 'p-1', quantity: 3, unitPrice: 1000, latestUnitPrice: 1100 }]);"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "README.md",
+      "line": 7,
+      "snippet": "**HTTP:** `GET /cart`, `PATCH` and `DELETE /cart/items/:productId`, `POST /cart/coupon`, and `GET /products/:id` for line names. Guests send the `x-cart-id` header."
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 40,
+      "snippet": "export const setQuantity = (loggedIn: boolean, productId: string, quantity: number) =>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 41,
+      "snippet": "call(loggedIn, `/cart/items/${encodeURIComponent(productId)}`, 'PATCH', { quantity });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 42,
+      "snippet": "export const removeLine = (loggedIn: boolean, productId: string) =>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 43,
+      "snippet": "call(loggedIn, `/cart/items/${encodeURIComponent(productId)}`, 'DELETE');"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 8,
+      "snippet": "onQuantity: (productId: string, quantity: number) => void;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 9,
+      "snippet": "onRemove: (productId: string) => void;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 16,
+      "snippet": "const name = names[l.productId] ?? l.productId;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 18,
+      "snippet": "<li key={l.productId}>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 24,
+      "snippet": "<button type=\"button\" aria-label={`Decrease ${name}`} onClick={() => onQuantity(l.productId, l.quantity - 1)}>−</button>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 26,
+      "snippet": "<button type=\"button\" aria-label={`Increase ${name}`} onClick={() => onQuantity(l.productId, l.quantity + 1)}>+</button>{' '}"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 27,
+      "snippet": "<button type=\"button\" aria-label={`Remove ${name}`} onClick={() => onRemove(l.productId)}>Remove</button>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/types.ts",
+      "line": 3,
+      "snippet": "productId: string;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 22,
+      "snippet": "const ids = state.status === 'ready' ? state.cart.lines.map((l) => l.productId).filter((id) => !(id in names)) : [];"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 8,
+      "snippet": "const line = (productId: string, quantity: number, unitPrice: number, latestUnitPrice?: number) => ({ productId, quantity, unitPrice, ...(latestUnitPrice ? { latestUnitPrice } : {}) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "README.md",
+      "line": 5,
+      "snippet": "**Exposes** `./Page` with props `onAddToCart(productId)` and `currency`."
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 14,
+      "snippet": "onAddToCart: (productId: string) => void;"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 32,
+      "snippet": "const productId = params.get('product');"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 59,
+      "snippet": "if (productId) return <ProductDetail id={productId} onBack={() => update({ product: null })} onAdd={add} busy={busy} />;"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 16,
+      "snippet": "export async function addToCart(productId: string, loggedIn: boolean): Promise<Cart> {"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 17,
+      "snippet": "const body = JSON.stringify({ productId, quantity: 1 });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/types.ts",
+      "line": 14,
+      "snippet": "export interface Cart { id: string; lines: { productId: string; quantity: number }[] }"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 100,
+      "snippet": "const cartBody = (id: string, qty: number) => ({ id, lines: [{ productId: 'p-1', quantity: qty }] });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 113,
+      "snippet": "expect(JSON.parse(post.init.body as string)).toEqual({ productId: 'p-1', quantity: 1 });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 141,
+      "snippet": "expect(authFetch).toHaveBeenCalledWith('/cart/items', { method: 'POST', body: JSON.stringify({ productId: 'p-1', quantity: 1 }) });"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/cart.checked_out.schema.json",
+      "line": 8,
+      "snippet": "\"properties\": {\"cartId\":{\"type\":\"string\"},\"userId\":{\"type\":\"string\",\"format\":\"uuid\"},\"total\":{\"type\":\"integer\"},\"currency\":{\"type\":\"string\"},\"lines\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"required\""
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 6,
+      "snippet": "\"required\": [\"productId\",\"price\",\"currency\",\"updatedAt\"],"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "events/product.updated.schema.json",
+      "line": 8,
+      "snippet": "\"properties\": {\"productId\":{\"type\":\"string\"},\"price\":{\"type\":\"integer\",\"description\":\"minor units\"},\"currency\":{\"type\":\"string\"},\"updatedAt\":{\"type\":\"string\",\"format\":\"date-time\"}}"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 16,
+      "snippet": "schema: { type: object, required: [productId, quantity], properties: { productId: { type: string }, quantity: { type: integer, minimum: 1 } } }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 30,
+      "snippet": "/cart/items/{productId}:"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 34,
+      "snippet": "- { name: productId, in: path, required: true, schema: { type: string } }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 46,
+      "snippet": "- { name: productId, in: path, required: true, schema: { type: string } }"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 72,
+      "snippet": "required: [productId, quantity, unitPrice]"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/cart-api.yaml",
+      "line": 74,
+      "snippet": "productId: { type: string }"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "README.md",
+      "line": 10,
+      "snippet": "**Props passed to catalog:** `onAddToCart(productId)`, `currency`."
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 15,
+      "snippet": "const onAddToCart = useCallback((productId: string) => setNotice(`Added ${productId} to your cart`), []);"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remote-modules.d.ts",
+      "line": 4,
+      "snippet": "const Page: ComponentType<{ onAddToCart: (productId: string) => void; currency: Currency }>;"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 53,
+      "snippet": "const guest = await call(CART, '/cart/items', { method: 'POST', body: { productId: created.body.id, quantity: 2 } });"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.005
+  }
+}

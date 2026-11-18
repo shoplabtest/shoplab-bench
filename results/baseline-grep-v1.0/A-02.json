@@ -1,0 +1,23 @@
+{
+  "id": "A-02",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 1,
+      "snippet": "import { DEFAULT_CURRENCY, Toast } from '@shoplab/ui-kit';"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 27,
+      "snippet": "<Route path=\"/\" element={<RemoteBoundary name=\"Catalog\"><CatalogPage onAddToCart={onAddToCart} currency={DEFAULT_CURRENCY} /></RemoteBoundary>} />"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.006
+  }
+}

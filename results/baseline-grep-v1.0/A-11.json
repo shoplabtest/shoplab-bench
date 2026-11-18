@@ -1,0 +1,59 @@
+{
+  "id": "A-11",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "scripts/check-expose.mjs",
+      "line": 2,
+      "snippet": "// unresolved `__federation_expose_*` placeholder, which breaks at runtime in the host. Usage: node scripts/check-expose.mjs Page [Other ...]"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "scripts/check-expose.mjs",
+      "line": 2,
+      "snippet": "// unresolved `__federation_expose_*` placeholder, which breaks at runtime in the host. Usage: node scripts/check-expose.mjs Page [Other ...]"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "README.md",
+      "line": 5,
+      "snippet": "**Loads** (runtime, from `REMOTE_*_URL`, defaults `localhost:5001-5003`): `catalog/Page`, `cart/Cart`, `account/Account`."
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "scripts/check-expose.mjs",
+      "line": 2,
+      "snippet": "// unresolved `__federation_expose_*` placeholder, which breaks at runtime in the host. Usage: node scripts/check-expose.mjs Page [Other ...]"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remote-modules.d.ts",
+      "line": 1,
+      "snippet": "declare module 'catalog/Page' {"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remote-modules.d.ts",
+      "line": 4,
+      "snippet": "const Page: ComponentType<{ onAddToCart: (productId: string) => void; currency: Currency }>;"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remote-modules.d.ts",
+      "line": 5,
+      "snippet": "export default Page;"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/remotes.ts",
+      "line": 4,
+      "snippet": "export const CatalogPage = lazy(() => import('catalog/Page'));"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.005
+  }
+}

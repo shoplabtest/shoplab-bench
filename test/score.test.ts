@@ -110,3 +110,31 @@ test('findings in test files are neither false positives nor matches', () => {
   assert.equal(s.ignoredTestSites.length, 1);
   assert.equal(summarize([key()], new Map([['B-03', res]])).sitePrecision, 1);
 });
+
+test('per-pr.csv has one row per PR with matched, missed and extra counts and the missed sites', async () => {
+  const { perPrCsv, summarizeByCategory } = await import('../src/score.ts');
+  const keys = [key(), key({ id: 'C-01', category: 'C', expect: 'safe', sites: [], kinds: ['event'] })];
+  const results = new Map<string, PrResult>([
+    ['B-03', { id: 'B-03', verdict: 'break', sites: [{ consumer: 'shoplab-cart-api', file: 'src/clients/catalog.ts', line: 27 }, { consumer: 'x', file: 'y', line: 1 }] }],
+  ]);
+  const lines = perPrCsv(keys, results).trim().split('\n');
+  assert.equal(lines.length, 3);
+  assert.equal(lines[0], 'id,split,category,difficulty,expect,verdict,verdictOk,keySites,matched,missed,falsePositives,missedSites');
+  assert.equal(lines[1], 'B-03,dev,B,hard,break,break,yes,2,1,1,1,shoplab-gateway/src/routes.ts:10');
+  assert.equal(lines[2], 'C-01,dev,C,medium,safe,missing,no,0,0,0,0,'.replace('medium', 'hard')); // no result for C-01 counts as missing
+  assert.deepEqual(Object.keys(summarizeByCategory(keys, results)), ['B', 'C']);
+  assert.equal(summarizeByCategory(keys, results).B.siteRecall, 0.5);
+});
+
+test('validateResult accepts a good result and explains every way a result can be malformed', async () => {
+  const { validateResult } = await import('../src/validate.ts');
+  const good = { id: 'B-03', verdict: 'break', sites: [{ consumer: 'shoplab-cart-api', file: 'src/consumer.ts', line: 9, snippet: 'x' }], coverageGaps: ['shoplab-ghost'], cost: { tokens: 1, toolCalls: 2, seconds: 3 } };
+  assert.deepEqual(validateResult('B-03', good), []);
+  assert.deepEqual(validateResult('B-03', { id: 'B-03', verdict: 'safe', sites: [] }), []);
+  const bad = validateResult('B-03', { id: 'X-01', verdict: 'maybe', sites: [{ consumer: 'cart-api', file: '/abs/path.ts', line: 0 }], cost: { tokens: -1, toolCalls: 0, seconds: 0 } });
+  assert.equal(bad.length, 6);
+  assert.ok(bad.some((m) => /id must be "B-03"/.test(m)) && bad.some((m) => /verdict must be one of/.test(m)) && bad.some((m) => /repository name/.test(m)));
+  assert.ok(bad.some((m) => /relative to the repository root/.test(m)) && bad.some((m) => /positive integer/.test(m)) && bad.some((m) => /cost.tokens/.test(m)));
+  assert.deepEqual(validateResult('B-03', { id: 'B-03', verdict: 'safe' }), ['sites must be an array (use [] for "nothing found")']);
+  assert.deepEqual(validateResult('B-03', null), ['B-03: result must be a JSON object']);
+});

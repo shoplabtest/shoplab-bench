@@ -1,0 +1,182 @@
+{
+  "dev": {
+    "prs": 29,
+    "prDetectionRecall": 0.95,
+    "siteRecall": 0.9259259259259259,
+    "hardSiteRecall": 0.8947368421052632,
+    "sitePrecision": 0.07470119521912351,
+    "safeQuietRate": 1,
+    "verdictAccuracy": 0.9655172413793104,
+    "evidenceValidity": 1,
+    "coverageGapReport": null,
+    "cost": {
+      "tokens": {
+        "median": 0,
+        "p90": 0
+      },
+      "toolCalls": {
+        "median": 0,
+        "p90": 0
+      },
+      "seconds": {
+        "median": 0.005,
+        "p90": 0.007
+      }
+    }
+  },
+  "holdout": {
+    "prs": 0,
+    "prDetectionRecall": null,
+    "siteRecall": null,
+    "hardSiteRecall": null,
+    "sitePrecision": null,
+    "safeQuietRate": null,
+    "verdictAccuracy": null,
+    "evidenceValidity": null,
+    "coverageGapReport": null,
+    "cost": {
+      "tokens": {
+        "median": null,
+        "p90": null
+      },
+      "toolCalls": {
+        "median": null,
+        "p90": null
+      },
+      "seconds": {
+        "median": null,
+        "p90": null
+      }
+    }
+  },
+  "byCategory": {
+    "dev": {
+      "A": {
+        "prs": 13,
+        "prDetectionRecall": 0.9230769230769231,
+        "siteRecall": 0.9433962264150944,
+        "hardSiteRecall": null,
+        "sitePrecision": 0.1362397820163488,
+        "safeQuietRate": null,
+        "verdictAccuracy": 0.9230769230769231,
+        "evidenceValidity": 1,
+        "coverageGapReport": null,
+        "cost": {
+          "tokens": {
+            "median": 0,
+            "p90": 0
+          },
+          "toolCalls": {
+            "median": 0,
+            "p90": 0
+          },
+          "seconds": {
+            "median": 0.005,
+            "p90": 0.007
+          }
+        }
+      },
+      "B": {
+        "prs": 6,
+        "prDetectionRecall": 1,
+        "siteRecall": 0.8695652173913043,
+        "hardSiteRecall": 0.875,
+        "sitePrecision": 0.17094017094017094,
+        "safeQuietRate": null,
+        "verdictAccuracy": 1,
+        "evidenceValidity": 1,
+        "coverageGapReport": null,
+        "cost": {
+          "tokens": {
+            "median": 0,
+            "p90": 0
+          },
+          "toolCalls": {
+            "median": 0,
+            "p90": 0
+          },
+          "seconds": {
+            "median": 0.005,
+            "p90": 0.005
+          }
+        }
+      },
+      "C": {
+        "prs": 5,
+        "prDetectionRecall": null,
+        "siteRecall": null,
+        "hardSiteRecall": null,
+        "sitePrecision": null,
+        "safeQuietRate": 1,
+        "verdictAccuracy": 1,
+        "evidenceValidity": null,
+        "coverageGapReport": null,
+        "cost": {
+          "tokens": {
+            "median": 0,
+            "p90": 0
+          },
+          "toolCalls": {
+            "median": 0,
+            "p90": 0
+          },
+          "seconds": {
+            "median": 0,
+            "p90": 0
+          }
+        }
+      },
+      "D": {
+        "prs": 4,
+        "prDetectionRecall": null,
+        "siteRecall": null,
+        "hardSiteRecall": null,
+        "sitePrecision": null,
+        "safeQuietRate": 1,
+        "verdictAccuracy": 1,
+        "evidenceValidity": null,
+        "coverageGapReport": null,
+        "cost": {
+          "tokens": {
+            "median": 0,
+            "p90": 0
+          },
+          "toolCalls": {
+            "median": 0,
+            "p90": 0
+          },
+          "seconds": {
+            "median": 0.004,
+            "p90": 0.004
+          }
+        }
+      },
+      "H": {
+        "prs": 1,
+        "prDetectionRecall": 1,
+        "siteRecall": 1,
+        "hardSiteRecall": 1,
+        "sitePrecision": 0.009615384615384616,
+        "safeQuietRate": null,
+        "verdictAccuracy": 1,
+        "evidenceValidity": 1,
+        "coverageGapReport": null,
+        "cost": {
+          "tokens": {
+            "median": 0,
+            "p90": 0
+          },
+          "toolCalls": {
+            "median": 0,
+            "p90": 0
+          },
+          "seconds": {
+            "median": 0.008,
+            "p90": 0.008
+          }
+        }
+      }
+    },
+    "holdout": {}
+  }
+}

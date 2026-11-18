@@ -1,0 +1,215 @@
+{
+  "id": "A-01",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 19,
+      "snippet": "{o.id} · {o.status} · <Money amount={o.total} currency={o.currency as 'USD'} /> · {new Date(o.placedAt).toLocaleDateString('en-US')}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/helpers.ts",
+      "line": 3,
+      "snippet": "export const product = (id: string, name: string, amount: number) => ({ id, name, price: { amount, currency: 'USD' }, categoryId: 'audio' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 82,
+      "snippet": "await store.addToLine(cart.id, productId, quantity, product.price.amount);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 6,
+      "snippet": "price: { amount: number; currency: string };"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/helpers.ts",
+      "line": 15,
+      "snippet": "add(id: string, amount: number, currency = 'USD') { this.products.set(id, { id, name: id, price: { amount, currency } }); }"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 20,
+      "snippet": "<Money amount={l.unitPrice} currency={currency as 'USD'} />"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 22,
+      "snippet": "<small> (now <Money amount={l.latestUnitPrice} currency={currency as 'USD'} />)</small>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 11,
+      "snippet": "<dt>Subtotal</dt><dd><Money amount={subtotal} currency={currency} /></dd>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 12,
+      "snippet": "{discount > 0 && (<><dt>Discount</dt><dd>−<Money amount={discount} currency={currency} /></dd></>)}"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 13,
+      "snippet": "<dt>Total</dt><dd><Money amount={cart.total} currency={currency} /></dd>"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/helpers.ts",
+      "line": 3,
+      "snippet": "export const product = (id: string, name: string, amount: number) => ({ id, name, price: { amount, currency: 'USD' }, categoryId: 'audio' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 14,
+      "snippet": "price: { amount: p.price_amount, currency: p.currency },"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 42,
+      "snippet": "const price = b.price as { amount?: unknown; currency?: unknown } | undefined;"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 43,
+      "snippet": "if (!price || !Number.isInteger(price.amount) || (price.amount as number) < 0 || !CURRENCIES.includes(price.currency as string)) return 'price';"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 44,
+      "snippet": "out.priceAmount = price.amount as number;"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 32,
+      "snippet": "const create = async (name: string, amount: number) =>"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 33,
+      "snippet": "(await (await call('/products', 'POST', { name, price: { amount, currency: 'USD' }, categoryId: 'audio' }, 'staff')).json()) as { id: string };"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 36,
+      "snippet": "const body = { name: 'X', price: { amount: 100, currency: 'USD' }, categoryId: 'audio' };"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 44,
+      "snippet": "assert.equal((await bad({ name: 'X', price: { amount: 1.5, currency: 'USD' }, categoryId: 'audio' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 45,
+      "snippet": "assert.equal((await bad({ name: 'X', price: { amount: 100, currency: 'JPY' }, categoryId: 'audio' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 46,
+      "snippet": "assert.equal((await bad({ name: 'X', price: { amount: 100, currency: 'USD' }, categoryId: 'nope' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 52,
+      "snippet": "assert.deepEqual(p, { id, name: 'Studio Speaker', price: { amount: 4500, currency: 'USD' }, categoryId: 'audio' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 59,
+      "snippet": "await call(`/products/${id}`, 'PUT', { price: { amount: 999, currency: 'EUR' } }, 'staff');"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 77,
+      "snippet": "const asc = (await (await call('/search?q=headphones&sort=price_asc')).json()) as { price: { amount: number } }[];"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 78,
+      "snippet": "assert.deepEqual(asc.map((p) => p.price.amount), [3000, 9000]);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 79,
+      "snippet": "const desc = (await (await call('/search?q=headphones&sort=price_desc')).json()) as { price: { amount: number } }[];"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 80,
+      "snippet": "assert.deepEqual(desc.map((p) => p.price.amount), [9000, 3000]);"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 26,
+      "snippet": "<Price amount={state.data.price.amount} currency={state.data.price.currency} />"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/ProductCard.tsx",
+      "line": 15,
+      "snippet": "<Price amount={product.price.amount} currency={product.price.currency} />"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/types.ts",
+      "line": 7,
+      "snippet": "price: { amount: number; currency: Currency };"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/helpers.ts",
+      "line": 3,
+      "snippet": "export const product = (id: string, name: string, amount: number) => ({ id, name, price: { amount, currency: 'USD' }, categoryId: 'audio' });"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 32,
+      "snippet": "required: [amount, currency]"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/catalog-api.yaml",
+      "line": 34,
+      "snippet": "amount: { type: integer, description: minor units }"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 49,
+      "snippet": "body: { name: `Smoke Speaker ${Date.now()}`, price: { amount: 4200, currency: 'USD' }, categoryId: 'audio' },"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.025
+  }
+}

@@ -1,0 +1,30 @@
+id,split,category,difficulty,expect,verdict,verdictOk,keySites,matched,missed,falsePositives,missedSites
+A-01,dev,A,easy,break,break,yes,3,3,0,12,
+A-02,dev,A,easy,break,break,yes,2,2,0,0,
+A-03,dev,A,medium,break,break,yes,4,4,0,118,
+A-04,dev,A,easy,break,break,yes,2,2,0,11,
+A-05,dev,A,easy,break,safe,no,2,0,2,0,shoplab-catalog-mfe/src/api.ts:19 shoplab-contracts/openapi/catalog-api.yaml:24
+A-06,dev,A,medium,break,break,yes,6,5,1,61,shoplab-contracts/openapi/catalog-api.yaml:42
+A-07,dev,A,easy,break,break,yes,3,3,0,16,
+A-08,dev,A,easy,break,break,yes,6,6,0,6,
+A-09,dev,A,easy,break,break,yes,2,2,0,8,
+A-10,dev,A,medium,break,break,yes,14,14,0,10,
+A-11,dev,A,easy,break,break,yes,2,2,0,4,
+A-12,dev,A,easy,break,break,yes,3,3,0,64,
+A-13,dev,A,medium,break,break,yes,4,4,0,7,
+B-01,dev,B,hard,break,break,yes,8,8,0,5,
+B-02,dev,B,hard,break,break,yes,3,2,1,16,shoplab-catalog-mfe/src/components/Price.tsx:4
+B-03,dev,B,hard,break,break,yes,3,1,2,22,shoplab-cart-api/src/consumer.ts:9 shoplab-cart-api/src/events.ts:17
+B-04,dev,B,hard,break,break,yes,4,4,0,51,
+B-05,dev,B,hard,break,break,yes,3,3,0,3,
+B-06,dev,B,hard,break,break,yes,2,2,0,0,
+C-01,dev,C,easy,safe,safe,yes,0,0,0,0,
+C-02,dev,C,easy,safe,safe,yes,0,0,0,0,
+C-03,dev,C,easy,safe,safe,yes,0,0,0,0,
+C-04,dev,C,easy,safe,safe,yes,0,0,0,0,
+C-05,dev,C,easy,safe,safe,yes,0,0,0,0,
+D-01,dev,D,medium,safe,safe,yes,0,0,0,0,
+D-02,dev,D,medium,safe,safe,yes,0,0,0,0,
+D-03,dev,D,medium,safe,safe,yes,0,0,0,0,
+D-04,dev,D,medium,safe,safe,yes,0,0,0,0,
+H-01,dev,H,hard,break,break,yes,5,5,0,515,

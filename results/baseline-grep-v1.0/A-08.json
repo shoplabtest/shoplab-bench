@@ -1,0 +1,167 @@
+{
+  "id": "A-08",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/iam.yaml",
+      "line": 76,
+      "snippet": "required: [accessToken, refreshToken, expiresIn]"
+    },
+    {
+      "consumer": "shoplab-contracts",
+      "file": "openapi/iam.yaml",
+      "line": 78,
+      "snippet": "accessToken: { type: string, description: 'JWT with claims sub, role, tenant' }"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 26,
+      "snippet": "const next = await request<{ accessToken: string; refreshToken: string }>('/auth/refresh', {"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 30,
+      "snippet": "const tokens = { accessToken: next.accessToken, refreshToken: next.refreshToken };"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 47,
+      "snippet": "return await request<T>(path, { ...init, token: tokens?.accessToken });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 52,
+      "snippet": "return request<T>(path, { ...init, token: next.accessToken });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 33,
+      "snippet": "async function mergeGuestCart(accessToken: string) {"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 39,
+      "snippet": "token: accessToken,"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 51,
+      "snippet": "const user = useMemo(() => (tokens ? decodeUser(tokens.accessToken) : null), [tokens]);"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 59,
+      "snippet": "const saved = { accessToken: next.accessToken, refreshToken: next.refreshToken };"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/auth.tsx",
+      "line": 62,
+      "snippet": "await mergeGuestCart(saved.accessToken);"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/storage.ts",
+      "line": 5,
+      "snippet": "export interface Tokens { accessToken: string; refreshToken: string }"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 6,
+      "snippet": "const save = (accessToken: string, refreshToken: string) => localStorage.setItem(AUTH_KEY, JSON.stringify({ accessToken, refreshToken }));"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 22,
+      "snippet": "'POST /auth/refresh': () => ({ body: { accessToken: 'new', refreshToken: 'r2', expiresIn: 900 } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 25,
+      "snippet": "expect(JSON.parse(localStorage.getItem(AUTH_KEY)!)).toEqual({ accessToken: 'new', refreshToken: 'r2' });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 34,
+      "snippet": "'POST /auth/refresh': () => ({ body: { accessToken: 'new', refreshToken: 'r2', expiresIn: 900 } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 24,
+      "snippet": "stubFetch({ 'POST /auth/login': () => ({ body: { accessToken: access, refreshToken: 'r1', expiresIn: 900 } }) });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 29,
+      "snippet": "expect(JSON.parse(localStorage.getItem(AUTH_KEY)!)).toEqual({ accessToken: access, refreshToken: 'r1' });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 44,
+      "snippet": "'POST /auth/login': () => ({ body: { accessToken: access, refreshToken: 'r1', expiresIn: 900 } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 60,
+      "snippet": "'POST /auth/login': () => ({ body: { accessToken: access, refreshToken: 'r1', expiresIn: 900 } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 70,
+      "snippet": "localStorage.setItem(AUTH_KEY, JSON.stringify({ accessToken: access, refreshToken: 'r1' }));"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 78,
+      "snippet": "localStorage.setItem(AUTH_KEY, JSON.stringify({ accessToken: access, refreshToken: 'r1' }));"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 48,
+      "snippet": "method: 'POST', token: admin.body.accessToken,"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 59,
+      "snippet": "const merged = await call(CART, '/cart/merge', { method: 'POST', token: user.body.accessToken, body: { guestCartId: guest.body.id } });"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 62,
+      "snippet": "const coupon = await call(CART, '/cart/coupon', { method: 'POST', token: user.body.accessToken, body: { code: 'WELCOME10' } });"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 65,
+      "snippet": "const checkout = await call(CART, '/cart/checkout', { method: 'POST', token: user.body.accessToken });"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.006
+  }
+}

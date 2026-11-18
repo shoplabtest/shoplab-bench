@@ -1,0 +1,10 @@
+{
+  "id": "D-04",
+  "verdict": "safe",
+  "sites": [],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.004
+  }
+}

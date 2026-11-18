@@ -1,9 +1,11 @@
 import { readFileSync, readdirSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { grepBaseline } from './baseline-grep.ts';
 import { coverageReport, formatCoverage } from './coverage.ts';
+import { materialize } from './materialize.ts';
 import { pinRepos, resolveTags } from './pin.ts';
-import { fsEvidenceCheck, summarizeBySplit } from './score.ts';
-import { validateKey, validateManifest } from './validate.ts';
+import { fsEvidenceCheck, perPrCsv, summarizeByCategory, summarizeBySplit } from './score.ts';
+import { validateKey, validateManifest, validateResult } from './validate.ts';
 import { gitReadAtSha, verifyKeys } from './verify.ts';
 import type { AnswerKey, Manifest, PrResult } from './types.ts';
 
@@ -33,6 +35,22 @@ if (cmd === 'validate') {
   if (existsSync(mp)) for (const p of validateManifest(readJson<Manifest>(mp))) (bad++, console.error(`manifest: ${p}`));
   console.log(`${keys.length} keys checked, ${bad} problem(s)`);
   process.exit(bad ? 1 : 0);
+} else if (cmd === 'validate-run') {
+  // validate-run --run results/<run-id>: every result file is well formed, and every PR has one
+  const run = arg('run');
+  if (!run) throw new Error('usage: validate-run --run <results/run-id>');
+  const dir = resolve(run);
+  const keys = loadKeys(arg('keys') ? resolve(arg('keys')!) : undefined);
+  let bad = 0;
+  for (const k of keys) {
+    const p = join(dir, `${k.id}.json`);
+    if (!existsSync(p)) { console.error(`${k.id}: no result file`); bad++; continue; }
+    let parsed: unknown;
+    try { parsed = JSON.parse(readFileSync(p, 'utf8')); } catch (e) { console.error(`${k.id}: not valid JSON (${(e as Error).message})`); bad++; continue; }
+    for (const problem of validateResult(k.id, parsed)) { console.error(`${k.id}: ${problem}`); bad++; }
+  }
+  console.log(`${keys.length} PRs checked, ${bad} problem(s)`);
+  process.exit(bad ? 1 : 0);
 } else if (cmd === 'verify-keys') {
   // verify-keys --repos <dir with shoplab-* checkouts>: every site and decoy line must hold its snippet at the pinned SHA
   const reposDir = arg('repos');
@@ -55,6 +73,28 @@ if (cmd === 'validate') {
   const r = coverageReport(loadKeys());
   console.log(formatCoverage(r));
   process.exit(r.ok ? 0 : 1);
+} else if (cmd === 'materialize') {
+  // materialize --out <dir> [--only A-01,B-02]: clone every pinned repo and write each PR's diff and review request
+  const out = arg('out');
+  if (!out) throw new Error('usage: materialize --out <dir> [--only <id,id>]');
+  const r = materialize(readJson<Manifest>(join(root, 'manifest.json')), resolve(out), arg('only')?.split(','));
+  console.log(`${r.repos.length} repositories and ${r.prs.length} PRs in ${resolve(out)}`);
+} else if (cmd === 'baseline-grep') {
+  // baseline-grep --work <materialized dir> --out results/<run-id>: the grep baseline, written as an ordinary run
+  const work = arg('work');
+  const out = arg('out');
+  if (!work || !out) throw new Error('usage: baseline-grep --work <dir> --out <results/run-id>');
+  const outDir = resolve(out);
+  mkdirSync(outDir, { recursive: true });
+  const manifest = readJson<Manifest>(join(root, 'manifest.json'));
+  for (const pr of manifest.prs) {
+    const diffPath = join(resolve(work), 'prs', pr.id, 'diff.patch');
+    if (!existsSync(diffPath)) continue;
+    const result = grepBaseline(pr.id, readFileSync(diffPath, 'utf8'), { reposDir: join(resolve(work), 'repos'), ownRepo: pr.repo });
+    writeFileSync(join(outDir, `${pr.id}.json`), JSON.stringify(result, null, 2) + '\n');
+  }
+  writeFileSync(join(outDir, 'run.json'), JSON.stringify({ agent: 'grep-baseline', benchmarkVersion: manifest.benchmarkVersion, date: new Date().toISOString().slice(0, 10) }, null, 2) + '\n');
+  console.log(`wrote ${outDir}`);
 } else if (cmd === 'score') {
   const run = arg('run');
   if (!run) throw new Error('usage: score --run <results/run-id> [--repos <dir>] [--keys <dir>]');
@@ -66,11 +106,23 @@ if (cmd === 'validate') {
     if (existsSync(p)) results.set(k.id, readJson<PrResult>(p));
   }
   const reposDir = arg('repos');
-  const summary = summarizeBySplit(keys, results, reposDir ? fsEvidenceCheck(resolve(reposDir)) : undefined);
+  const evidence = reposDir ? fsEvidenceCheck(resolve(reposDir)) : undefined;
+  const summary = {
+    ...summarizeBySplit(keys, results, evidence),
+    byCategory: {
+      dev: summarizeByCategory(keys.filter((k) => k.split === 'dev'), results, evidence),
+      holdout: summarizeByCategory(keys.filter((k) => k.split === 'holdout'), results, evidence),
+    },
+  };
   mkdirSync(runDir, { recursive: true });
   writeFileSync(join(runDir, 'summary.json'), JSON.stringify(summary, null, 2) + '\n');
-  console.log(JSON.stringify(summary, null, 2));
+  writeFileSync(join(runDir, 'per-pr.csv'), perPrCsv(keys, results, evidence));
+  // cost.json: what each PR cost, as reported by the run, plus the totals
+  const perPr = Object.fromEntries([...results].map(([id, r]) => [id, r.cost ?? null]));
+  const sum = (f: 'tokens' | 'toolCalls' | 'seconds') => Object.values(perPr).reduce((n, c) => n + (c?.[f] ?? 0), 0);
+  writeFileSync(join(runDir, 'cost.json'), JSON.stringify({ total: { tokens: sum('tokens'), toolCalls: sum('toolCalls'), seconds: sum('seconds') }, perPr }, null, 2) + '\n');
+  console.log(JSON.stringify({ dev: summary.dev, holdout: summary.holdout }, null, 2));
 } else {
-  console.error('commands: validate | verify-keys | pin | coverage | score --run <dir> [--repos <dir>] [--keys <dir>]');
+  console.error('commands: validate | validate-run --run <dir> | verify-keys | pin | coverage | materialize | baseline-grep | score --run <dir> [--repos <dir>] [--keys <dir>]');
   process.exit(2);
 }

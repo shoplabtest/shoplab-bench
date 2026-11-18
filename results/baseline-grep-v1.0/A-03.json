@@ -1,0 +1,1259 @@
+{
+  "id": "A-03",
+  "verdict": "break",
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/AuthForm.tsx",
+      "line": 12,
+      "snippet": "throw new ApiError(res.status, body.error ?? 'request_failed');"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 11,
+      "snippet": "{state.status === 'loading' && <p>Loading…</p>}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 12,
+      "snippet": "{state.status === 'error' && <p role=\"alert\">Order history is unavailable right now.</p>}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 13,
+      "snippet": "{state.status === 'ready' && (state.data.length === 0 ? ("
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 19,
+      "snippet": "{o.id} · {o.status} · <Money amount={o.total} currency={o.currency as 'USD'} /> · {new Date(o.placedAt).toLocaleDateString('en-US')}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/ProfileForm.tsx",
+      "line": 8,
+      "snippet": "const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/ProfileForm.tsx",
+      "line": 30,
+      "snippet": "<button type=\"submit\" disabled={status === 'saving'}>Save</button>"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/ProfileForm.tsx",
+      "line": 31,
+      "snippet": "{status === 'saved' && <p role=\"status\">Saved</p>}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/ProfileForm.tsx",
+      "line": 32,
+      "snippet": "{status === 'error' && <p role=\"alert\">Could not save your profile.</p>}"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/errors.ts",
+      "line": 6,
+      "snippet": "if (e.status === 401) return 'Wrong email or password.';"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/errors.ts",
+      "line": 7,
+      "snippet": "if (e.status === 409) return 'That email is already registered.';"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/errors.ts",
+      "line": 8,
+      "snippet": "if (e.status === 400) return mode === 'register' ? 'Check your details: use a valid email and a password of 8+ characters.' : 'Enter your email and password.';"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/types.ts",
+      "line": 5,
+      "snippet": "export interface OrderSummary { id: string; status: string; total: number; currency: string; placedAt: string }"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/useAsync.ts",
+      "line": 3,
+      "snippet": "export type AsyncState<T> = { status: 'loading' } | { status: 'ready'; data: T } | { status: 'error'; error: unknown };"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/useAsync.ts",
+      "line": 7,
+      "snippet": "const [state, setState] = useState<AsyncState<T>>({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/useAsync.ts",
+      "line": 10,
+      "snippet": "setState({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/useAsync.ts",
+      "line": 12,
+      "snippet": "(data) => current && setState({ status: 'ready', data }),"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/useAsync.ts",
+      "line": 13,
+      "snippet": "(error) => current && setState({ status: 'error', error }),"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/account.test.tsx",
+      "line": 45,
+      "snippet": "const calls = stubFetch({ 'POST /auth/register': () => ({ status: 201, body: profile }) });"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/account.test.tsx",
+      "line": 57,
+      "snippet": "stubFetch({ 'POST /auth/register': () => ({ status: 409, body: { error: 'email_taken' } }) });"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/account.test.tsx",
+      "line": 94,
+      "snippet": "expect((await screen.findByRole('status')).textContent).toBe('Saved');"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/account.test.tsx",
+      "line": 109,
+      "snippet": "routes([{ id: 'o-7', status: 'shipped', total: 12500, currency: 'USD', placedAt: '2026-10-15T10:00:00Z' }]);"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/helpers.ts",
+      "line": 7,
+      "snippet": "type Handler = (init: RequestInit) => { status?: number; body?: unknown };"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/helpers.ts",
+      "line": 17,
+      "snippet": "const { status = 200, body } = routes[key](init);"
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "test/helpers.ts",
+      "line": 18,
+      "snippet": "return new Response(body === undefined ? null : JSON.stringify(body), { status });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "migrations/001_create_carts.sql",
+      "line": 6,
+      "snippet": "status      text NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'checked_out')),"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "migrations/001_create_carts.sql",
+      "line": 13,
+      "snippet": "CREATE UNIQUE INDEX carts_one_active_per_user ON carts (user_id) WHERE user_id IS NOT NULL AND status = 'active';"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 75,
+      "snippet": "status text DEFAULT 'active'::text NOT NULL,"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 80,
+      "snippet": "CONSTRAINT carts_status_check CHECK ((status = ANY (ARRAY['active'::text, 'checked_out'::text])))"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "schema.sql",
+      "line": 149,
+      "snippet": "CREATE UNIQUE INDEX carts_one_active_per_user ON public.carts USING btree (user_id) WHERE ((user_id IS NOT NULL) AND (status = 'active'::text));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 52,
+      "snippet": "if (found && found.user_id === null && found.status === 'active') cart = found;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 61,
+      "snippet": "const send = async (res: Response, cart: CartRow, status = 200) => {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 63,
+      "snippet": "res.status(status).json(await toCart(store, cart));"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 72,
+      "snippet": "if (typeof productId !== 'string' || !Number.isInteger(quantity) || quantity < 1) return void res.status(400).json({ error: 'invalid_request' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 74,
+      "snippet": "if (product === 'down') return void res.status(502).json({ error: 'catalog_unavailable' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 75,
+      "snippet": "if (!product) return void res.status(404).json({ error: 'product_not_found' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 77,
+      "snippet": "if (cart.currency && cart.currency !== product.price.currency) return void res.status(409).json({ error: 'currency_mismatch' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 88,
+      "snippet": "if (!Number.isInteger(quantity) || quantity < 0) return void res.status(400).json({ error: 'invalid_request' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 91,
+      "snippet": "if (!ok) return void res.status(404).json({ error: 'line_not_found' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 97,
+      "snippet": "if (!(await store.removeLine(cart.id, req.params.productId))) return void res.status(404).json({ error: 'line_not_found' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 104,
+      "snippet": "if (!coupon || (coupon.expires_at && coupon.expires_at <= new Date())) return void res.status(422).json({ error: 'invalid_coupon' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 114,
+      "snippet": "if (!claims) return void res.status(401).json({ error: 'unauthorized' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 118,
+      "snippet": "if (guest && guest.user_id === null && guest.status === 'active' && guest.expires_at > new Date()) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 137,
+      "snippet": "if (!claims) return void res.status(401).json({ error: 'unauthorized' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 140,
+      "snippet": "if (body.lines.length === 0) return void res.status(409).json({ error: 'empty_cart' });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/app.ts",
+      "line": 149,
+      "snippet": "res.status(202).json({ cartId: cart.id });"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 19,
+      "snippet": "if (res.status === 404) return null;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/clients/catalog.ts",
+      "line": 20,
+      "snippet": "if (!res.ok) throw new Error(`catalog-api responded ${res.status}`);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 7,
+      "snippet": "status: 'active' | 'checked_out';"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 33,
+      "snippet": "setStatus(cartId: string, status: CartRow['status']): Promise<void>;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 52,
+      "snippet": "return (await this.pool.query<CartRow>(\"SELECT * FROM carts WHERE user_id = $1 AND status = 'active'\", [userId])).rows[0] ?? null;"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 66,
+      "snippet": "async setStatus(cartId: string, status: CartRow['status']) {"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 67,
+      "snippet": "await this.pool.query('UPDATE carts SET status = $2 WHERE id = $1', [cartId, status]);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 110,
+      "snippet": "const c = [...this.carts.values()].find((x) => x.user_id === userId && x.status === 'active');"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 114,
+      "snippet": "const c: CartRow = { id: randomUUID(), user_id: userId, status: 'active', coupon_code: null, currency: null, expires_at: expiresAt };"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "src/store.ts",
+      "line": 122,
+      "snippet": "async setStatus(cartId: string, status: CartRow['status']) { const c = this.carts.get(cartId); if (c) c.status = status; }"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 55,
+      "snippet": "assert.equal((await add({ productId: 'p-1', quantity: 0 })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 56,
+      "snippet": "assert.equal((await add({ productId: 'p-1', quantity: 1.5 })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 57,
+      "snippet": "assert.equal((await add({ productId: 'nope', quantity: 1 })).status, 404);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 59,
+      "snippet": "assert.equal((await add({ productId: 'p-1', quantity: 1 })).status, 502);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 65,
+      "snippet": "assert.equal(r.status, 409);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 74,
+      "snippet": "assert.equal((await call('/cart/items/p-1', { method: 'DELETE', cartId: a.id })).status, 404);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 82,
+      "snippet": "assert.equal((await call('/cart/coupon', { method: 'POST', body: { code: 'NOPE' }, cartId: a.id })).status, 422);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 83,
+      "snippet": "assert.equal((await call('/cart/coupon', { method: 'POST', body: { code: 'OLD' }, cartId: a.id })).status, 422);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 97,
+      "snippet": "assert.equal((await call('/cart/merge', { method: 'POST', body: { guestCartId: guest.id } })).status, 401);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 120,
+      "snippet": "assert.equal(r.status, 202);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 129,
+      "snippet": "assert.equal((await call('/cart/checkout', { method: 'POST' })).status, 401);"
+    },
+    {
+      "consumer": "shoplab-cart-api",
+      "file": "test/app.test.ts",
+      "line": 130,
+      "snippet": "assert.equal((await call('/cart/checkout', { method: 'POST', token: userToken(USER) })).status, 409);"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/Cart.tsx",
+      "line": 11,
+      "snippet": "if (state.status === 'loading') return <p>Loading your cart…</p>;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/Cart.tsx",
+      "line": 12,
+      "snippet": "if (state.status === 'error') return <p role=\"alert\">Could not load your cart.</p>;"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/cartApi.ts",
+      "line": 30,
+      "snippet": "throw new ApiError(res.status, err.error ?? 'request_failed');"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useAsync.ts",
+      "line": 3,
+      "snippet": "export type AsyncState<T> = { status: 'loading' } | { status: 'ready'; data: T } | { status: 'error'; error: unknown };"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useAsync.ts",
+      "line": 7,
+      "snippet": "const [state, setState] = useState<AsyncState<T>>({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useAsync.ts",
+      "line": 10,
+      "snippet": "setState({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useAsync.ts",
+      "line": 12,
+      "snippet": "(data) => current && setState({ status: 'ready', data }),"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useAsync.ts",
+      "line": 13,
+      "snippet": "(error) => current && setState({ status: 'error', error }),"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 6,
+      "snippet": "export type CartState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; cart: Cart };"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 9,
+      "snippet": "const [state, setState] = useState<CartState>({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 13,
+      "snippet": "const adopt = useCallback((cart: Cart) => setState({ status: 'ready', cart }), []);"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 17,
+      "snippet": "setState({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 18,
+      "snippet": "getCart(loggedIn).then((c) => current && adopt(c), () => current && setState({ status: 'error' }));"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 22,
+      "snippet": "const ids = state.status === 'ready' ? state.cart.lines.map((l) => l.productId).filter((id) => !(id in names)) : [];"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/useCart.ts",
+      "line": 47,
+      "snippet": "run(() => applyCoupon(loggedIn, code), (e) => (e instanceof ApiError && e.status === 422 ? 'That coupon is not valid.' : 'Could not apply the coupon.')),"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 39,
+      "snippet": "stubFetch({ 'GET /cart': () => ({ body: cart([line('p-9', 1, 100)], 100) }), 'GET /products/p-9': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 51,
+      "snippet": "stubFetch({ 'GET /cart': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 95,
+      "snippet": "'PATCH /cart/items/p-1': () => ({ status: 500, body: {} }),"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/cart.test.tsx",
+      "line": 125,
+      "snippet": "'POST /cart/coupon': () => ({ status: 422, body: { error: 'invalid_coupon' } }),"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/helpers.ts",
+      "line": 7,
+      "snippet": "type Handler = (init: RequestInit) => { status?: number; body?: unknown };"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/helpers.ts",
+      "line": 17,
+      "snippet": "const { status = 200, body } = routes[key](init);"
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "test/helpers.ts",
+      "line": 18,
+      "snippet": "return new Response(body === undefined ? null : JSON.stringify(body), { status });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 76,
+      "snippet": "if (!p) return void res.status(404).json({ error: 'not_found' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 83,
+      "snippet": "if (typeof q !== 'string' || !q.trim() || !SORTS.includes(sort)) return void res.status(400).json({ error: 'invalid_request' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 91,
+      "snippet": "if (typeof parsed === 'string') return void res.status(400).json({ error: 'invalid_request', field: parsed });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 92,
+      "snippet": "if (!(await store.categoryExists(parsed.categoryId!))) return void res.status(400).json({ error: 'invalid_request', field: 'categoryId' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 95,
+      "snippet": "res.status(201).json(toProduct(p));"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 100,
+      "snippet": "if (typeof parsed === 'string') return void res.status(400).json({ error: 'invalid_request', field: parsed });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 101,
+      "snippet": "if (parsed.categoryId && !(await store.categoryExists(parsed.categoryId))) return void res.status(400).json({ error: 'invalid_request', field: 'categoryId' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 103,
+      "snippet": "if (!p) return void res.status(404).json({ error: 'not_found' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/app.ts",
+      "line": 109,
+      "snippet": "res.status((await store.deleteProduct(req.params.id)) ? 204 : 404).end();"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/auth.ts",
+      "line": 18,
+      "snippet": "if (!h?.startsWith('Bearer ')) return void res.status(401).json({ error: 'unauthorized' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/auth.ts",
+      "line": 22,
+      "snippet": "return void res.status(401).json({ error: 'unauthorized' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "src/auth.ts",
+      "line": 24,
+      "snippet": "if (req.claims.role === 'customer') return void res.status(403).json({ error: 'forbidden' });"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 37,
+      "snippet": "assert.equal((await call('/products', 'POST', body)).status, 401);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 38,
+      "snippet": "assert.equal((await call('/products', 'POST', body, 'customer')).status, 403);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 39,
+      "snippet": "assert.equal((await call('/products', 'POST', body, 'admin')).status, 201);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 44,
+      "snippet": "assert.equal((await bad({ name: 'X', price: { amount: 1.5, currency: 'USD' }, categoryId: 'audio' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 45,
+      "snippet": "assert.equal((await bad({ name: 'X', price: { amount: 100, currency: 'JPY' }, categoryId: 'audio' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 46,
+      "snippet": "assert.equal((await bad({ name: 'X', price: { amount: 100, currency: 'USD' }, categoryId: 'nope' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 53,
+      "snippet": "assert.equal((await call('/products/missing')).status, 404);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 81,
+      "snippet": "assert.equal((await call('/search')).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 82,
+      "snippet": "assert.equal((await call('/search?q=x&sort=bogus')).status, 400);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 94,
+      "snippet": "assert.equal((await call(`/products/${id}`, 'DELETE', undefined, 'staff')).status, 204);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 95,
+      "snippet": "assert.equal((await call(`/products/${id}`)).status, 404);"
+    },
+    {
+      "consumer": "shoplab-catalog-api",
+      "file": "test/app.test.ts",
+      "line": 96,
+      "snippet": "assert.equal((await call(`/products/${id}`, 'DELETE', undefined, 'staff')).status, 404);"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 65,
+      "snippet": "{categories.status === 'ready' && ("
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 69,
+      "snippet": "{products.status === 'loading' && <p>Loading…</p>}"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 70,
+      "snippet": "{products.status === 'error' && <p role=\"alert\">Could not load products.</p>}"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 71,
+      "snippet": "{products.status === 'ready' && ("
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/Page.tsx",
+      "line": 80,
+      "snippet": "<button type=\"button\" disabled={products.status !== 'ready' || products.data.length === 0} onClick={() => update({ page: String(page + 1) })}>Next</button>"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 18,
+      "snippet": "{state.status === 'loading' && <p>Loading…</p>}"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 19,
+      "snippet": "{state.status === 'error' &&"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 20,
+      "snippet": "(state.error instanceof ApiError && state.error.status === 404"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/ProductDetail.tsx",
+      "line": 23,
+      "snippet": "{state.status === 'ready' && ("
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/api.ts",
+      "line": 8,
+      "snippet": "throw new ApiError(res.status, body.error ?? 'request_failed');"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/cart.ts",
+      "line": 30,
+      "snippet": "throw new ApiError(res.status, err.error ?? 'request_failed');"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/useAsync.ts",
+      "line": 3,
+      "snippet": "export type AsyncState<T> = { status: 'loading' } | { status: 'ready'; data: T } | { status: 'error'; error: unknown };"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/useAsync.ts",
+      "line": 7,
+      "snippet": "const [state, setState] = useState<AsyncState<T>>({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/useAsync.ts",
+      "line": 10,
+      "snippet": "setState({ status: 'loading' });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/useAsync.ts",
+      "line": 12,
+      "snippet": "(data) => current && setState({ status: 'ready', data }),"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/useAsync.ts",
+      "line": 13,
+      "snippet": "(error) => current && setState({ status: 'error', error }),"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/helpers.ts",
+      "line": 7,
+      "snippet": "type Handler = (init: RequestInit) => { status?: number; body?: unknown };"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/helpers.ts",
+      "line": 17,
+      "snippet": "const { status = 200, body } = routes[key](init);"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/helpers.ts",
+      "line": 18,
+      "snippet": "return new Response(body === undefined ? null : JSON.stringify(body), { status });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 56,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products?*': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 87,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products/gone': () => ({ status: 404, body: { error: 'not_found' } }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 93,
+      "snippet": "stubFetch({ 'GET /categories': () => ({ body: [] }), 'GET /products/p-1': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "test/page.test.tsx",
+      "line": 150,
+      "snippet": "'POST /cart/items': () => ({ status: 404, body: { error: 'product_not_found' } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 13,
+      "snippet": "throw new ApiError(res.status, body.error ?? 'request_failed');"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 15,
+      "snippet": "return (res.status === 204 ? undefined : await res.json()) as T;"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "src/api.ts",
+      "line": 49,
+      "snippet": "if (!(err instanceof ApiError) || err.status !== 401 || !tokens) throw err;"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 21,
+      "snippet": "'GET /cart': (init) => (bearer(init) === 'Bearer old' && first ? ((first = false), { status: 401, body: {} }) : { body: { ok: true } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 32,
+      "snippet": "'GET /a': (init) => (bearer(init) === 'Bearer old' ? { status: 401, body: {} } : { body: 'a' }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 33,
+      "snippet": "'GET /b': (init) => (bearer(init) === 'Bearer old' ? { status: 401, body: {} } : { body: 'b' }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 43,
+      "snippet": "'GET /cart': () => ({ status: 401, body: { error: 'unauthorized' } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 44,
+      "snippet": "'POST /auth/refresh': () => ({ status: 401, body: { error: 'invalid_refresh_token' } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 46,
+      "snippet": "await expect(authFetch('/cart')).rejects.toMatchObject({ status: 401 });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 51,
+      "snippet": "const calls = stubFetch({ 'GET /cart': () => ({ status: 401, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/api.test.ts",
+      "line": 52,
+      "snippet": "await expect(authFetch('/cart')).rejects.toMatchObject({ status: 401 });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 34,
+      "snippet": "stubFetch({ 'POST /auth/login': () => ({ status: 401, body: { error: 'invalid_credentials' } }) });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 36,
+      "snippet": "await expect(act(() => result.current.login('a@shoplab.test', 'bad'))).rejects.toMatchObject({ status: 401, code: 'invalid_credentials' });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 61,
+      "snippet": "'POST /cart/merge': () => ({ status: 502, body: { error: 'down' } }),"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/auth.test.tsx",
+      "line": 79,
+      "snippet": "stubFetch({ 'POST /auth/logout': () => ({ status: 500, body: {} }) });"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/helpers.ts",
+      "line": 5,
+      "snippet": "type Handler = (init: RequestInit) => { status?: number; body?: unknown };"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/helpers.ts",
+      "line": 15,
+      "snippet": "const { status = 200, body } = h(init);"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "test/helpers.ts",
+      "line": 16,
+      "snippet": "return new Response(body === undefined ? null : JSON.stringify(body), { status });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 30,
+      "snippet": "if (!h?.startsWith('Bearer ')) return void res.status(401).json({ error: 'unauthorized' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 35,
+      "snippet": "res.status(401).json({ error: 'unauthorized' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 50,
+      "snippet": "return void res.status(400).json({ error: 'invalid_request' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 53,
+      "snippet": "if (!user) return void res.status(409).json({ error: 'email_taken' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 55,
+      "snippet": "res.status(201).json(publicUser(user));"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 62,
+      "snippet": "return void res.status(401).json({ error: 'invalid_credentials' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 70,
+      "snippet": "if (!row || row.revoked_at || row.expires_at <= new Date()) return void res.status(401).json({ error: 'invalid_refresh_token' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 72,
+      "snippet": "if (!user) return void res.status(401).json({ error: 'invalid_refresh_token' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 81,
+      "snippet": "res.status(204).end();"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 92,
+      "snippet": "res.status(202).json(process.env.NODE_ENV === 'production' ? {} : { resetToken });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 97,
+      "snippet": "if (typeof token !== 'string' || typeof password !== 'string' || password.length < 8) return void res.status(400).json({ error: 'invalid_request' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 99,
+      "snippet": "if (!userId) return void res.status(400).json({ error: 'invalid_token' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 102,
+      "snippet": "res.status(204).end();"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 107,
+      "snippet": "if (sub !== req.params.id && role === 'customer') return void res.status(403).json({ error: 'forbidden' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 109,
+      "snippet": "if (!user) return void res.status(404).json({ error: 'not_found' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 116,
+      "snippet": "if (sub !== req.params.id && role !== 'admin') return void res.status(403).json({ error: 'forbidden' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 118,
+      "snippet": "if (typeof fullName !== 'string' || !fullName.trim()) return void res.status(400).json({ error: 'invalid_request' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 120,
+      "snippet": "if (!user) return void res.status(404).json({ error: 'not_found' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 125,
+      "snippet": "if (req.claims!.role !== 'admin') return void res.status(403).json({ error: 'forbidden' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 127,
+      "snippet": "if (!ROLES.includes(role)) return void res.status(400).json({ error: 'invalid_role' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "src/app.ts",
+      "line": 129,
+      "snippet": "if (!before) return void res.status(404).json({ error: 'not_found' });"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 35,
+      "snippet": "assert.equal(r.status, 201);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 37,
+      "snippet": "assert.equal((await register('a@shoplab.test')).status, 409);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 42,
+      "snippet": "assert.equal(r.status, 400);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 54,
+      "snippet": "assert.equal(r.status, 401);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 60,
+      "snippet": "assert.equal(next.status, 200);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 61,
+      "snippet": "assert.equal((await call('/auth/refresh', 'POST', { refreshToken: pair.refreshToken })).status, 401);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 67,
+      "snippet": "assert.equal((await call('/auth/logout', 'POST', { all: true }, a.accessToken)).status, 204);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 68,
+      "snippet": "assert.equal((await call('/auth/refresh', 'POST', { refreshToken: b.refreshToken })).status, 401);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 75,
+      "snippet": "assert.equal((await call(`/users/${b}`, 'GET', undefined, a.accessToken)).status, 403);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 80,
+      "snippet": "assert.equal(r.status, 200);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 82,
+      "snippet": "assert.equal((await call(`/users/${b}/role`, 'PUT', { role: 'staff' }, a.accessToken)).status, 403);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 89,
+      "snippet": "assert.equal((await call('/auth/password-reset/confirm', 'POST', { token: resetToken, password: 'new-password-1' })).status, 204);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 90,
+      "snippet": "assert.equal((await call('/auth/password-reset/confirm', 'POST', { token: resetToken, password: 'new-password-2' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 91,
+      "snippet": "assert.equal((await call('/auth/refresh', 'POST', { refreshToken: pair.refreshToken })).status, 401);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 92,
+      "snippet": "assert.equal((await call('/auth/login', 'POST', { email: 'b@shoplab.test', password: 'new-password-1' })).status, 200);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 96,
+      "snippet": "assert.equal((await call('/auth/password-reset/request', 'POST', { email: 'ghost@shoplab.test' })).status, 202);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 108,
+      "snippet": "assert.equal(ok.status, 200);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 110,
+      "snippet": "assert.equal((await patch(cId, d.accessToken, { fullName: 'Hacker' })).status, 403);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 111,
+      "snippet": "assert.equal((await patch(cId, c.accessToken, { fullName: '   ' })).status, 400);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 112,
+      "snippet": "assert.equal((await patch('00000000-0000-0000-0000-000000000000', (await login('root@shoplab.test')).accessToken, { fullName: 'X' })).status, 404);"
+    },
+    {
+      "consumer": "shoplab-iam",
+      "file": "test/app.test.ts",
+      "line": 113,
+      "snippet": "assert.equal((await patch(cId, (await login('root@shoplab.test')).accessToken, { fullName: 'By Admin' })).status, 200);"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/e2e.mjs",
+      "line": 55,
+      "snippet": "await expectVisible(page.getByRole('status').filter({ hasText: 'Saved' }), 'profile edit saves through iam');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/frontends.mjs",
+      "line": 17,
+      "snippet": "if (r.status !== 0) process.exit(r.status ?? 1);"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/frontends.mjs",
+      "line": 27,
+      "snippet": "try { if ((await fetch(`http://localhost:${a.port}/`)).status < 500) break; } catch {}"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 26,
+      "snippet": "return { status: res.status, body: text ? JSON.parse(text) : null };"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 42,
+      "snippet": "expect(admin.status === 200, 'seeded admin can log in');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 45,
+      "snippet": "expect(list.status === 200 && list.body.length > 0, 'seeded catalog lists products');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 51,
+      "snippet": "expect(created.status === 201, 'admin token from iam is accepted by catalog-api');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 54,
+      "snippet": "expect(guest.status === 200 && guest.body.total === 8400, 'guest adds a product; price snapshot comes from catalog-api');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 57,
+      "snippet": "expect((await call(IAM, '/auth/register', { method: 'POST', body: { email, password: 'password123', fullName: 'Smoke Test' } })).status === 201, 'new user registers');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 60,
+      "snippet": "expect(merged.status === 200 && merged.body.lines[0]?.quantity === 2, 'guest cart merges into the user cart on login');"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 66,
+      "snippet": "expect(checkout.status === 202, 'checkout is accepted');"
+    }
+  ],
+  "cost": {
+    "tokens": 0,
+    "toolCalls": 0,
+    "seconds": 0.007
+  }
+}
