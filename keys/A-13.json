@@ -17,28 +17,32 @@
       "file": "src/cart.ts",
       "line": 35,
       "why": "Emits cart:updated with detail { count }",
-      "snippet": "emitCartUpdated({ count"
+      "snippet": "emitCartUpdated({ count",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-mfe",
       "file": "src/cartApi.ts",
       "line": 35,
       "why": "Emits cart:updated with detail { count }",
-      "snippet": "emitCartUpdated({ count"
+      "snippet": "emitCartUpdated({ count",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/remote-modules.d.ts",
       "line": 5,
       "why": "Declares the detail shape with count",
-      "snippet": "emitCartUpdated(detail: { count: number })"
+      "snippet": "emitCartUpdated(detail: { count: number })",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-mfe",
       "file": "src/remote-modules.d.ts",
       "line": 5,
       "why": "Declares the detail shape with count",
-      "snippet": "emitCartUpdated(detail: { count: number })"
+      "snippet": "emitCartUpdated(detail: { count: number })",
+      "hard": false
     }
   ],
   "mustNotFlag": [

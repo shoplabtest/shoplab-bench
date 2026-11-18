@@ -17,21 +17,24 @@
       "file": "src/cartApi.ts",
       "line": 44,
       "why": "Sends the coupon as { code }",
-      "snippet": "'/cart/coupon', 'POST', { code }"
+      "snippet": "'/cart/coupon', 'POST', { code }",
+      "hard": false
     },
     {
       "consumer": "shoplab-infra",
       "file": "scripts/smoke.mjs",
       "line": 62,
       "why": "The smoke test posts { code: \"WELCOME10\" }",
-      "snippet": "'/cart/coupon'"
+      "snippet": "'/cart/coupon'",
+      "hard": false
     },
     {
       "consumer": "shoplab-contracts",
       "file": "openapi/cart-api.yaml",
       "line": 26,
       "why": "Published OpenAPI spec still requires { code } in the coupon request",
-      "snippet": "required: [code]"
+      "snippet": "required: [code]",
+      "hard": false
     }
   ],
   "mustNotFlag": [

@@ -74,4 +74,4 @@ The scorer is deterministic: the same results always give the same numbers. Mode
 npm run baseline-grep -- --work <work-dir> --out results/baseline-grep-v1.0
 ```
 
-The grep baseline searches every other repository for the names a PR removed and reports every hit. It needs no model. Its scores are in `results/baseline-grep-v1.0/` and are the floor an agent has to beat, mainly on precision.
+The grep baseline searches every other repository for the names a PR removed and reports every hit. It needs no model. A key site is `hard` exactly when this baseline does not find it. Its scores are in `results/baseline-grep-v1.0/` and are the floor an agent has to beat, mainly on precision.

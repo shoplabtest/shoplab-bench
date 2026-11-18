@@ -3,6 +3,7 @@ import { join, resolve } from 'node:path';
 import { grepBaseline } from './baseline-grep.ts';
 import { coverageReport, formatCoverage } from './coverage.ts';
 import { materialize } from './materialize.ts';
+import { flagChanges, reflagHard } from './reflag.ts';
 import { pinRepos, resolveTags } from './pin.ts';
 import { fsEvidenceCheck, perPrCsv, summarizeByCategory, summarizeBySplit } from './score.ts';
 import { validateKey, validateManifest, validateResult } from './validate.ts';
@@ -79,6 +80,18 @@ if (cmd === 'validate') {
   if (!out) throw new Error('usage: materialize --out <dir> [--only <id,id>]');
   const r = materialize(readJson<Manifest>(join(root, 'manifest.json')), resolve(out), arg('only')?.split(','));
   console.log(`${r.repos.length} repositories and ${r.prs.length} PRs in ${resolve(out)}`);
+} else if (cmd === 'reflag-hard') {
+  // reflag-hard --run results/baseline-grep-v1.0 [--write]: hard = the grep baseline does not find the site
+  const run = arg('run');
+  if (!run) throw new Error('usage: reflag-hard --run <results/baseline-run> [--write]');
+  let moved = 0;
+  for (const k of loadKeys()) {
+    const p = join(resolve(run), `${k.id}.json`);
+    const next = reflagHard(k, existsSync(p) ? readJson<PrResult>(p) : undefined);
+    for (const c of flagChanges(k, next)) (moved++, console.log(`${c.id} ${c.site}: hard ${c.from} -> ${c.to}`));
+    if (process.argv.includes('--write')) writeFileSync(join(root, 'keys', `${k.id}.json`), JSON.stringify(next, null, 2) + '\n');
+  }
+  console.log(`${moved} flag(s) ${process.argv.includes('--write') ? 'rewritten' : 'would change (use --write)'}`);
 } else if (cmd === 'baseline-grep') {
   // baseline-grep --work <materialized dir> --out results/<run-id>: the grep baseline, written as an ordinary run
   const work = arg('work');

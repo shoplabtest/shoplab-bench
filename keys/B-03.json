@@ -25,14 +25,16 @@
       "file": "src/events.ts",
       "line": 17,
       "why": "ProductUpdated type declares price as a number",
-      "snippet": "  price: number;"
+      "snippet": "  price: number;",
+      "hard": true
     },
     {
       "consumer": "shoplab-contracts",
       "file": "events/product.updated.schema.json",
       "line": 8,
       "why": "Published event schema still says price is an integer",
-      "snippet": "\"price\":{\"type\":\"integer\""
+      "snippet": "\"price\":{\"type\":\"integer\"",
+      "hard": false
     }
   ],
   "mustNotFlag": []
