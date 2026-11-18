@@ -27,13 +27,16 @@ function arg(name: string): string | undefined {
   return i > -1 ? process.argv[i + 1] : undefined;
 }
 
+/** The manifest to use: --manifest <file>, else the one in this repository. */
+const manifestPath = () => (arg('manifest') ? resolve(arg('manifest')!) : join(root, 'manifest.json'));
+
 const cmd = process.argv[2];
 
 if (cmd === 'validate') {
   const keys = loadKeys();
   let bad = 0;
   for (const k of keys) for (const p of validateKey(k)) (bad++, console.error(`${k.id}: ${p}`));
-  const mp = join(root, 'manifest.json');
+  const mp = manifestPath();
   if (existsSync(mp)) for (const p of validateManifest(readJson<Manifest>(mp))) (bad++, console.error(`manifest: ${p}`));
   console.log(`${keys.length} keys checked, ${bad} problem(s)`);
   process.exit(bad ? 1 : 0);
@@ -57,7 +60,7 @@ if (cmd === 'validate') {
   // verify-keys --repos <dir with shoplab-* checkouts>: every site and decoy line must hold its snippet at the pinned SHA
   const reposDir = arg('repos');
   if (!reposDir) throw new Error('usage: verify-keys --repos <dir>');
-  const problems = verifyKeys(loadKeys(), readJson<Manifest>(join(root, 'manifest.json')), gitReadAtSha(resolve(reposDir)));
+  const problems = verifyKeys(loadKeys(), readJson<Manifest>(manifestPath()), gitReadAtSha(resolve(reposDir)));
   for (const p of problems) console.error(p);
   console.log(`${problems.length} problem(s)`);
   process.exit(problems.length ? 1 : 0);
@@ -67,7 +70,7 @@ if (cmd === 'validate') {
   const tag = arg('tag') ?? 'bench-v1.0-base';
   const repos = process.argv.slice(3).filter((a, i, all) => !a.startsWith('--') && !all[i - 1]?.startsWith('--'));
   if (!repos.length) throw new Error('usage: pin [--org <org>] [--tag <tag>] <repo> [<repo> ...]');
-  const mp = join(root, 'manifest.json');
+  const mp = manifestPath();
   const next = pinRepos(readJson<Manifest>(mp), resolveTags(org, repos, tag));
   writeFileSync(mp, JSON.stringify(next, null, 2) + '\n');
   for (const r of repos) console.log(`${r} ${next.repos[r].sha}`);
@@ -79,13 +82,13 @@ if (cmd === 'validate') {
   // materialize --out <dir> [--only A-01,B-02]: clone every pinned repo and write each PR's diff and review request
   const out = arg('out');
   if (!out) throw new Error('usage: materialize --out <dir> [--only <id,id>]');
-  const r = materialize(readJson<Manifest>(join(root, 'manifest.json')), resolve(out), arg('only')?.split(','));
+  const r = materialize(readJson<Manifest>(manifestPath()), resolve(out), arg('only')?.split(','));
   console.log(`${r.repos.length} repositories and ${r.prs.length} PRs in ${resolve(out)}`);
 } else if (cmd === 'split') {
   // split --slate <phase2.json> [--holdout 22] [--out split.json]: seeded dev/hold-out assignment for PRs not yet written
   const slatePath = arg('slate');
   if (!slatePath) throw new Error('usage: split --slate <slate.json> [--holdout <n>] [--out <file>]');
-  const manifest = readJson<Manifest>(join(root, 'manifest.json'));
+  const manifest = readJson<Manifest>(manifestPath());
   const existing = loadKeys().map((k): SlateEntry => ({ id: k.id, category: k.category, kinds: [...k.kinds] }));
   const known = new Set(existing.map((k) => k.id));
   const candidates = readJson<SlateEntry[]>(resolve(slatePath)).filter((s) => !known.has(s.id)).map((s) => ({ id: s.id, category: s.category, kinds: s.kinds }));
@@ -111,7 +114,7 @@ if (cmd === 'validate') {
   if (!work || !out) throw new Error('usage: baseline-grep --work <dir> --out <results/run-id>');
   const outDir = resolve(out);
   mkdirSync(outDir, { recursive: true });
-  const manifest = readJson<Manifest>(join(root, 'manifest.json'));
+  const manifest = readJson<Manifest>(manifestPath());
   for (const pr of manifest.prs) {
     const diffPath = join(resolve(work), 'prs', pr.id, 'diff.patch');
     if (!existsSync(diffPath)) continue;
