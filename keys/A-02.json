@@ -17,14 +17,16 @@
       "file": "src/App.tsx",
       "line": 1,
       "why": "Imports the constant that was renamed",
-      "snippet": "import { DEFAULT_CURRENCY, Toast }"
+      "snippet": "import { DEFAULT_CURRENCY, Toast }",
+      "hard": false
     },
     {
       "consumer": "shoplab-host",
       "file": "src/App.tsx",
       "line": 27,
       "why": "Passes the constant to the catalog remote as the currency prop",
-      "snippet": "currency={DEFAULT_CURRENCY}"
+      "snippet": "currency={DEFAULT_CURRENCY}",
+      "hard": false
     }
   ],
   "mustNotFlag": []

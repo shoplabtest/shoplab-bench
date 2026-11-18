@@ -17,14 +17,16 @@
       "file": "src/types.ts",
       "line": 12,
       "why": "Type of the GET /categories response uses children",
-      "snippet": "children: CategoryNode[]"
+      "snippet": "children: CategoryNode[]",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/components/CategoryNav.tsx",
       "line": 13,
       "why": "Renders the category tree from children",
-      "snippet": "node.children.length"
+      "snippet": "node.children.length",
+      "hard": false
     }
   ],
   "mustNotFlag": [

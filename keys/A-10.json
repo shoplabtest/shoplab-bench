@@ -17,98 +17,112 @@
       "file": "src/cart.ts",
       "line": 2,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/Page.tsx",
       "line": 2,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "src/remote-modules.d.ts",
       "line": 1,
       "why": "Type declaration for the ./ui module",
-      "snippet": "declare module 'host/ui'"
+      "snippet": "declare module 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-mfe",
       "file": "src/Cart.tsx",
       "line": 1,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-mfe",
       "file": "src/cartApi.ts",
       "line": 2,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-mfe",
       "file": "src/remote-modules.d.ts",
       "line": 1,
       "why": "Type declaration for the ./ui module",
-      "snippet": "declare module 'host/ui'"
+      "snippet": "declare module 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-account-mfe",
       "file": "src/Account.tsx",
       "line": 1,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-account-mfe",
       "file": "src/components/ProfileForm.tsx",
       "line": 2,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-account-mfe",
       "file": "src/components/OrderHistory.tsx",
       "line": 2,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-account-mfe",
       "file": "src/components/AuthForm.tsx",
       "line": 3,
       "why": "Imports the module exposed as ./ui",
-      "snippet": "from 'host/ui'"
+      "snippet": "from 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-account-mfe",
       "file": "src/remote-modules.d.ts",
       "line": 1,
       "why": "Type declaration for the ./ui module",
-      "snippet": "declare module 'host/ui'"
+      "snippet": "declare module 'host/ui'",
+      "hard": false
     },
     {
       "consumer": "shoplab-catalog-mfe",
       "file": "vite.config.ts",
       "line": 26,
       "why": "Unit-test alias maps the old module name",
-      "snippet": "{ 'host/ui':"
+      "snippet": "{ 'host/ui':",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-mfe",
       "file": "vite.config.ts",
       "line": 26,
       "why": "Unit-test alias maps the old module name",
-      "snippet": "{ 'host/ui':"
+      "snippet": "{ 'host/ui':",
+      "hard": false
     },
     {
       "consumer": "shoplab-account-mfe",
       "file": "vite.config.ts",
       "line": 26,
       "why": "Unit-test alias maps the old module name",
-      "snippet": "{ 'host/ui':"
+      "snippet": "{ 'host/ui':",
+      "hard": false
     }
   ],
   "mustNotFlag": [

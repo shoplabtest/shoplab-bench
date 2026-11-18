@@ -17,21 +17,24 @@
       "file": "src/consumer.ts",
       "line": 9,
       "why": "Consumer reads productId from product.updated",
-      "snippet": "typeof ev.productId"
+      "snippet": "typeof ev.productId",
+      "hard": false
     },
     {
       "consumer": "shoplab-cart-api",
       "file": "src/events.ts",
       "line": 16,
       "why": "ProductUpdated type declares productId",
-      "snippet": "  productId: string;"
+      "snippet": "  productId: string;",
+      "hard": false
     },
     {
       "consumer": "shoplab-contracts",
       "file": "events/product.updated.schema.json",
       "line": 8,
       "why": "Published event schema still names the field productId",
-      "snippet": "\"productId\":{\"type\":\"string\"}"
+      "snippet": "\"productId\":{\"type\":\"string\"}",
+      "hard": false
     }
   ],
   "mustNotFlag": []

@@ -17,7 +17,7 @@
       "file": "src/storage.ts",
       "line": 3,
       "why": "Host reads the guest cart id under the old key when merging after login",
-      "hard": true,
+      "hard": false,
       "snippet": "CART_ID_KEY = 'cartId'"
     },
     {
@@ -25,7 +25,7 @@
       "file": "src/cart.ts",
       "line": 6,
       "why": "Catalog writes the guest cart id under the old key",
-      "hard": true,
+      "hard": false,
       "snippet": "GUEST_CART_KEY = 'cartId'"
     },
     {
@@ -33,7 +33,7 @@
       "file": "scripts/e2e.mjs",
       "line": 30,
       "why": "e2e test reads the old key",
-      "hard": true,
+      "hard": false,
       "snippet": "getItem('cartId')"
     },
     {
@@ -41,7 +41,7 @@
       "file": "scripts/e2e.mjs",
       "line": 49,
       "why": "e2e test waits for the old key to be cleared",
-      "hard": true,
+      "hard": false,
       "snippet": "getItem('cartId')"
     }
   ],

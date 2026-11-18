@@ -17,14 +17,16 @@
       "file": "src/remotes.ts",
       "line": 4,
       "why": "Lazy-loads the module exposed as ./Page",
-      "snippet": "import('catalog/Page')"
+      "snippet": "import('catalog/Page')",
+      "hard": false
     },
     {
       "consumer": "shoplab-host",
       "file": "src/remote-modules.d.ts",
       "line": 1,
       "why": "Type declaration for the ./Page module",
-      "snippet": "declare module 'catalog/Page'"
+      "snippet": "declare module 'catalog/Page'",
+      "hard": false
     }
   ],
   "mustNotFlag": [
