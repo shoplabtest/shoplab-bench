@@ -13,6 +13,7 @@
     "pin": "tsx src/cli.ts pin",
     "verify-keys": "tsx src/cli.ts verify-keys",
     "validate-run": "tsx src/cli.ts validate-run",
+    "split": "tsx src/cli.ts split",
     "reflag-hard": "tsx src/cli.ts reflag-hard",
     "materialize": "tsx src/cli.ts materialize",
     "baseline-grep": "tsx src/cli.ts baseline-grep"
