@@ -4,6 +4,7 @@ import { grepBaseline } from './baseline-grep.ts';
 import { coverageReport, formatCoverage } from './coverage.ts';
 import { materialize } from './materialize.ts';
 import { flagChanges, reflagHard } from './reflag.ts';
+import { assignSplit, type SlateEntry } from './split.ts';
 import { pinRepos, resolveTags } from './pin.ts';
 import { fsEvidenceCheck, perPrCsv, summarizeByCategory, summarizeBySplit } from './score.ts';
 import { validateKey, validateManifest, validateResult } from './validate.ts';
@@ -80,6 +81,17 @@ if (cmd === 'validate') {
   if (!out) throw new Error('usage: materialize --out <dir> [--only <id,id>]');
   const r = materialize(readJson<Manifest>(join(root, 'manifest.json')), resolve(out), arg('only')?.split(','));
   console.log(`${r.repos.length} repositories and ${r.prs.length} PRs in ${resolve(out)}`);
+} else if (cmd === 'split') {
+  // split --slate <phase2.json> [--holdout 22] [--out split.json]: seeded dev/hold-out assignment for PRs not yet written
+  const slatePath = arg('slate');
+  if (!slatePath) throw new Error('usage: split --slate <slate.json> [--holdout <n>] [--out <file>]');
+  const manifest = readJson<Manifest>(join(root, 'manifest.json'));
+  const existing = loadKeys().map((k): SlateEntry => ({ id: k.id, category: k.category, kinds: [...k.kinds] }));
+  const known = new Set(existing.map((k) => k.id));
+  const candidates = readJson<SlateEntry[]>(resolve(slatePath)).filter((s) => !known.has(s.id)).map((s) => ({ id: s.id, category: s.category, kinds: s.kinds }));
+  const result = { shuffleSeed: manifest.shuffleSeed, ...assignSplit(existing, candidates, Number(arg('holdout') ?? 22), manifest.shuffleSeed) };
+  if (arg('out')) writeFileSync(resolve(arg('out')!), JSON.stringify(result, null, 2) + '\n');
+  console.log(JSON.stringify(result, null, 2));
 } else if (cmd === 'reflag-hard') {
   // reflag-hard --run results/baseline-grep-v1.0 [--write]: hard = the grep baseline does not find the site
   const run = arg('run');
@@ -136,6 +148,6 @@ if (cmd === 'validate') {
   writeFileSync(join(runDir, 'cost.json'), JSON.stringify({ total: { tokens: sum('tokens'), toolCalls: sum('toolCalls'), seconds: sum('seconds') }, perPr }, null, 2) + '\n');
   console.log(JSON.stringify({ dev: summary.dev, holdout: summary.holdout }, null, 2));
 } else {
-  console.error('commands: validate | validate-run --run <dir> | verify-keys | pin | coverage | materialize | baseline-grep | score --run <dir> [--repos <dir>] [--keys <dir>]');
+  console.error('commands: validate | validate-run --run <dir> | split --slate <file> | verify-keys | pin | coverage | materialize | baseline-grep | score --run <dir> [--repos <dir>] [--keys <dir>]');
   process.exit(2);
 }
