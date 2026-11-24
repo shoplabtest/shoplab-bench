@@ -1,0 +1,32 @@
+{
+  "id": "C-09",
+  "repo": "shoplab-orders",
+  "pr": 1,
+  "baseSha": "415284d0fc1e7797e358dc879cea7c1f028b5eae",
+  "headSha": "290b7600a955034d2b7d09db893d2ba9108eb1d6",
+  "split": "dev",
+  "category": "C",
+  "difficulty": "easy",
+  "expect": "safe",
+  "kinds": [
+    "event"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-invoices",
+      "file": "src/consumer.ts",
+      "line": 18,
+      "why": "Binds only order.placed; a new event key does not reach this queue",
+      "snippet": "bindQueue(QUEUE, EXCHANGE, 'order.placed')"
+    },
+    {
+      "consumer": "shoplab-notifications",
+      "file": "src/consumer.ts",
+      "line": 9,
+      "why": "Handles only the events it lists",
+      "snippet": "'order.placed': handleOrderPlaced"
+    }
+  ],
+  "notes": "A new event is published; no existing event changes."
+}

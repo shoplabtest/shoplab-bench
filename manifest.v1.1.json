@@ -67,5 +67,86 @@
       "sha": "54e6032c0da4b549f5e93fb15817b0cbc8334da2"
     }
   },
-  "prs": []
+  "prs": [
+    {
+      "id": "A-15",
+      "repo": "shoplab-contracts",
+      "pr": 2,
+      "baseSha": "f7d403f366de63a6b1ba8d5457b02f45a7aea2f0",
+      "headSha": "932b2ee5999e4547d06a8272cdf07f4d6b03496c",
+      "split": "dev"
+    },
+    {
+      "id": "A-17",
+      "repo": "shoplab-iam",
+      "pr": 5,
+      "baseSha": "b1502600814826260cb3ba2cf3c13f641590df3f",
+      "headSha": "4460dd748dca283240711883cbd35d80575a1d6f",
+      "split": "dev"
+    },
+    {
+      "id": "A-19",
+      "repo": "shoplab-infra",
+      "pr": 3,
+      "baseSha": "25e41f2fa7e5376e83f69709e31d3c13fbee8ec8",
+      "headSha": "4cc48a481993bdd7a53671b5639f10d340a99f59",
+      "split": "dev"
+    },
+    {
+      "id": "C-08",
+      "repo": "shoplab-infra",
+      "pr": 4,
+      "baseSha": "25e41f2fa7e5376e83f69709e31d3c13fbee8ec8",
+      "headSha": "9b7c8501fd2172977539b7f0f2190acfca86eab3",
+      "split": "dev"
+    },
+    {
+      "id": "C-09",
+      "repo": "shoplab-orders",
+      "pr": 1,
+      "baseSha": "415284d0fc1e7797e358dc879cea7c1f028b5eae",
+      "headSha": "290b7600a955034d2b7d09db893d2ba9108eb1d6",
+      "split": "dev"
+    },
+    {
+      "id": "E-02",
+      "repo": "shoplab-invoices",
+      "pr": 1,
+      "baseSha": "d58806c2a41fff95614f1422672942830c4cf8db",
+      "headSha": "bb1dc8b2a1f9af514457dba7c2f8528166378a70",
+      "split": "dev"
+    },
+    {
+      "id": "F-03",
+      "repo": "shoplab-cart-mfe",
+      "pr": 3,
+      "baseSha": "09859d41aa602abbaa496ec1cbc81ffe1f095896",
+      "headSha": "252108ae62982a307cfde13db852aaa8846b308d",
+      "split": "dev"
+    },
+    {
+      "id": "F-04",
+      "repo": "shoplab-ui-kit",
+      "pr": 7,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "f3cf23f65f0937b300501d7683445c4615547f72",
+      "split": "dev"
+    },
+    {
+      "id": "G-02",
+      "repo": "shoplab-ui-kit",
+      "pr": 8,
+      "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+      "headSha": "06e46193f42bfecb00c1fba20782989d40b4e72b",
+      "split": "dev"
+    },
+    {
+      "id": "H-02",
+      "repo": "shoplab-contracts",
+      "pr": 3,
+      "baseSha": "f7d403f366de63a6b1ba8d5457b02f45a7aea2f0",
+      "headSha": "393a228740a447b2c989ca7abe6eef2a72adf381",
+      "split": "dev"
+    }
+  ]
 }

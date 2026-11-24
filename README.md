@@ -16,7 +16,7 @@ npm run baseline-grep -- --work <dir> --out results/<run-id>   # reference basel
 
 See [RUNNING.md](RUNNING.md) for the contract between a review agent and the benchmark.
 
-- `manifest.json`: every repo and PR at a full 40-char SHA. Branch names are never used. Commands that read it accept `--manifest <file>` to use another one (a draft of the next version, for example).
+- `manifest.json`: every repo and PR at a full 40-char SHA. Branch names are never used. Commands that read it accept `--manifest <file>` to use another one (a draft of the next version, for example). Commands that read the keys accept `--keys <dir>` the same way.
 - `keys/<id>.json`: one answer key per PR, committed before any agent run.
 - `results/<run-id>/<pr-id>.json`: agent output (`verdict`, `sites`, `coverageGaps`, `cost`).
 - Scoring always reports `dev` and `holdout` separately. Hold-out keys stay in `shoplab-bench-holdout` until release.

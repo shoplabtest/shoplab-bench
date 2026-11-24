@@ -1,0 +1,53 @@
+{
+  "id": "F-04",
+  "repo": "shoplab-ui-kit",
+  "pr": 7,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "f3cf23f65f0937b300501d7683445c4615547f72",
+  "split": "dev",
+  "category": "F",
+  "difficulty": "medium",
+  "expect": "safe",
+  "kinds": [
+    "package"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-host",
+      "file": "package.json",
+      "line": 15,
+      "why": "Inside the widened range",
+      "snippet": "\"react\": \"^18.3.1\""
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "package.json",
+      "line": 16,
+      "why": "Inside the widened range",
+      "snippet": "\"react\": \"^18.3.1\""
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "package.json",
+      "line": 16,
+      "why": "Inside the widened range",
+      "snippet": "\"react\": \"^18.3.1\""
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "package.json",
+      "line": 17,
+      "why": "Inside the widened range",
+      "snippet": "\"react\": \"^18.3.1\""
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "package.json",
+      "line": 17,
+      "why": "Inside the widened range",
+      "snippet": "\"react\": \"^18.3.1\""
+    }
+  ],
+  "notes": "The peer range only gets wider."
+}
