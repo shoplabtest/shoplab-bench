@@ -1,0 +1,57 @@
+{
+  "id": "A-17",
+  "repo": "shoplab-iam",
+  "pr": 5,
+  "baseSha": "b1502600814826260cb3ba2cf3c13f641590df3f",
+  "headSha": "4460dd748dca283240711883cbd35d80575a1d6f",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "db-table"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-invoices",
+      "file": "src/customers.ts",
+      "line": 20,
+      "why": "Reads the customer from iam's users table by name",
+      "snippet": "FROM users WHERE id",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "docker-compose.yml",
+      "line": 136,
+      "why": "The grants job waits for the users table, so with the rename it never finishes and invoices never starts",
+      "snippet": "to_regclass('public.users')",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "deploy/invoices-reader.sql",
+      "line": 10,
+      "why": "The read-only role is granted on the old table name",
+      "snippet": "ON users TO invoices_reader",
+      "hard": false
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/Account.tsx",
+      "line": 18,
+      "why": "The REST path /users stays; only the table is renamed",
+      "snippet": "/users/${user.id}"
+    },
+    {
+      "consumer": "shoplab-gateway",
+      "file": "src/routes.ts",
+      "line": 28,
+      "why": "A gateway route for the REST resource, not the table",
+      "snippet": "prefix: '/users'"
+    }
+  ],
+  "notes": "No compatibility view, so every direct reader of the table breaks. The REST API is unchanged."
+}

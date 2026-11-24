@@ -1,0 +1,32 @@
+{
+  "id": "C-08",
+  "repo": "shoplab-infra",
+  "pr": 4,
+  "baseSha": "25e41f2fa7e5376e83f69709e31d3c13fbee8ec8",
+  "headSha": "9b7c8501fd2172977539b7f0f2190acfca86eab3",
+  "split": "dev",
+  "category": "C",
+  "difficulty": "easy",
+  "expect": "safe",
+  "kinds": [
+    "deploy-output"
+  ],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-orders",
+      "file": ".github/workflows/ci.yml",
+      "line": 16,
+      "why": "Reads catalog_api_url, which is untouched",
+      "snippet": "catalog_api_url"
+    },
+    {
+      "consumer": "shoplab-gateway",
+      "file": ".github/workflows/ci.yml",
+      "line": 14,
+      "why": "Reads catalog_api_url, which is untouched",
+      "snippet": "catalog_api_url"
+    }
+  ],
+  "notes": "A new output is added; nothing is renamed or removed."
+}

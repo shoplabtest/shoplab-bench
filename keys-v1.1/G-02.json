@@ -1,0 +1,113 @@
+{
+  "id": "G-02",
+  "repo": "shoplab-ui-kit",
+  "pr": 8,
+  "baseSha": "831e24ca9be8640f328042f341944ff6ddce9b34",
+  "headSha": "06e46193f42bfecb00c1fba20782989d40b4e72b",
+  "split": "dev",
+  "category": "G",
+  "difficulty": "hard",
+  "expect": "at-risk",
+  "kinds": [
+    "function"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 17,
+      "why": "Calls formatMoney without a locale",
+      "snippet": "formatMoney(o.total",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/steps/ReviewStep.tsx",
+      "line": 33,
+      "why": "Calls formatMoney without a locale",
+      "snippet": "formatMoney(cart.total",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/steps/RetryStep.tsx",
+      "line": 21,
+      "why": "Calls formatMoney without a locale",
+      "snippet": "formatMoney(order.total",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/steps/RetryStep.tsx",
+      "line": 15,
+      "why": "Money forwards no locale to formatMoney",
+      "snippet": "<Money amount={order.total}",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/steps/Confirmation.tsx",
+      "line": 8,
+      "why": "Money forwards no locale to formatMoney",
+      "snippet": "<Money amount={order.total}",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/components/OrderSummary.tsx",
+      "line": 17,
+      "why": "Money forwards no locale to formatMoney",
+      "snippet": "<Money amount={l.quantity * l.unitPrice}",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/components/OrderSummary.tsx",
+      "line": 23,
+      "why": "Money forwards no locale to formatMoney",
+      "snippet": "<Money amount={disc",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/Totals.tsx",
+      "line": 12,
+      "why": "Money forwards no locale to formatMoney",
+      "snippet": "<Money amount={discount}",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-cart-mfe",
+      "file": "src/components/CartLines.tsx",
+      "line": 20,
+      "why": "Money forwards no locale to formatMoney",
+      "snippet": "<Money amount={l.unitPrice}",
+      "hard": true
+    },
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "src/components/Price.tsx",
+      "line": 4,
+      "why": "PriceTag formats through formatMoney with no locale",
+      "snippet": "<PriceTag className=\"catalog-price\"",
+      "hard": true
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-notifications",
+      "file": "src/money.ts",
+      "line": 1,
+      "why": "The notifications service has its own fixed-format formatMoney",
+      "snippet": "export const formatMoney"
+    },
+    {
+      "consumer": "shoplab-invoices",
+      "file": "src/tax.ts",
+      "line": 17,
+      "why": "The invoices service has its own fixed-format formatMoney",
+      "snippet": "export const formatMoney"
+    }
+  ],
+  "notes": "Same signature and types, different output: every price shown without an explicit locale now follows the viewer's locale. Tests on an en-US machine pass."
+}

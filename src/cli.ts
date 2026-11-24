@@ -14,7 +14,10 @@ import type { AnswerKey, Manifest, PrResult } from './types.ts';
 const root = resolve(import.meta.dirname, '..');
 const readJson = <T>(p: string): T => JSON.parse(readFileSync(p, 'utf8')) as T;
 
-function loadKeys(dir = join(root, 'keys')): AnswerKey[] {
+/** The keys to use: --keys <dir>, else this repository's keys/. */
+const keysDir = () => (arg('keys') ? resolve(arg('keys')!) : join(root, 'keys'));
+
+function loadKeys(dir = keysDir()): AnswerKey[] {
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
     .filter((f) => f.endsWith('.json'))
@@ -104,7 +107,7 @@ if (cmd === 'validate') {
     const p = join(resolve(run), `${k.id}.json`);
     const next = reflagHard(k, existsSync(p) ? readJson<PrResult>(p) : undefined);
     for (const c of flagChanges(k, next)) (moved++, console.log(`${c.id} ${c.site}: hard ${c.from} -> ${c.to}`));
-    if (process.argv.includes('--write')) writeFileSync(join(root, 'keys', `${k.id}.json`), JSON.stringify(next, null, 2) + '\n');
+    if (process.argv.includes('--write')) writeFileSync(join(keysDir(), `${k.id}.json`), JSON.stringify(next, null, 2) + '\n');
   }
   console.log(`${moved} flag(s) ${process.argv.includes('--write') ? 'rewritten' : 'would change (use --write)'}`);
 } else if (cmd === 'baseline-grep') {

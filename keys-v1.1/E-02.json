@@ -1,0 +1,23 @@
+{
+  "id": "E-02",
+  "repo": "shoplab-invoices",
+  "pr": 1,
+  "baseSha": "d58806c2a41fff95614f1422672942830c4cf8db",
+  "headSha": "bb1dc8b2a1f9af514457dba7c2f8528166378a70",
+  "split": "dev",
+  "category": "E",
+  "difficulty": "medium",
+  "expect": "break",
+  "kinds": [],
+  "sites": [],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 121,
+      "why": "Calls the credit-note endpoint; the API and amounts are unchanged",
+      "snippet": "credit-notes"
+    }
+  ],
+  "notes": "In-repo bug: credit-note tax is rounded down, so crediting an invoice in full leaves part of its tax unreturned; the test was changed to match the new rounding. No consumer is affected."
+}

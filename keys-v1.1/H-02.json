@@ -1,0 +1,49 @@
+{
+  "id": "H-02",
+  "repo": "shoplab-contracts",
+  "pr": 3,
+  "baseSha": "f7d403f366de63a6b1ba8d5457b02f45a7aea2f0",
+  "headSha": "393a228740a447b2c989ca7abe6eef2a72adf381",
+  "split": "dev",
+  "category": "H",
+  "difficulty": "medium",
+  "expect": "break",
+  "kinds": [
+    "api-operation"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/useCheckout.ts",
+      "line": 123,
+      "why": "Calls the operation that is renamed; the new getOrderLines operation has no callers",
+      "snippet": "api.getPayment(payment.id)",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/generated/contracts.ts",
+      "line": 86,
+      "why": "Generated client method named after the old operationId: stale until regenerated",
+      "snippet": "getPayment: (id: string",
+      "hard": false
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-payments",
+      "file": "app/service.py",
+      "line": 58,
+      "why": "The payments service's own method, unrelated to the operation name",
+      "snippet": "def get_payment"
+    },
+    {
+      "consumer": "shoplab-payments",
+      "file": "app/main.py",
+      "line": 89,
+      "why": "The route handler name, not the operationId",
+      "snippet": "def get_payment(payment_id"
+    }
+  ],
+  "notes": "Mixed diff: one safe addition, one breaking rename."
+}

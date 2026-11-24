@@ -1,0 +1,148 @@
+{
+  "id": "A-15",
+  "repo": "shoplab-contracts",
+  "pr": 2,
+  "baseSha": "f7d403f366de63a6b1ba8d5457b02f45a7aea2f0",
+  "headSha": "932b2ee5999e4547d06a8272cdf07f4d6b03496c",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "medium",
+  "expect": "break",
+  "kinds": [
+    "type"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-orders",
+      "file": "src/app.ts",
+      "line": 16,
+      "why": "Builds the OrderSummary response with the old field name; it is typed by the generated OrderSummary",
+      "snippet": "total: o.total",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/components/OrderHistory.tsx",
+      "line": 18,
+      "why": "Reads total on each order summary",
+      "snippet": "<Money amount={o.total}",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/steps/Confirmation.tsx",
+      "line": 8,
+      "why": "Shows the paid amount from order.total",
+      "snippet": "amount={order.total}",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/steps/RetryStep.tsx",
+      "line": 15,
+      "why": "Shows the amount still to pay from order.total",
+      "snippet": "amount={order.total}",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/steps/RetryStep.tsx",
+      "line": 21,
+      "why": "Builds the button title from order.total",
+      "snippet": "formatMoney(order.total",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-payments",
+      "file": "app/orders_client.py",
+      "line": 40,
+      "why": "Reads total from GET /orders/{id}; a Python consumer of the same field",
+      "snippet": "total=o[\"total\"]",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 106,
+      "why": "Smoke test checks the order total returned by GET /orders",
+      "snippet": "order.total === 7560",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-orders",
+      "file": "src/generated/contracts.ts",
+      "line": 11,
+      "why": "Generated copy of OrderSummary: stale until regenerated",
+      "snippet": "total: number;",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "src/generated/contracts.ts",
+      "line": 11,
+      "why": "Generated copy of OrderSummary: stale until regenerated",
+      "snippet": "total: number;",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/generated/contracts.ts",
+      "line": 17,
+      "why": "Generated copy of OrderSummary: stale until regenerated",
+      "snippet": "total: number;",
+      "hard": false
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-payments",
+      "file": "app/service.py",
+      "line": 44,
+      "why": "Reads the parsed OrderInfo field, not the HTTP response",
+      "snippet": "order.total < 1"
+    },
+    {
+      "consumer": "shoplab-payments",
+      "file": "app/service.py",
+      "line": 51,
+      "why": "Same internal field: unaffected once the client maps the new name",
+      "snippet": "order.total, order.currency"
+    },
+    {
+      "consumer": "shoplab-orders",
+      "file": "src/orders.ts",
+      "line": 22,
+      "why": "The order.placed event payload keeps its own field named total",
+      "snippet": "total: result.order.total"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 61,
+      "why": "A cart total, not an order total",
+      "snippet": "guest.body.total === 8400"
+    },
+    {
+      "consumer": "shoplab-infra",
+      "file": "scripts/smoke.mjs",
+      "line": 70,
+      "why": "A cart total, not an order total",
+      "snippet": "coupon.body.total === 7560"
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/components/OrderSummary.tsx",
+      "line": 24,
+      "why": "A cart total, not an order total",
+      "snippet": "cart.total"
+    },
+    {
+      "consumer": "shoplab-payments",
+      "file": "app/orders_client.py",
+      "line": 12,
+      "why": "The parsed OrderInfo field keeps its name; only the line that reads the HTTP field changes",
+      "snippet": "total: int"
+    }
+  ],
+  "notes": "Spec rename in contracts. The generated clients and types in the consumers are only regenerated later; the sites are the production code that reads or builds the field."
+}

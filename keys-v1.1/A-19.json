@@ -1,0 +1,63 @@
+{
+  "id": "A-19",
+  "repo": "shoplab-infra",
+  "pr": 3,
+  "baseSha": "25e41f2fa7e5376e83f69709e31d3c13fbee8ec8",
+  "headSha": "4cc48a481993bdd7a53671b5639f10d340a99f59",
+  "split": "dev",
+  "category": "A",
+  "difficulty": "easy",
+  "expect": "break",
+  "kinds": [
+    "config-key"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-host",
+      "file": "src/App.tsx",
+      "line": 24,
+      "why": "Reads the old key; with the key gone it silently falls back to its default of false",
+      "snippet": "flags['checkout.v2'] ?? false",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "src/Checkout.tsx",
+      "line": 20,
+      "why": "Reads the old key; with the key gone it silently falls back to its default of true, which differs from the host's",
+      "snippet": "flags['checkout.v2'] ?? true",
+      "hard": false
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-gateway",
+      "file": "src/flags.ts",
+      "line": 6,
+      "why": "A documentation example in a comment, not a reader of the flag",
+      "snippet": "`checkout.v2` is FLAG_CHECKOUT_V2"
+    },
+    {
+      "consumer": "shoplab-gateway",
+      "file": "README.md",
+      "line": 26,
+      "why": "Documentation that names the flag: stale text, but nothing breaks",
+      "snippet": "checkout.v2"
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "README.md",
+      "line": 26,
+      "why": "Documentation that names the flag: stale text, but nothing breaks",
+      "snippet": "checkout.v2"
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "README.md",
+      "line": 8,
+      "why": "Documentation that names the flag: stale text, but nothing breaks",
+      "snippet": "checkout.v2"
+    }
+  ],
+  "notes": "The two readers use different defaults, so after the rename the host and the checkout remote disagree about whether express payment is on."
+}

@@ -1,0 +1,64 @@
+{
+  "id": "F-03",
+  "repo": "shoplab-cart-mfe",
+  "pr": 3,
+  "baseSha": "09859d41aa602abbaa496ec1cbc81ffe1f095896",
+  "headSha": "252108ae62982a307cfde13db852aaa8846b308d",
+  "split": "dev",
+  "category": "F",
+  "difficulty": "hard",
+  "expect": "break",
+  "kinds": [
+    "package"
+  ],
+  "sites": [
+    {
+      "consumer": "shoplab-ui-kit",
+      "file": "package.json",
+      "line": 16,
+      "why": "ui-kit v1.0.0 only accepts React 18 as a peer, and cart-mfe now installs React 19",
+      "snippet": "\"react\": \"^18.2.0\"",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "package.json",
+      "line": 15,
+      "why": "The host provides React 18 to every remote as a shared singleton",
+      "snippet": "\"react\": \"^18.3.1\"",
+      "hard": false
+    },
+    {
+      "consumer": "shoplab-host",
+      "file": "vite.config.ts",
+      "line": 26,
+      "why": "The shared singleton list: a remote built on React 19 and a host on 18 do not share one copy",
+      "snippet": "shared: ['react', 'react-dom'",
+      "hard": true
+    }
+  ],
+  "mustNotFlag": [
+    {
+      "consumer": "shoplab-catalog-mfe",
+      "file": "package.json",
+      "line": 16,
+      "why": "Stays on React 18, consistent with the host",
+      "snippet": "\"react\": \"^18.3.1\""
+    },
+    {
+      "consumer": "shoplab-account-mfe",
+      "file": "package.json",
+      "line": 17,
+      "why": "Stays on React 18, consistent with the host",
+      "snippet": "\"react\": \"^18.3.1\""
+    },
+    {
+      "consumer": "shoplab-checkout-mfe",
+      "file": "package.json",
+      "line": 17,
+      "why": "Stays on React 18, consistent with the host",
+      "snippet": "\"react\": \"^18.3.1\""
+    }
+  ],
+  "notes": "Typecheck, tests and the build all pass. The break is at runtime: two copies of React in one page, and an invalid peer range."
+}
